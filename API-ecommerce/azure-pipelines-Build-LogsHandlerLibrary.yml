@@ -1,0 +1,51 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'Libraries.ecommerce.LogsHandler/Libraries.ecommerce.LogsHandler.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Restore'
+  inputs:
+    command: 'restore'
+    projects: '$(solution)'
+    feedsToUse: 'select'
+    vstsFeed: '65c62037-3c0b-4c73-aaed-5ca9674511c2/d5ce7def-e26c-466d-bee2-230ddb33ba0e'
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+    arguments: '--configuration $(BuildConfiguration)'
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack Data Library'
+  inputs:
+    command: 'pack'
+    packagesToPack: '$(solution)'
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '2'
+    minorVersion: '0'
+    patchVersion: '0'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Push to Artifacts'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '65c62037-3c0b-4c73-aaed-5ca9674511c2/d5ce7def-e26c-466d-bee2-230ddb33ba0e'

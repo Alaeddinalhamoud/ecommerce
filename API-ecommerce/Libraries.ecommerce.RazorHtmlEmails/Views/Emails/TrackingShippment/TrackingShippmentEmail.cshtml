@@ -1,0 +1,104 @@
+﻿@using Libraries.ecommerce.RazorHtmlEmails.Views.Emails.TrackingShippment
+@using Libraries.ecommerce.RazorHtmlEmails.Views.Shared
+@using ecommerce.Data;
+@model TrackingShippmentEmailViewModel
+
+@{
+    ViewData["EmailTitle"] = "Tracking Order!";
+
+    string statusPickedUp = "<span>&#10062;</span>";
+    string statusDispatched = "<span>&#10062;</span>";
+    string statusInTransit = "<span>&#10062;</span>";
+    string statusDelivered = "<span>&#10062;</span>";
+    string orderStatus = "OrderProcessing";
+    switch (Model.TrackingStatus)
+    {
+        case TrackingStatus.Ordered:
+            break;
+        case TrackingStatus.PickedUp:
+            statusPickedUp = "<span>&#9989;</span>";
+            orderStatus = "OrderPickupAvailable";
+            break;
+        case TrackingStatus.Dispatched:
+            statusDispatched = "<span>&#9989;</span>";
+            statusPickedUp = "<span>&#9989;</span>";
+            orderStatus = "OrderPickupAvailable";
+            break;
+        case TrackingStatus.InTransit:
+            statusInTransit = "<span>&#9989;</span>";
+            statusDispatched = "<span>&#9989;</span>";
+            statusPickedUp = "<span>&#9989;</span>";
+            orderStatus = "OrderInTransit";
+            break;
+        case TrackingStatus.Delivered:
+            statusDelivered = "<span>&#9989;</span>";
+            statusInTransit = "<span>&#9989;</span>";
+            statusDispatched = "<span>&#9989;</span>";
+            statusPickedUp = "<span>&#9989;</span>";
+            orderStatus = "OrderDelivered";
+            break;
+        default:
+            break;
+    }
+}
+
+<div bgcolor="#ffffff" align="left">
+    <p> Hello, </p>
+    <p>
+        We are pleased to report that the your Order #@Model.OrderId is @Model.TrackingStatus.
+    </p>
+    <div>
+        <p><span>&#9989;</span> <strong>Ordered</strong></p>
+        <p>@Html.Raw(statusPickedUp) <strong>PickedUp</strong></p>
+        <p>@Html.Raw(statusDispatched) <strong>Dispatched</strong></p>
+        <p>@Html.Raw(statusInTransit) <strong>InTransit</strong></p>
+        <p>@Html.Raw(statusDelivered) <strong>Delivered</strong></p>
+    </div>
+    <hr />
+    <div>
+        @{
+            if (!String.IsNullOrEmpty(Model.CourierCopmany))
+            {
+                <p><strong>Shipped with:</strong> @Model.CourierCopmany</p>
+            }
+            if (!String.IsNullOrEmpty(Model.CourierTrackingNumber))
+            {
+                <p><strong>Tracking Number:</strong> @Model.CourierTrackingNumber</p>
+            }
+            if (!String.IsNullOrEmpty(Model?.ExpectedArrival.ToLongDateString()))
+            {
+                <p><strong>Expected Arrival Date:</strong> @Model?.ExpectedArrival.ToLongDateString()</p>
+            }
+            if (!String.IsNullOrEmpty(Model.TrackingLink))
+            {
+                @await Html.PartialAsync("EmailButton", new EmailButtonViewModel("Tracking Link", Model.TrackingLink))
+            }
+        }
+    </div>
+</div>
+
+<div itemscope itemtype="http://schema.org/ParcelDelivery">
+    <meta itemprop="expectedArrivalUntil" content="@Model?.ExpectedArrival.ToLongDateString()" />
+    <div itemprop="carrier" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="@Model.CourierCopmany" />
+        <link itemprop="url" href="@Model.TrackingLink" />
+    </div>
+    <div itemprop="partOfOrder" itemscope itemtype="http://schema.org/Order">
+        <meta itemprop="orderNumber" content="@Model.OrderId" />
+        <div itemprop="merchant" itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content="Medi-Shopping.com" />
+        </div>
+    </div>
+    <meta itemprop="trackingNumber" content="@Model.CourierTrackingNumber" />
+    <link itemprop="trackingUrl" href="@Model.TrackingLink" />
+    <div itemprop="potentialAction" itemscope itemtype="http://schema.org/TrackAction">
+        <link itemprop="url" href="@Model.TrackingLink" />
+    </div>
+    <div itemprop="hasDeliveryMethod" itemscope itemtype="http://schema.org/ParcelService">
+        <meta itemprop="name" content="http://schema.org/ParcelService" />
+    </div>
+    <div itemprop="partOfOrder" itemscope itemtype="http://schema.org/Order">
+        <meta itemprop="orderNumber" content="@Model.OrderId" />       
+        <link itemprop="orderStatus" href="http://schema.org/@orderStatus" />
+    </div>
+</div>

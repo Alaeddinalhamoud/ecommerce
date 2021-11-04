@@ -1,0 +1,22 @@
+﻿@using Libraries.ecommerce.RazorHtmlEmails.Views.Emails.GenericText
+@using Libraries.ecommerce.RazorHtmlEmails.Views.Shared
+@model GenericTextEmailViewModel
+
+@{
+    ViewData["EmailTitle"] = "Hi!";
+}
+
+<p>
+  @Model.Text
+</p>
+ 
+
+<p>
+    If you have any questions, just reply to this email—we're always happy to help out.
+</p>
+
+<br />
+
+<p>
+    Medi-Shopping Support Team
+</p>

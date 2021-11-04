@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>1.1.8.26</Version>
+    <PackageId>Libraries.ecommerce.Services</PackageId>
+    <Authors>Libraries.ecommerce.Services</Authors>
+    <Company>Libraries.ecommerce.Services</Company>
+    <Product>Libraries.ecommerce.Services</Product>
+    <AssemblyName>Libraries.ecommerce.Services</AssemblyName>
+    <RootNamespace>Libraries.ecommerce.Services</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="5.2.0" />
+    <PackageReference Include="UtilityFunctions.Data" Version="2.0.0-CI-20210204-201535" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ecommerce.Data\ecommerce.Data.csproj" />
+  </ItemGroup>
+
+</Project>
