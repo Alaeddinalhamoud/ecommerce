@@ -6,7 +6,7 @@ Bulid using:
 - Ids 4
 
 Projects:
-- API (Publish on github)
+- API (Published on github)
 - Dashbboard (Coming Soon)
 - Front-end (Coming Soon)
 - Azure function (payment service - email service) (Coming Soon)
