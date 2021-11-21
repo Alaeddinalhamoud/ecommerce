@@ -10,7 +10,7 @@ Projects:
 - Dashbboard (Coming Soon)
 - Front-end (Coming Soon)
 - Azure function (payment service - email service) (Coming Soon)
-- Auth using Identity server  4 (Coming Soon)
+- Auth using Identity server  4 (Published on github)
 
 
 
