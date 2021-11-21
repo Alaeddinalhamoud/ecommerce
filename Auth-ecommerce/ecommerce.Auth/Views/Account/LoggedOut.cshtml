@@ -1,0 +1,49 @@
+﻿@model LoggedOutViewModel
+
+@{
+    // set this so the layout rendering sees an anonymous user
+    ViewData["signed-out"] = true;
+}
+
+<div class="error_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="error_form">
+                    <h2>Logout</h2>
+                    <p>                        
+                        <small>You are now logged out</small>
+                    </p>
+
+                    @if (Model.PostLogoutRedirectUri != null)
+                    {
+                        <div>
+                            Click <a href="@Model.PostLogoutRedirectUri">here</a> to return to the
+                            <span>@Model.ClientName</span>.
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            Click <a  href="/home/index">here</a> to return to the
+                            <span>@Model.ClientName</span>.
+                        </div>
+                    }
+
+                    @if (Model.SignOutIframeUrl != null)
+                    {
+                        <iframe width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @if (Model.AutomaticRedirectAfterSignOut)
+    {
+        <script src="~/js/signout-redirect.js"></script>
+    }
+}

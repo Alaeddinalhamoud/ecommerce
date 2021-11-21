@@ -1,0 +1,57 @@
+/* 21. shipping css here */
+
+.shipping_inner{
+    border: 1px solid $grey_color;
+    padding: 19px 5px;
+     border-radius: 4px;
+    overflow: hidden;
+}
+
+.single_shipping{
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    border-left: 1px solid $grey_color;
+    width: 25%;
+    float: left;
+    &:first-child{
+        border: 0;
+    }
+    @media #{$tablet-device}{
+        margin-bottom: 12px;
+        width: 50%;
+        border: 0;
+    }
+    @media #{$large-mobile}{
+        margin-bottom: 12px;
+         border: 0;
+        width: 100%;
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+   
+}
+.shipping_icone{
+    margin-right: 14px;
+}
+.shipping_content{
+    & h2{
+        font-size: 14px;
+        line-height: 20px;
+        text-transform: capitalize;
+        font-weight: 700;
+        margin-bottom: 4px;
+        font-family: $open-sans;
+        
+    }
+    & p{
+        font-size: 13px;
+        line-height: 18px;
+    }
+}
+
+
+
+
+

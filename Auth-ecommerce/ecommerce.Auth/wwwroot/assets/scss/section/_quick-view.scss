@@ -1,0 +1,299 @@
+/*  24. modal css here */
+.modal-dialog.modal-dialog-centered {
+	min-width: 1100px;
+    @media #{$laptop-device }{
+       min-width: 1000px;
+    }
+    @media #{$desktop-device }{
+       min-width: 950px;
+    }
+    @media #{$tablet-device}{
+       min-width: 730px;
+    }
+    @media #{$large-mobile}{
+       min-width: 90%;
+    }
+}
+.modal_tab_img {
+	text-align: center;
+	margin-bottom: 10px;
+    & img{
+        margin: 0 auto;
+    }
+}
+
+
+.modal_tab_button{
+    & ul{
+        & li{
+            & a{
+                padding: 0;
+                border: 1px solid $grey_color;
+                margin: 0 2px;
+                & img{
+                   width: 100%;  
+                }
+            }
+        }
+    }
+}
+
+.modal_title{
+    & h2{
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 14px;
+        line-height: 26px;
+    }
+}
+.modal_social{
+    & h2{
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 15px;
+        line-height: 20px;
+    }
+    & ul{
+        & li{
+            display: inline-block;
+	        margin-right: 3px; 
+            & a{
+                
+                text-transform: uppercase;
+                display: inline-block;
+                width: 38px;
+                height: 38px;
+                text-align: center;
+                line-height: 38px;
+                border-radius: 50%;
+                font-size: 15px;
+                color: $white;
+                font-weight: 400;
+                 
+            }
+            &.facebook{
+                & a{
+                   background: #3c5b9b;
+                    &:hover{
+                        background: $secondary_color;
+
+                    }
+                }
+            }
+            &.twitter{
+                & a{
+                   background: #1DA1F2;
+                    &:hover{
+                        background: $secondary_color;
+
+                    }
+                }
+            }
+            &.pinterest{
+                & a{
+                   background: #BD081B;
+                    &:hover{
+                        background: $secondary_color;
+
+                    }
+                }
+            }
+            &.google-plus{
+                & a{
+                   background: #DC5043;
+                    &:hover{
+                        background: $secondary_color;
+
+                    }
+                }
+            }
+            &.linkedin{
+                & a{
+                   background: #010103;
+                    &:hover{
+                        background: $secondary_color;
+
+                    }
+                }
+            }
+        }
+    }
+}    
+
+.modal_price {
+    margin-bottom: 12px;
+    & span{
+        font-weight: 600;
+        color: $secondary_color;
+        font-size: 16px;
+        &.old_price {
+            color: $fonts_color;
+            font-size: 14px;
+            font-weight: 400;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+    }
+}
+
+.modal_description {
+    & p{
+        line-height: 24px;
+        font-size: 15px;
+        margin: 0; 
+    }
+}
+
+.variants_size {
+    & h2{
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+        line-height: 20px;
+    }
+    &.mb-15 {
+        margin-bottom: 24px;
+    }
+    & .select_option{
+        width: 100%;
+        border-radius: 0;
+        margin-bottom: 25px;
+        & .list{
+            width: 100%;
+            border-radius: 0;
+        }
+    }
+   
+}
+
+.variants_color{
+    @extend .variants_size;
+}
+.modal_add_to_cart {
+   margin-bottom: 25px;
+    & form{
+        & input{
+            width: 95px;
+            border: 1px solid $grey_color;
+            background: none;
+            padding: 0 10px;
+            height: 45px;
+            @media #{$large-mobile}{
+              width: 75px;
+            }
+        }
+        & button{
+            background: none;
+            border: 1px solid $fonts_color;
+            margin-left: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            height: 45px;
+            width: 230px;
+            line-height: 18px;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            background: $fonts_color;
+            color: $white;
+            @include transition(.3s);
+            cursor: pointer;
+            @media #{$large-mobile}{
+              width: 130px;
+            }
+            &:hover{
+                background: $secondary_color;
+                color: $white;
+                border-color: $secondary_color;
+            }
+        }
+    }
+}
+
+
+.modal_body {
+	padding: 29px 6px 38px;
+    & .modal_tab{
+         @media #{$large-mobile}{
+          margin-bottom: 60px;
+        }
+    }
+}
+.modal-content{
+    border-radius: 0;
+}
+.modal-content button.close {
+	position: absolute;
+	left: 94%;
+	width: 35px;
+    height: 35px;
+	display: block;
+	border: 1px solid $grey_color;
+	top: 10px;
+	border-radius: 50%;
+	cursor: pointer;
+    font-size: 20px;
+	z-index: 9;
+     @media #{$large-mobile}{
+       left: 83%;
+        width: 29px;
+        height: 32px;
+        top: 4px;
+        margin-bottom: 14px;
+    }
+    &:hover{
+        color: $secondary_color;
+    }
+}
+
+.modal_add_to_cart.mb-15 {
+	margin-bottom: 23px;
+}
+.modal_description.mb-15 {
+	margin-bottom: 20px;
+}
+.product_navactive{
+    &.owl-carousel{
+        &:hover{
+            & .owl-nav{
+                & div{
+                   opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+        & .owl-nav{
+            display: block;
+            & div{
+                position: absolute;
+                background: #f2f2f2;
+                border-radius: 3px;
+                color: #333;
+                height: 32px;
+                top: 50%;
+                transform: translatey(-50%);
+                width: 32px;
+                text-align: center;
+                line-height: 32px;
+                left: -7px;
+                font-size: 18px;
+                -webkit-transition: 0.3s;
+                transition: 0.3s;
+                opacity: 0;
+                visibility: hidden;
+                &:hover{
+                    background: $secondary_color;
+                    color: #ffffff;
+                }
+                &.owl-next{
+                    right: -7px;
+                    left: auto;
+                }
+            }
+        }
+    }
+    
+}
+/*modal css end*/

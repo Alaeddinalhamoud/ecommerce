@@ -1,0 +1,62 @@
+/* 22. wishlist css here */
+.table_desc.wishlist table tbody tr:last-child td {
+	border-bottom: 0;
+}
+.table_desc.wishlist{
+    & table{
+        & tbody{
+            & tr{
+                & td{
+                    &.product_total{
+                        & a{
+                            background:  $secondary_color;
+                            font-size: 12px;
+                            font-weight: 700;
+                            height: 38px;
+                            line-height: 18px;
+                            padding: 10px 20px;
+                            color: $fonts_color;
+                            text-transform: uppercase;
+                            border-radius: 3px;
+                            &:hover{
+                                background: $fonts_color;
+                                color: $white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.wishlist_share {
+	text-align: center;
+	padding: 20px 0;
+	border: 1px solid $grey_color;
+    & h4{
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+    & ul{
+        & li{
+            display: inline-block;
+            & a{
+                padding: 0 10px;
+                display: block;
+                &:hover{
+                    color:  $secondary_color;
+                }
+            }
+        }
+    }
+}
+
+
+.wishlist_area {
+	padding-bottom: 60px;
+}
+
+/*wishlist css end*/

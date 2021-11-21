@@ -1,0 +1,102 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ecommerce.Data" Version="2.0.0-CI-20210204-193450" />   
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2" />
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
+    <PackageReference Include="Libraries.ecommerce.GoogleReCaptcha" Version="2.0.0-CI-20210113-200449" />
+    <PackageReference Include="Libraries.ecommerce.RazorHtmlEmails" Version="2.0.0-CI-20210113-200337" />
+    <PackageReference Include="Libraries.ecommerce.Services" Version="2.0.0-CI-20210204-193345" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="System.Security.Principal" Version="4.3.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageReference Include="UtilityFunctions.Data" Version="2.0.0-CI-20210204-201535" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\css\style.css.map" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\assets\fonts\ionicons.svg" />
+    <None Include="wwwroot\assets\fonts\Linearicons-Free.svg" />
+    <None Include="wwwroot\assets\fonts\Linearicons-Free.woff2" />
+    <None Include="wwwroot\assets\fonts\Stroke-Gap-Icons.svg" />
+    <None Include="wwwroot\assets\js\main.js" />
+    <None Include="wwwroot\assets\js\map.js" />
+    <None Include="wwwroot\assets\js\plugins.js" />
+    <None Include="wwwroot\assets\scss\element\_button.scss" />
+    <None Include="wwwroot\assets\scss\section\_404.scss" />
+    <None Include="wwwroot\assets\scss\section\_about.scss" />
+    <None Include="wwwroot\assets\scss\section\_banner.scss" />
+    <None Include="wwwroot\assets\scss\section\_blog-details.scss" />
+    <None Include="wwwroot\assets\scss\section\_blog-page.scss" />
+    <None Include="wwwroot\assets\scss\section\_blog.scss" />
+    <None Include="wwwroot\assets\scss\section\_brand.scss" />
+    <None Include="wwwroot\assets\scss\section\_cart-page.scss" />
+    <None Include="wwwroot\assets\scss\section\_checkout.scss" />
+    <None Include="wwwroot\assets\scss\section\_collection.scss" />
+    <None Include="wwwroot\assets\scss\section\_coming-soon.scss" />
+    <None Include="wwwroot\assets\scss\section\_compare.scss" />
+    <None Include="wwwroot\assets\scss\section\_contact.scss" />
+    <None Include="wwwroot\assets\scss\section\_faq.scss" />
+    <None Include="wwwroot\assets\scss\section\_footer.scss" />
+    <None Include="wwwroot\assets\scss\section\_header.scss" />
+    <None Include="wwwroot\assets\scss\section\_login.scss" />
+    <None Include="wwwroot\assets\scss\section\_my-account.scss" />
+    <None Include="wwwroot\assets\scss\section\_newsletter-popup.scss" />
+    <None Include="wwwroot\assets\scss\section\_newsletter.scss" />
+    <None Include="wwwroot\assets\scss\section\_privacy-policy.scss" />
+    <None Include="wwwroot\assets\scss\section\_product-details.scss" />
+    <None Include="wwwroot\assets\scss\section\_product.scss" />
+    <None Include="wwwroot\assets\scss\section\_quick-view.scss" />
+    <None Include="wwwroot\assets\scss\section\_services.scss" />
+    <None Include="wwwroot\assets\scss\section\_shipping.scss" />
+    <None Include="wwwroot\assets\scss\section\_shop.scss" />
+    <None Include="wwwroot\assets\scss\section\_slider.scss" />
+    <None Include="wwwroot\assets\scss\section\_testimonial.scss" />
+    <None Include="wwwroot\assets\scss\section\_wishlist.scss" />
+    <None Include="wwwroot\assets\scss\style.scss" />
+    <None Include="wwwroot\assets\scss\_common.scss" />
+    <None Include="wwwroot\assets\scss\_mixin.scss" />
+    <None Include="wwwroot\assets\scss\_variabls.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\IdentityServer\" />
+    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Properties\ServiceDependencies\" />
+    <Folder Include="wwwroot\cert\" />
+  </ItemGroup>
+
+</Project>

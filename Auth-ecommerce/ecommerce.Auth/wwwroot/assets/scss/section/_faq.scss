@@ -1,0 +1,96 @@
+
+/* 16. faq page css here */
+
+.faq_content_area {
+	padding-bottom: 56px;
+    @media #{$large-mobile}{
+        margin-top: 26px;
+    }
+}
+.accordion_area {
+	padding-bottom: 60px;
+}
+.card.card_dipult {
+	border: none;
+    margin-bottom: 10px;
+}
+.card.card_dipult:last-child {
+	margin-bottom: 0;
+}
+.card-header.card_accor  {
+    padding: 0;
+	border: none;
+    & button{
+        height: 45px;
+        text-decoration: none;
+        cursor: pointer;
+        position: relative;
+        white-space: initial;
+        @media #{$large-mobile}{
+            height: 60px;
+        }
+        & i{
+            position: absolute;
+            top: 50%;
+            -webkit-transform: translatey(-50%);
+            transform: translatey(-50%);
+            right: 20px;
+            @media #{$large-mobile}{
+                right: 10px;
+            }
+        }
+        &.btn-link{
+            border: 1px solid  $secondary_color;
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 500;
+            color: $fonts_color;
+            &.collapsed{
+                background: $secondary_color5;
+                border: 1px solid  $grey_color;
+                width: 100%;
+                text-align: left;
+                color: $fonts_color6;
+            }
+        }
+    }
+}
+
+.accordion_area {
+    & .collapse {
+        &.show{
+            border-left: 1px solid $secondary_color;
+            border-bottom: 1px solid $secondary_color;
+            border-right: 1px solid $secondary_color;
+        }
+    }
+}
+
+.card-header.card_accor button.btn-link i.fa-plus {
+	display: none;
+}
+.card-header.card_accor button.btn-link.collapsed i.fa-plus {
+	display: block;
+}
+.card-header.card_accor button.btn-link.collapsed i.fa-minus {
+	display: none;
+}
+.faq_content_wrapper{
+    & h4{
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        line-height: 18px;
+        @media #{$large-mobile}{
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+}
+
+/*faq page css end*/
+
+
+
+

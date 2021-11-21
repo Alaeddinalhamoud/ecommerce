@@ -1,0 +1,62 @@
+﻿@model ecommerce.Auth.Quickstart.Models.RegisterVM
+<!-- customer login start -->
+<div class="customer_login mt-32">
+    <div class="container">
+        <div class="row">
+
+            <!--register area start-->
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form register">
+                    <h2>Register</h2>
+                    <form asp-route="Register">
+                        <input type="hidden" asp-for="ReturnUrl" />
+                        <p>
+                            <label>Full Name <span>*</span></label>
+                            <input type="text" placeholder="Full Name" asp-for="FullName" autofocus required>
+                        </p>
+                        <p>
+                            <label>Email address <span>*</span></label>
+                            <input type="email" placeholder="Email" asp-for="Email" autofocus required>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label>Date of Birth <span>*</span></label>
+                            <input type="date" asp-for="DOB" value="@DateTime.Now.Date.AddYears(-19).ToString("yyyy-MM-dd")" autofocus required>
+                            <span asp-validation-for="DOB" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label>Mobile <span>*</span></label>
+                            <input type="tel" placeholder="Mobile" asp-for="phone" asp-format="{0:yyyy-MM-ddTHH:mm}" autofocus required>
+                            <span asp-validation-for="phone" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label>Passwords <span>*</span></label>
+                            <input type="password" placeholder="Password" asp-for="Password" autocomplete="off" required>
+                        </p>
+                        <p>
+                            <label>Confirm Passwords <span>*</span></label>
+                            <input type="password" placeholder="Password" asp-for="ConfirmPassword" autocomplete="off" required>
+                        </p>
+                        <p>
+                            By selecting Register you agree you've read and accepted our <a class="text-warning" href="https://Example.com/Home/Page/1">User Agreement</a>. Please see our <a class="text-warning" href="https://Example.com/Home/Page/2">Privacy Notice</a> for information regarding the processing of your data.
+                        </p>
+                        <input type="text" asp-for="Token" class="googlerecaptchatoken" required hidden>
+                        <div class="login_submit">
+                            <button type="submit" name="button" value="register">
+                                <span class="spinner-googleReCaptcha">
+                                    <span class="fa fa-spinner fa-spin fa-2x"></span>
+                                </span>
+                                <span class="Captipn-googleReCaptcha d-none">
+                                    Register
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                    <partial name="_ValidationSummary" />
+                </div>
+            </div>
+            <!--register area end-->
+        </div>
+    </div>
+</div>
+<!-- customer login end -->

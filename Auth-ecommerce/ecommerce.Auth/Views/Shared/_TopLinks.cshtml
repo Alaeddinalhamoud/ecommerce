@@ -1,0 +1,33 @@
+﻿<ul>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <li class="top_links">
+            <a asp-action="login" asp-controller="Account"><i class="fa fa-sign-in"></i> Sign In </a>
+        </li>
+        <li class="top_links">
+            <a asp-action="register" asp-controller="Account">Sign Up </a>
+        </li>
+    }
+    else
+    {
+        <li class="top_links">
+            <i class="ion-android-person"></i> Hello, @User.Identity.Name
+        </li>
+        <li><a asp-action="logout" asp-controller="account">Logout</a></li>
+    }
+    @*<li class="language">
+            <a href="#"><img src="/assets/img/logo/language.png" alt="">en-gb<i class="ion-ios-arrow-down"></i></a>
+            <ul class="dropdown_language">
+                <li><a href="#"><img src="/assets/img/logo/language.png" alt=""> English</a></li>
+                <li><a href="#"><img src="/assets/img/logo/language2.png" alt=""> Germany</a></li>
+            </ul>
+        </li>
+        <li class="currency">
+            <a href="#">$ USD<i class="ion-ios-arrow-down"></i></a>
+            <ul class="dropdown_currency">
+                <li><a href="#">EUR – Euro</a></li>
+                <li><a href="#">GBP – British Pound</a></li>
+                <li><a href="#">INR – India Rupee</a></li>
+            </ul>
+        </li>*@
+</ul>

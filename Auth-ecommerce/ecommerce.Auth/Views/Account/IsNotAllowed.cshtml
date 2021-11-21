@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "IsNotAllowed";
+} 
+
+<div class="error_section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="error_form">
+                    <span> <i class="fa fa-envelope fa-4x mb-2"> </i></span>
+                    <h3 class="header_middle">Is Not Active</h3>
+                    <p class="text-danger">You have to active your email.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form">
+                    <form asp-action="IsNotAllowed" asp-controller="Account" method="post">
+                        <p>
+                            <label>Resend Activation Code <span>*</span></label>
+                            <input type="email" placeholder="Email" name="email" id="email" autocomplete="on" required>
+                        </p>
+                        <div class="login_submit">
+                            <button type="submit" name="button" value="Resend">Resend</button>
+                        </div>
+                    </form>
+                    <partial name="_ValidationSummary" />
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+

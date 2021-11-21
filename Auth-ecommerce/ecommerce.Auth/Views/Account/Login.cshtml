@@ -1,0 +1,82 @@
+@model LoginViewModel
+ <!-- customer login start -->
+<div class="customer_login mt-32">
+    <div class="container">
+        <div class="row">
+            <!--login area start-->
+            <div class="col-lg-6 col-md-6">
+                @if (Model.EnableLocalLogin)
+                {
+                    <div class="account_form">
+                        <h2>login</h2>
+                        <form asp-route="Login">
+                            <input type="hidden" asp-for="ReturnUrl" />
+                            <p>
+                                <label>Username or email <span>*</span></label>
+                                <input type="text" asp-for="Username" autofocus required>
+                            </p>
+                            <p>
+                                <label>Passwords <span>*</span></label>
+                                <input type="password" asp-for="Password" autocomplete="off" required>
+                                <input type="text" asp-for="Token" class="googlerecaptchatoken" required hidden>
+                            </p>
+                            <div class="login_submit">
+                                <a asp-action="ForgetYourPassword" asp-controller="Account">Forget your password?</a>
+                                @if (Model.AllowRememberLogin)
+                                {
+                                    <label for="remember" class="login-remember">
+                                        <input asp-for="RememberLogin">
+                                        Remember me
+                                    </label>
+                                }
+                            <button name="button" value="login" type="submit">
+                                <span class="spinner-googleReCaptcha">
+                                    <span class="fa fa-spinner fa-spin fa-2x"></span>
+                                </span>
+                                <span class="Captipn-googleReCaptcha d-none">
+                                    login
+                                </span>
+                            </button>
+                            </div>
+
+                        </form>
+                        <partial name="_ValidationSummary" />
+                    </div>
+                }
+            </div>
+            <!--login area start-->
+            <div class="col-lg-6 col-md-6">
+                @if (Model.VisibleExternalProviders.Any())
+                {
+                    <div class="col-md-6 col-sm-6 external-providers">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Quick access with</h3>
+                            </div>
+                            <div class="">
+
+                                <div class="card-body">
+                                    <ul class="list-inline">
+                                        @foreach (var provider in Model.VisibleExternalProviders)
+                                        {
+                                            <li class="list-inline-item">
+                                                <a class="btn btn-secondary"
+                                                   asp-controller="External"
+                                                   asp-action="Challenge"
+                                                   asp-route-scheme="@provider.AuthenticationScheme"
+                                                   asp-route-returnUrl="@Model.ReturnUrl">
+                                                    @provider.DisplayName
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            </div>
+        </div>
+</div>
+<!-- customer login end -->

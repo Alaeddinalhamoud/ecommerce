@@ -1,0 +1,313 @@
+/* 14. checkout page css here */
+.user-actions{
+    margin-bottom: 20px;
+    & h3{
+        font-size: 13px;
+        font-weight: 400;
+        background-color: #f7f6f7;
+        padding: 15px 10px;
+        border-top: 3px solid $secondary_color;
+        margin-bottom: 0;
+        & a{
+            color: $secondary_color;
+        }
+    }
+}
+
+.checkout_info {
+	border: 1px solid $grey_color;
+	margin-top: 25px;
+	padding: 20px 30px;
+    & p{
+        margin-bottom: 15px;
+    }
+    & a{
+       color: $secondary_color;
+        margin-top: 15px;
+        display: block; 
+    }
+}
+
+.form_group {
+    margin-bottom: 20px;
+    & label{
+        font-size: 14px;
+        display: block;
+        line-height: 18px;
+    }
+    & input{
+        border: 1px solid $grey_color;
+        background: none;
+        height: 45px;
+        width: 350px;
+        padding: 0 20px;
+        @media #{$large-mobile}{
+           width: 100%;
+        }
+    }
+    & button{
+        display: inline-block;
+        width: 80px;
+        background: $fonts_color;
+        border: 0;
+        color: $white;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+        @include transition(.3s);
+        margin-right: 20px;
+        cursor: pointer;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 3px;
+        &:hover{
+            background: $secondary_color;
+        }
+    }
+}
+
+
+.form_group input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+	position: relative;
+	top: 3px;
+}
+.form_group.group_3 {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+    & label{
+        margin-bottom: 0;
+        line-height: 34px;
+        cursor: pointer;
+        &:hover{
+            color: $secondary_color;
+        }
+    }
+}
+
+
+#checkout_coupon{
+    & input{
+        background: none;
+        border: 1px solid $grey_color;
+        width: 200px;
+        height: 45px;
+        font-size: 12px;
+        padding: 0 20px;
+        color: $fonts_color;
+    }
+    & button{
+        width: 130px;
+        background: $fonts_color;
+        color: $white;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+        cursor: pointer;
+        @include transition(.3s);
+        border: 0;
+        height: 45px;
+        line-height: 45px;
+        border-radius: 3px;
+        margin-left: 5px;
+        @media #{$large-mobile}{
+           margin-top: 20px;
+        } 
+        &:hover{
+            background: $secondary_color;
+        }
+    }
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+.checkout_form{
+    & h3{
+        font-size: 16px;
+        line-height: 30px;
+        padding: 5px 10px;
+        text-transform: uppercase;
+        color:  $white;
+        background:$fonts_color;
+        font-weight: 500;
+    }
+    & input{
+        border: 1px solid $grey_color;
+        background: none;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: $fonts_color;
+    }
+    & .nice-select{
+        width:100%; 
+        & ul.list{
+            width:100%;
+            height: 180px;
+            overflow: auto;
+        }
+        &::after{
+            top: 56%;
+        }
+    }
+    & label{
+        font-weight: 600;
+        & span{
+            color: $secondary_color;
+        }
+        &.righ_0,{
+            cursor: pointer;
+            font-size: 15px;
+            line-height: 27px;
+            padding: 5px 10px;
+            text-transform: capitalize;
+            color: $white;
+            background: $fonts_color;
+            font-weight: 500;
+            @include transition(.3s);
+            margin-bottom: 0;
+            border-radius: 5px;
+            @media #{$large-mobile}{
+                font-size: 13px;
+                line-height: 25px;
+                padding: 3px 10px;
+            }
+            &:hover{
+                background: $fonts_color2;
+            }
+        }
+    }
+}
+
+
+.checkout_form input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+	position: relative;
+	top: 2px;
+	margin-right: 10px;
+}
+.order_button{
+    & button{
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 30px;
+        padding: 5px 10px;
+        text-transform: capitalize;
+        color: $white;
+        background: $secondary_color;
+        font-weight: 500;
+        @include transition(.3s);
+        margin-bottom: 0;
+        border-radius: 5px;
+        &:hover{
+            background: $fonts_color;
+        }
+    }
+}
+
+
+.order-notes {
+    @media #{$large-mobile}{
+        margin-bottom: 58px;
+    }
+    & textarea{
+        border: 1px solid #e5e5e5;
+        border-radius: 0;
+        height: 45px;
+        max-width: 100%;
+        padding: 0 30px 0 20px;
+        background: none;
+        font-size: 13px;
+        resize: none;
+        line-height: 45px;
+        width: 100%;
+        color: $fonts_color; 
+    }
+    & label{
+        line-height: 13px;
+    }
+}
+
+
+.Checkout_section {
+	margin-bottom: 56px;
+    @media #{$large-mobile}{
+        margin-bottom: 60px;
+    }
+}
+.order_table{
+    margin-bottom: 35px;
+    & table{
+         width: 100%;
+        & thead{
+            & tr{
+                & th{
+                    min-width: 50%;
+                    text-align: center;
+                    padding: 15px 0;
+                    border-bottom: 1px solid #ddd;
+                }
+                
+            }
+        }
+        & tbody{
+            & tr{
+                & td{
+                    min-width: 50%;
+                    text-align: center;
+                    padding: 15px 0;
+                    border-bottom: 1px solid #ddd;
+                }
+            }
+        }
+        & tfoot{
+            & tr{
+                & th{
+                    min-width: 50%;
+                    text-align: center;
+                    padding: 15px 0;
+                    border-bottom: 1px solid #ddd;
+                }
+                & td{
+                    min-width: 50%;
+                    text-align: center;
+                    padding: 15px 0;
+                    border-bottom: 1px solid #ddd;
+                }
+            }
+        }
+    }
+}
+
+
+
+.panel-default input[type="radio"] {
+	width: 15px;
+	height: 15px;
+	position: relative;
+	top: 2px;
+	margin-right: 10px;
+}
+.panel-default{
+    & img{
+        width: 160px;
+    }
+}
+.order_button{
+    & button{
+        border: 0;
+    }
+}
+
+.card-body1 {
+	margin-bottom: 15px;
+}
+/*checkout page css end*/

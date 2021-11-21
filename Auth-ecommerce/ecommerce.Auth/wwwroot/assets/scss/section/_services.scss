@@ -1,0 +1,303 @@
+
+/* 20. services page css here */
+
+.services_gallery {
+	padding-bottom: 28px;
+}
+.services_content{
+    & h3{
+        font-size: 15px;
+        text-transform: capitalize;
+        font-weight: 500;
+        margin-bottom: 11px;
+        line-height: 14px;
+    }
+    & p{
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        margin-bottom: 0;
+    }
+}
+
+
+
+
+.services_thumb {
+	margin-bottom: 20px;
+    & img{
+         @media #{$large-mobile}{
+           width: 100%;
+        }
+    }
+    
+}
+
+
+.single_services {
+	margin-bottom: 25px;
+}
+.our_services {
+	padding: 50px 0 25px;
+	background: #ECECEC;
+    @media #{$tablet-device}{
+        margin-bottom: 60px;
+        padding: 50px 0 27px;
+    }
+    @media #{$large-mobile}{
+       padding: 49px 0 25px;
+        margin-bottom: 60px;
+    }
+}
+.services_item {
+	margin-bottom: 27px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.services_title {
+	text-align: center;
+	margin-bottom: 35px;
+    & h2{
+        font-size: 25px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 11px;
+    }
+}
+
+.services_icone {
+	margin-right: 15px;
+    & i{
+        font-size: 35px;
+        line-height: 46px;
+        color:$secondary_color;
+    }
+}
+
+.services_desc{
+    & h3{
+        font-size: 13px;
+        font-weight: 500;
+    }
+    & p{
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 24px;
+        margin-bottom: 0;
+    }
+	
+}
+.services_section_thumb{
+    @media #{$tablet-device}{
+        margin-bottom: 28px;
+    }
+    @media #{$large-mobile}{
+        margin-bottom: 28px;
+    }
+}
+.unlimited_services{
+    @media #{$tablet-device}{
+        margin-bottom: 59px;
+    }
+    @media #{$large-mobile}{
+        margin-bottom: 59px;
+    }
+}
+.unlimited_services_content {
+	text-align: center;
+    & h1{
+        font-weight: 600;
+        line-height: 40px;
+        text-transform: uppercase;
+        font-size: 25px;
+        margin-bottom: 20px;
+        @media #{$desktop-device}{
+            line-height: 25px;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        @media #{$tablet-device}{
+           line-height: 21px;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+        @media #{$large-mobile}{
+           line-height: 20px;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+    }
+    & p{
+        font-size: 14px;
+        line-height: 28px;
+        margin-bottom: 25px;
+        @media #{$tablet-device}{
+           font-size: 14px;
+            margin-bottom: 15px;
+        }
+        @media #{$large-mobile}{
+           font-size: 13px;
+            margin-bottom: 15px;
+        }
+    }
+    & a{
+        font-size: 14px;
+        padding: 6px 20px;
+        display: inline-block;
+        border: 1px solid $fonts_color;
+        border-radius: 30px;
+        &:hover{
+            background: $secondary_color;
+            border-color: $secondary_color;
+            color: $body-color;
+        }
+    }
+}
+
+
+.priceing_table {
+	background: #ECECEC;
+	padding: 60px 0 30px;
+}
+.single_priceing {
+	background: $body-color;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34,25,25,0.4);
+	box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34,25,25,0.4);
+	text-align: center;
+	margin-bottom: 30px;
+}
+.priceing_title {
+	padding: 20px;
+	background: $secondary_color;
+    & h1{
+        color: $body-color;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 0;
+    }
+}
+
+.priceing_list{
+    padding: 0 20px 30px;
+    & h1{
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding: 36px 0 24px;
+        margin: 0;
+        line-height: 20px;
+        & span{
+            font-size: 40px;
+        }
+    }
+    & ul{
+        & li{
+            padding: 15px 0;
+            border-bottom: 1px solid $grey_color;
+            line-height: 24px;
+            &:first-child{
+                border-top: 1px solid $grey_color;
+            }
+        }
+    }
+    & a{
+        margin: 30px 0 0;
+        line-height: 38px;
+        padding: 0 20px;
+        border: 1px solid $fonts_color;
+        color: $fonts_color;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 30px;
+        text-transform: uppercase;
+    }
+	
+}
+
+
+.priceing_list a.list_button,.priceing_list a:hover {
+	background: $secondary_color;
+	border-color:$secondary_color;
+	color: $body-color;
+}
+.advantages_ecommerce{
+    padding: 54px 0;
+    @media #{$large-mobile}{
+        padding: 55px 0 60px;
+    }
+}
+.advantages_content {
+    & h3{
+       font-size: 25px;
+        font-weight: 500;
+        text-transform: capitalize; 
+         @media #{$tablet-device}{
+            font-size: 20px;
+            line-height: 20px;
+        }
+        @media #{$large-mobile}{
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+    & p{
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 400;
+        @media #{$tablet-device}{
+            font-size: 13px;
+        }
+        @media #{$large-mobile}{
+            font-size: 13px;
+        }
+    }
+}
+
+
+.advantages_button {
+	text-align: center;
+    & a{
+        font-size: 14px;
+        padding: 6px 20px;
+        display: inline-block;
+        border-radius: 30px;
+        border: 1px solid $fonts_color;
+        &:hover{
+            background: $secondary_color;
+            color: $body-color;
+            border-color: $secondary_color
+        }
+        @media #{$large-mobile}{
+            padding: 5px 11px;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+    }
+}
+
+
+/*services page css end*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

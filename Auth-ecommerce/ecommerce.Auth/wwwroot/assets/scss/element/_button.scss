@@ -1,0 +1,15 @@
+/* 02. Element */
+
+.button{
+    background: $secondary_color;
+    box-shadow: none;
+    color: $white;
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 22px;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-radius: 3px;
+}
+

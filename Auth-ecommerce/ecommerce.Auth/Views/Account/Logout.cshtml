@@ -1,0 +1,23 @@
+﻿@model LogoutViewModel
+
+<div class="customer_login mt-32">
+<div class="container">
+    <div class="row">
+        <!--login area start-->
+        <div class="col-lg-6 col-md-6"> 
+            <div class="account_form">
+                <h2>Logout</h2>
+                <form asp-action="Logout">
+                    <p>Would you like to logout?</p>
+                    <input type="hidden" name="logoutId" value="@Model.LogoutId" />
+                    <div class="form-group">
+                        <button>Yes</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+                 

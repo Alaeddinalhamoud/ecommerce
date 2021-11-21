@@ -1,0 +1,117 @@
+
+/* 17. login page css here */
+.account_form{
+    & h2{
+        font-size: 28px;
+        text-transform: capitalize;
+        font-weight: 500;
+        line-height: 22px;
+        margin-bottom: 30px;
+        @media #{$large-mobile}{
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    }
+    & form{
+        border: 1px solid $grey_color;
+        padding: 23px 20px 29px;
+        border-radius: 5px;
+    }
+    & label{
+        font-size: 15px;
+        font-weight: 400;
+        cursor: pointer;
+        line-height: 12px;
+        margin-bottom: 12px;
+        transition: .3s;
+        &:hover{
+            color: $secondary_color;
+        }
+    }
+    & input{
+        border: 1px solid $grey_color;
+        height: 40px;
+        max-width: 100%;
+        padding: 0 20px;
+        background: none;
+        width: 100%;
+    }
+    & button{
+        background: $secondary_color;
+        border: 0;
+        color: $white;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        height: 34px;
+        line-height: 21px;
+        padding: 5px 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+        @include transition(.3s);
+        margin-left: 20px;
+        border-radius: 20px;
+        
+        &:hover{
+            background:  $fonts_color; 
+        }
+    }
+    &.register{
+        & button{
+            @media #{$large-mobile}{
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+
+.login_submit label input[type="checkbox"] {
+	width: 15px;
+	height: 13px;
+	margin-right: 3px;
+}
+.login_submit{
+    text-align: right;
+    @media #{$large-mobile}{
+        text-align: left;
+    }
+    & a{
+        font-size: 13px;
+        float: left;
+        line-height: 39px;
+        &:hover{
+            color: $secondary_color;
+        }
+        @media #{$tablet-device}{
+            float: none;
+            line-height: 18px;
+            display: block;
+            margin-bottom: 20px;
+        }
+        @media #{$large-mobile}{
+            float: none;
+            line-height: 18px;
+            display: block;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.customer_login {
+	padding-bottom: 60px;
+}
+
+.account_form p {
+	margin-bottom: 20px;
+    
+}
+.account_form.register {
+     @media #{$large-mobile}{
+        margin-top: 57px;
+    }
+	
+}
+
+
+/*login page css end */

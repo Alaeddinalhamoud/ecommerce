@@ -1,0 +1,46 @@
+@using System.Diagnostics
+
+@{
+    var version = FileVersionInfo.GetVersionInfo(typeof(IdentityServer4.Hosting.IdentityServerMiddleware).Assembly.Location).ProductVersion.Split('+').First();
+    if (!System.Diagnostics.Debugger.IsAttached)
+    {
+        <meta http-equiv="refresh" content="2; url=https://Example.com" />
+    }
+}
+
+<section class="product_details mt-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <div class="welcome-page">
+                    <div class="row page-header">
+                        <div class="col-sm-12">
+                            <h1>
+                                <img class="icon" src="~/icon.png">
+                                Welcome to My Website
+                                <small>(version @version)</small>
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <p>
+                                IdentityServer publishes a
+                                <a href="~/.well-known/openid-configuration">discovery document</a>
+                                where you can find metadata and links to all the endpoints, key material, etc.
+                            </p>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>
+                                Click <a href="~/grants">here</a> to manage your stored grants.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
