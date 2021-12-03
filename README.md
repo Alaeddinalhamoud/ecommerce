@@ -7,7 +7,7 @@ Bulid using:
 
 Projects:
 - API (Published on github)
-- Dashbboard (Coming Soon)
+- Dashbboard (Published on github)
 - Front-end (Coming Soon)
 - Azure function (payment service - email service) (Coming Soon)
 - Auth using Identity server  4 (Published on github)
