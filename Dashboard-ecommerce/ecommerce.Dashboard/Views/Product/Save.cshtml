@@ -1,0 +1,184 @@
+﻿@model ecommerce.Dashboard.Models.MvProduct
+@{
+    var oprationName = Model?.id == 0 ? "Add" : "Update";
+    ViewData["Title"] = $"{oprationName} Product";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">@oprationName Product</h1>
+                                </div>
+                                <form class="user" asp-action="Save" asp-controller="Product" method="post">
+                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="name" class="control-label"></label>
+                                        <input asp-for="name" type="text" class="form-control form-control-user" aria-describedby="Product name" placeholder="Product Name" required>
+                                        <span asp-validation-for="name" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="oldPrice" class="control-label"></label>
+                                        <input asp-for="oldPrice" type="number" class="form-control form-control-user" aria-describedby="Product old Price" placeholder="Product Old Price">
+                                        <span asp-validation-for="oldPrice" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="price" class="control-label"></label>
+                                        <input asp-for="price" type="number" min="1" class="form-control form-control-user" aria-describedby="Product Price" placeholder="Product Price" required>
+                                        <span asp-validation-for="price" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="qty" class="control-label"></label>
+                                        <input asp-for="qty" type="number" class="form-control form-control-user" aria-describedby="Product qty" placeholder="Product qty">
+                                        <span asp-validation-for="qty" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="packageType" class="control-label"></label>
+                                        <select class="custom-control custom-select-lg" asp-for="packageType">
+                                            <option value="Kit">Kit</option>
+                                            <option value="Set">Set</option>
+                                            <option value="Bottle">Bottle</option>
+                                            <option value="Box">Box</option>
+                                            <option value="Pack">Pack</option>
+                                            <option value="Carton">Carton</option>
+                                            <option value="Unit">Unit</option>
+                                            <option value="Each">Each</option>
+                                            <option value="Gram">Gram</option>
+                                        </select>
+                                        <span asp-validation-for="packageType" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="modelNumber" class="control-label"></label>
+                                        <input asp-for="modelNumber" type="text" class="form-control form-control-user" aria-describedby="Product model number" placeholder="Product model number">
+                                        <span asp-validation-for="modelNumber" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="barcode" class="control-label"></label>
+                                        <input asp-for="barcode" type="text" class="form-control form-control-user" aria-describedby="Product barcode" placeholder="Product Barcode">
+                                        <span asp-validation-for="barcode" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="expiryDate" class="control-label"></label><span class="text-danger"> (If the Product has expire date.)</span>
+                                        <input asp-for="expiryDate" type="date" class="form-control form-control-user"
+                                               aria-describedby="expiryDate" placeholder="expiryDate" value="@Model?.expiryDate.ToString("yyyy-MM-dd")" asp-format="{0:yyyy-MM-ddTHH:mm}">
+                                        <span asp-validation-for="expiryDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="inventoryCode" class="control-label"></label>
+                                        <input asp-for="inventoryCode" type="text" class="form-control form-control-user" aria-describedby="Product inventory code" placeholder="Product inventory code">
+                                        <span asp-validation-for="inventoryCode" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="LotNumber" class="control-label"></label>
+                                        <input asp-for="LotNumber" type="text" class="form-control form-control-user" aria-describedby="Product LotNumber" placeholder="Product LotNumber">
+                                        <span asp-validation-for="LotNumber" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="videoUrl" class="control-label"></label>
+                                        <input asp-for="videoUrl" type="url" class="form-control form-control-user" aria-describedby="Product videoUrl" placeholder="Product video">
+                                        <span asp-validation-for="videoUrl" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="placeOfOrigin" class="control-label">Country of origin</label>
+                                        <select class="custom-control custom-select-lg" asp-for="placeOfOrigin" asp-items="Model.countries" required>
+                                            <option value="">-- Select --</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="categoryId" class="control-label"></label>
+                                        <select class="custom-control custom-select-lg" asp-for="categoryId" asp-items="Model.categories" required>
+                                            <option value="">-- Select --</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="brandId" class="control-label"></label>
+                                        <select class="custom-control custom-select-lg" asp-for="brandId" asp-items="Model.brands" required>
+                                            <option value="">-- Select --</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="productTypeId" class="control-label"></label>
+                                        <select class="custom-control custom-select-lg" asp-for="productTypeId" asp-items="Model.productTypes" required>
+                                            <option value="">-- Select --</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="shortDescription" class="control-label"></label>
+                                        <textarea data-val="true"
+                                                  data-val-maxlength="The field Description must be a string or array type with a maximum length of &#x27;1024&#x27;."
+                                                  data-val-maxlength-max="500"
+                                                  data-val-minlength="The field Description must be a string or array type with a minimum length of &#x27;5&#x27;."
+                                                  data-val-minlength-min="3"
+                                                  asp-for="shortDescription" type="text" class="form-control form-control-user" aria-describedby="Product description" placeholder="Product short description" required>
+                                         </textarea>
+                                        <span asp-validation-for="description" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="description" class="control-label"></label>
+                                        <textarea data-val="true"
+                                                  data-val-maxlength="The field Description must be a string or array type with a maximum length of &#x27;1024&#x27;."
+                                                  data-val-maxlength-max="1024"
+                                                  data-val-minlength="The field Description must be a string or array type with a minimum length of &#x27;5&#x27;."
+                                                  data-val-minlength-min="5"
+                                                  asp-for="description" type="text" class="form-control form-control-user" aria-describedby="Product description" placeholder="Product description" required>
+                                         </textarea>
+                                        <span asp-validation-for="description" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="tags" class="control-label">Tags</label>
+                                        <input asp-for="tags" type="text" data-role="tagsinput" class="form-control form-control-user" aria-describedby="Product barcode" placeholder="Add Tag">
+                                        <span asp-validation-for="tags" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="mr-3">Free Shipping?</label>
+                                        <label class="switch">
+                                            <input type="checkbox" asp-for="freeShipping">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="mr-3">Free Tax?</label>
+                                        <label class="switch">
+                                            <input type="checkbox" asp-for="freeTax">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input asp-for="updateImage" type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">Do you want to @oprationName Images?</label>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit">
+                                        Next  <i class="fas fa-chevron-circle-right fa-lg text-white-50"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Leave it for now
+    @section Scripts {
+
+        <script>
+            var quill = new Quill('#description', {
+                theme: 'snow'
+            });
+        </script>
+    }*@
+
+
+@*value="@DateTime.Now.ToString("yyyy-MM-dd")"*@

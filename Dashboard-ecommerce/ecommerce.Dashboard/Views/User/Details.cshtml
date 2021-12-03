@@ -1,0 +1,45 @@
+﻿@model ecommerce.Data.ApplicationUser
+@{
+    ViewData["Title"] = "Product Type Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-left">
+                                    <p class="h4 text-gray-900 mb-2"><strong>Name:</strong> @Model?.name</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Email:</strong> @Model?.Email</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Is Blocked:</strong> @(Model.isBlocked.Equals(true) ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Is Vendor:</strong> @(Model.isVendor.Equals(true) ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</p>
+                                </div>
+                                <hr>
+                                <a asp-action="Index" asp-controller="User" class="btn btn-secondary btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-undo"></i>
+                                    </span>
+                                    <span class="text">Back</span>
+                                </a>
+                                <a asp-action="Edit" asp-controller="User" asp-route-id="@Model?.Id" class="btn btn-warning btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    <span class="text">Edit</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

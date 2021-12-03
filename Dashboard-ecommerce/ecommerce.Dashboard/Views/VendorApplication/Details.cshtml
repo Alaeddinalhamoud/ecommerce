@@ -1,0 +1,133 @@
+﻿@model ecommerce.Data.MVData.VendorApplicationDetails
+@{
+    ViewData["Title"] = "Vendor Application Details";
+}
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-left">
+                                    <p class="h4 text-gray-900 mb-2"><strong>Name:</strong> @Model?.fullName</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Company Name:</strong> @Model?.companyName</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Company VAT:</strong> @Model?.companyVAT</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Work Email:</strong> @Model?.workEmail</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Tel 1:</strong> @Model?.tel1</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Tel 2:</strong> @Model?.tel2</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>CR Number:</strong> @Model?.crNumber</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Owner Id Number:</strong> @Model?.ownerIdNumber</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Company Address:</strong> @Model?.companyAddress</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Bank Name:</strong> @Model?.bankName</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Bank Address:</strong> @Model?.bankAddress</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Account Numebr:</strong> @Model?.account</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Swift Code:</strong> @Model?.swiftCode</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>IBAN:</strong> @Model?.iBAN</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Status:</strong> @Model?.status</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Created date:</strong> @Model?.createDate.ToShortDateString()</p>
+                                </div>
+                                @{
+                                    if (Model != null && Model.vendorMedias.Count() > 0)
+                                    {
+                                        <hr />
+                                        <p class="h4 text-gray-900 mb-2">
+                                            <strong>Media Files:</strong>
+                                            <ul>
+
+                                                @{
+                                                    foreach (var vendorMedia in Model.vendorMedias)
+                                                    {
+                                                        <li>
+                                                           <a href="@vendorMedia?.path">@vendorMedia?.alt</a>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </p>
+                                    }
+                                }
+                                <hr>
+                                <a asp-action="Index" asp-controller="VendorApplication" class="btn btn-secondary btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-undo"></i>
+                                    </span>
+                                    <span class="text">Back</span>
+                                </a>
+                                <a asp-action="ApproveVendorApplication" asp-controller="VendorApplication" asp-route-id="@Model?.id" asp-route-email="@Model.workEmail" class="btn btn-success btn-icon-split mb-2" title="Approve">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                    <span class="text">Approve</span>
+                                </a>
+                                <button data-vendorappid="@Model?.id" data-workemail="@Model?.workEmail" title="Reject" type="button" data-toggle="modal"
+                                        data-target="#ModalRejectStatus" class="open-AddBookDialog btn btn-danger btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-closed-captioning"></i>
+                                    </span>
+                                    <span class="text">Reject</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Pop Up-->
+<div class="modal fade" id="ModalRejectStatus" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reject Vendor Application</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" asp-action="RejectVendorApplication" asp-controller="VendorApplication" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="id" name="id" placeholder="vendorAppId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="workEmail" name="workEmail" placeholder="email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Note:</label>
+                        <input id="note" class="form-control" name="note" placeholder="Note" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-undo"></i>    Close </button>
+                        <button type="submit" class="btn btn-warning">Reject <i class="fas fa-times-circle"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+
+    <script>
+        $(document).on("click", ".open-AddBookDialog", function () {
+            var vendorappid = $(this).data('vendorappid');
+            $(".modal-body #id").val(vendorappid);
+
+            var workemail = $(this).data('workemail');
+            $(".modal-body #workEmail").val(workemail);
+
+            $('#addBookDialog').modal('show');
+        });
+    </script>
+
+}

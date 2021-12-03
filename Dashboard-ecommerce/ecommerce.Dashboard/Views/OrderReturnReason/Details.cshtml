@@ -1,0 +1,41 @@
+﻿@model ecommerce.Data.OrderReturnReason
+@{
+    ViewData["Title"] = "Order Return Reason";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-left">
+                                    <p class="h4 text-gray-900 mb-2"><strong>Reason: </strong> @Model?.reason</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Create Date: </strong> @Model?.createDate.ToShortDateString()</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Update Date: </strong> @Model?.updateDate.ToShortDateString()</p>
+                                </div>
+                                <hr>
+                                <a asp-action="Index" asp-controller="OrderReturnReason" class="btn btn-secondary btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-undo"></i>
+                                    </span>
+                                    <span class="text form-control">Back</span>
+                                </a>
+                                <a asp-action="Edit" asp-controller="OrderReturnReason" asp-route-id="@Model?.id" class="btn btn-warning btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    <span class="text form-control">Edit</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

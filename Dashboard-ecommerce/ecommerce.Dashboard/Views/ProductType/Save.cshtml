@@ -1,0 +1,43 @@
+﻿@model ecommerce.Dashboard.Models.MvProductType
+
+@{
+    var oprationName = Model?.id == 0 ? "Add" : "Update";
+    ViewData["Title"] = $"{oprationName} Product Type";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">@oprationName Product Type</h1>
+                                </div>
+                                <form class="user" asp-action="Save" asp-controller="ProductType" method="post">
+                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <input asp-for="name" type="text" class="form-control form-control-user" aria-describedby="Product Type name" placeholder="Product Type Name">
+                                        <span asp-validation-for="name" class="text-danger"></span>
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit">
+                                        @oprationName  <i class="fas fa-chevron-circle-right fa-lg text-white-50"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

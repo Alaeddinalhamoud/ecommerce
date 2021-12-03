@@ -1,0 +1,66 @@
+﻿@model ecommerce.Dashboard.Models.MVSlider
+@{
+    var oprationName = Model?.id == 0 ? "Add" : "Update";
+    ViewData["Title"] = $"{oprationName} Slider";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">@oprationName a slide show </h1>
+                                </div>
+                                <form class="user" asp-action="Save" asp-controller="Slider" method="post">
+                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <input asp-for="name" type="text" class="form-control form-control-user" aria-describedby="Slider name" placeholder="Title" required>
+                                        <span asp-validation-for="name" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="description" type="text" class="form-control form-control-user" aria-describedby="description" placeholder="Short Description">
+                                        <span asp-validation-for="description" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="link" type="text" class="form-control form-control-user" aria-describedby="link" placeholder="Link">
+                                        <span asp-validation-for="link" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="buttonCaption" type="text" class="form-control form-control-user" aria-describedby="buttonCaption" placeholder="Button Caption">
+                                        <span asp-validation-for="buttonCaption" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="mr-3">Enable/Disable</label>
+                                        <label class="switch">
+                                            <input type="checkbox" asp-for="isEnabled">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input asp-for="updatelogo" type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">Do you want to @oprationName Logo?</label>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit">
+                                        Next  <i class="fas fa-chevron-circle-right fa-lg text-white-50"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,476 @@
+﻿@model IEnumerable<ecommerce.Data.TrackingOrder>
+@using ecommerce.Data;
+@{
+    ViewData["Title"] = "Pending Shippment";
+}
+
+
+<link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h5 class="mb-0 text-gray-800"><span class="fas fa-fw fa-shipping-fast mr-1"></span>Pending Shipments</h5>
+    </div>
+    <!-- Tabs Start -->
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="Ordered-tab" data-toggle="tab" href="#Ordered" role="tab" aria-controls="Ordered" aria-selected="true">Ordered</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="PickedUp-tab" data-toggle="tab" href="#PickedUp" role="tab" aria-controls="PickedUp" aria-selected="false">PickedUp</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="Dispatched-tab" data-toggle="tab" href="#Dispatched" role="tab" aria-controls="Dispatched" aria-selected="false">Dispatched</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="InTransit-tab" data-toggle="tab" href="#InTransit" role="tab" aria-controls="InTransit" aria-selected="false">InTransit</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="Deleted-tab" data-toggle="tab" href="#Deleted" role="tab" aria-controls="Deleted" aria-selected="false">Deleted</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="Ordered" role="tabpanel" aria-labelledby="Ordered-tab">
+            <!--ordered start-->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="OrderedindexTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>Expected Arrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>ExpectedArrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                    <th>Update</th>
+                                </tr>
+                            </tfoot>
+                            <tbody class="align-middle">
+                                @{
+                                    foreach (var item in Model.Where(ord => ord.trackingStatus.Equals(TrackingStatus.Ordered)).OrderBy(x => x.date))
+                                    {
+                                        <tr>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item?.orderId">
+                                                    @item?.orderId
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.trackingStatus
+                                            </td>
+                                            <td class="align-middle">
+                                                @{
+                                                    var date = item.expectedArrival.ToString().Equals("01/01/0001 00:00:00") ? "" : item.expectedArrival.ToShortDateString();
+                                                }
+                                                @date
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.courierTrackingNumber
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.curierCopmany
+                                            </td>
+                                            <td>
+                                                <button data-id="@item.id" data-orderId="@item.orderId"
+                                                        data-trackingStatus="@item.trackingStatus" data-trackingUrl="@item.trackingUrl"
+                                                        data-courierTrackingNumber="@item.courierTrackingNumber" data-curierCopmany="@item.curierCopmany"
+                                                        data-email="@item.email" data-expectedArrivalDate="@item.expectedArrival.ToString("yyyy-MM-dd")"
+                                                        title="Update Status" type="button" data-toggle="modal" data-target="#ModalUpdateStatus" class="open-AddBookDialog btn btn-warning btn-circle btn-md">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--Ordered Ends-->
+        </div>
+        <div class="tab-pane fade" id="PickedUp" role="tabpanel" aria-labelledby="PickedUp-tab">
+            <!--PickUp start-->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="PickedUpindexTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>Expected Arrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>ExpectedArrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                    <th>Update</th>
+                                </tr>
+                            </tfoot>
+                            <tbody class="align-middle">
+                                @{
+                                    foreach (var item in Model.Where(ord => ord.trackingStatus.Equals(TrackingStatus.PickedUp)).OrderBy(x => x.updateDate))
+                                    {
+                                        <tr>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item?.orderId">
+                                                    @item?.orderId
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.trackingStatus
+                                            </td>
+                                            <td class="align-middle">
+                                                @{
+                                                    var date = item.expectedArrival.ToString().Equals("01/01/0001 00:00:00") ? "" : item.expectedArrival.ToShortDateString();
+                                                }
+                                                @date
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.courierTrackingNumber
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.curierCopmany
+                                            </td>
+                                            <td>
+                                                <button data-id="@item.id" data-orderId="@item.orderId"
+                                                        data-trackingStatus="@item.trackingStatus" data-trackingUrl="@item.trackingUrl"
+                                                        data-courierTrackingNumber="@item.courierTrackingNumber" data-curierCopmany="@item.curierCopmany"
+                                                        data-email="@item.email" data-expectedArrivalDate="@item.expectedArrival.ToString("yyyy-MM-dd")"
+                                                        title="Update Status" type="button" data-toggle="modal" data-target="#ModalUpdateStatus" class="open-AddBookDialog btn btn-warning btn-circle btn-md">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--PickUp Ends-->
+        </div>
+        <div class="tab-pane fade" id="Dispatched" role="tabpanel" aria-labelledby="Dispatched-tab">
+            <!--Dispatched start-->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="DispatchedindexTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>Expected Arrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>ExpectedArrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                    <th>Update</th>
+                                </tr>
+                            </tfoot>
+                            <tbody class="align-middle">
+                                @{
+                                    foreach (var item in Model.Where(ord => ord.trackingStatus.Equals(TrackingStatus.Dispatched)).OrderBy(x => x.updateDate))
+                                    {
+                                        <tr>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item.orderId">
+                                                    @item?.orderId
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.trackingStatus
+                                            </td>
+                                            <td class="align-middle">
+                                                @{
+                                                    var date = item.expectedArrival.ToString().Equals("01/01/0001 00:00:00") ? "" : item.expectedArrival.ToShortDateString();
+                                                }
+                                                @date
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.courierTrackingNumber
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.curierCopmany
+                                            </td>
+                                            <td>
+                                                <button data-id="@item.id" data-orderId="@item.orderId"
+                                                        data-trackingStatus="@item.trackingStatus" data-trackingUrl="@item.trackingUrl"
+                                                        data-courierTrackingNumber="@item.courierTrackingNumber" data-curierCopmany="@item.curierCopmany"
+                                                        data-email="@item.email" data-expectedArrivalDate="@item.expectedArrival.ToString("yyyy-MM-dd")"
+                                                        title="Update Status" type="button" data-toggle="modal" data-target="#ModalUpdateStatus" class="open-AddBookDialog btn btn-warning btn-circle btn-md">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--Dispatced Ends-->
+        </div>
+        <div class="tab-pane fade" id="InTransit" role="tabpanel" aria-labelledby="InTransit-tab">
+            <!--InTransit start-->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="InTransitindexTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>Expected Arrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>ExpectedArrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                    <th>Update</th>
+                                </tr>
+                            </tfoot>
+                            <tbody class="align-middle">
+                                @{
+                                    foreach (var item in Model.Where(ord => ord.trackingStatus.Equals(TrackingStatus.InTransit)).OrderBy(x => x.updateDate))
+                                    {
+                                        <tr>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item.orderId">
+                                                    @item?.orderId
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.trackingStatus
+                                            </td>
+                                            <td class="align-middle">
+                                                @{
+                                                    var date = item.expectedArrival.ToString().Equals("01/01/0001 00:00:00") ? "" : item.expectedArrival.ToShortDateString();
+                                                }
+                                                @date
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.courierTrackingNumber
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.curierCopmany
+                                            </td>
+                                            <td>
+                                                <button data-id="@item.id" data-orderId="@item.orderId"
+                                                        data-trackingStatus="@item.trackingStatus" data-trackingUrl="@item.trackingUrl"
+                                                        data-courierTrackingNumber="@item.courierTrackingNumber" data-curierCopmany="@item.curierCopmany"
+                                                        data-email="@item.email" data-expectedArrivalDate="@item.expectedArrival.ToString("yyyy-MM-dd")"
+                                                        title="Update Status" type="button" data-toggle="modal" data-target="#ModalUpdateStatus" class="open-AddBookDialog btn btn-warning btn-circle btn-md">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--InTransit Ends-->
+        </div>
+
+        <div class="tab-pane fade" id="Deleted" role="tabpanel" aria-labelledby="Deleted-tab">
+            <!--InTransit start-->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="InTransitindexTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>Expected Arrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>OrderId</th>
+                                    <th>Tracking Status</th>
+                                    <th>ExpectedArrival</th>
+                                    <th>Courier Tracking Number</th>
+                                    <th>Curier Comapny</th>
+                                </tr>
+                            </tfoot>
+                            <tbody class="align-middle">
+                                @{
+                                    foreach (var item in Model.Where(ord => ord.trackingStatus.Equals(TrackingStatus.Deleted)).OrderBy(x => x.updateDate))
+                                    {
+                                        <tr>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item.orderId">
+                                                    @item?.orderId
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.trackingStatus
+                                            </td>
+                                            <td class="align-middle">
+                                                @{
+                                                    var date = item.expectedArrival.ToString().Equals("01/01/0001 00:00:00") ? "" : item.expectedArrival.ToShortDateString();
+                                                }
+                                                @date
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.courierTrackingNumber
+                                            </td>
+                                            <td class="align-middle">
+                                                @item?.curierCopmany
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--InTransit Ends-->
+        </div>
+    </div>
+
+    <!-- Tabs Ends -->
+</div>
+
+
+
+
+
+<!--Pop Up-->
+<div class="modal fade" id="ModalUpdateStatus" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Delivery Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" asp-action="UpdateStatus" asp-controller="TrackingOrder" method="post">
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="trackingId" name="trackingId" readonly hidden>
+                    </div>
+                    <div class="form-group"> 
+                        <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Order Id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Status:  </label>
+                        <select size="1" id="trackingStatus" name="trackingStatus" class="form-control">
+                            <option value="Ordered">
+                                Ordered
+                            </option>
+                            <option value="PickedUp">
+                                PickedUp
+                            </option>
+                            <option value="Dispatched">
+                                Dispatched
+                            </option>
+                            <option value="InTransit">
+                                InTransit
+                            </option>
+                            <option value="Delivered">
+                                Delivered
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tracking Link:</label>
+                        <input id="trackingUrl" class="form-control" name="trackingUrl" placeholder="Tracking Link" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tracking Number: </label>
+                        <input id="courierTrackingNumber" class="form-control" name="courierTrackingNumber" placeholder="Courier Tracking Number" />
+                    </div>
+                    <div class="form-group">
+                        <label>Shipped with: </label>
+                        <input id="curierCopmany" class="form-control" name="curierCopmany" placeholder="Curier Copmany Name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Customer Email: </label>
+                        <input id="email" class="form-control" name="email" placeholder="Email" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Arrival Date: </label>
+                        <input id="expectedArrivalDate" type="date" class="form-control" name="expectedArrivalDate" min="@DateTime.Now" asp-format="{0:yyyy-MM-ddTHH:mm}"/>
+                    </div>
+                    <div class="modal-footer"> 
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-undo"></i>    Close </button>
+                           <button type="submit" class="btn btn-warning">Send Email <i class="fas fa-paper-plane"></i></button> 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/datatables-page.js"></script>
+    <script src="~/js/TrackingOrder/trackingOrderModelPopUp.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#OrderedindexTable').DataTable();
+        $('#PickedUpindexTable').DataTable();
+        $('#DispatchedindexTable').DataTable();
+        $('#InTransitindexTable').DataTable();
+    });
+</script>
+}
+

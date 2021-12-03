@@ -1,0 +1,55 @@
+﻿@model ecommerce.Dashboard.Models.MVOrderComplaintCase
+@{
+    ViewData["Title"] = "Order Complaint-Case Details";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-left">
+                                    <div class="form-group">
+                                        <label asp-for="reasonId" class="control-label"></label>
+                                        <select class="custom-control custom-select-lg" asp-for="reasonId" asp-items="Model?.reasons" required disabled>
+                                            <option value="">-- Select --</option>
+                                        </select>
+                                    </div>
+                                    <p class="h4 text-gray-900 mb-2">
+                                        <strong>Order Id: </strong>
+                                        <a asp-action="GetOrder" asp-controller="order" asp-route-id="@Model?.orderId">
+                                            @Model?.orderId
+                                        </a>
+                                    </p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Customer Notes: </strong>@Model?.customerNote</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Email: </strong>@Model?.email</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Status: </strong>@Model?.status</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Action to solve: </strong>@Model?.actionsToSolve</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Message To the Customer: </strong>@Model?.messageToCustomer</p>
+                                </div>
+                                <hr>
+                                <a asp-action="Index" asp-controller="OrderComplaintCase" class="btn btn-secondary btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-undo"></i>
+                                    </span>
+                                    <span class="text form-control">Back</span>
+                                </a>
+                                <a asp-action="Edit" asp-controller="OrderComplaintCase" asp-route-id="@Model?.id" class="btn btn-warning btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    <span class="text form-control">Edit</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

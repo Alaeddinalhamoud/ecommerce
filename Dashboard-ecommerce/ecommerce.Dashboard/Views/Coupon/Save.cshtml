@@ -1,0 +1,105 @@
+﻿@model ecommerce.Dashboard.Models.MVCoupon
+@{
+    var oprationName = Model?.id == 0 ? "Add" : "Update";
+    ViewData["Title"] = $"{oprationName} Coupon";
+    var disableCouponCode = Model?.id == 0 ? true : false;
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">@oprationName Coupon @(String.IsNullOrEmpty(Model?.code) ? "" : Model?.code)</h1>
+                                </div>
+                                <form class="user" asp-action="Save" asp-controller="Coupon" method="post">
+                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="couponName" class="control-label">Coupon Details</label>
+                                        <input asp-for="couponName" type="text" class="form-control form-control-user"
+                                               aria-describedby="couponName" placeholder="Coupon Details" required>
+                                        <span asp-validation-for="couponName" class="text-danger"></span>
+                                    </div>
+                                    @if (disableCouponCode)
+                                    {
+                                        <div class="form-group">
+                                            <label asp-for="code" class="control-label">Code</label>
+                                            <input asp-for="code" type="text" class="form-control form-control-user"
+                                                   aria-describedby="Code" placeholder="Code" required>
+                                            <span asp-validation-for="code" class="text-danger"></span>
+                                        </div>
+                                    }
+                                    <div class="form-group">
+                                        <label asp-for="discountType" class="control-label"></label>
+                                        <select class="custom-control custom-select-lg" asp-for="discountType" required>
+                                            <option value="Percentage">Percentage %</option>
+                                            <option value="FixedAmount">Fixed Amount</option>
+                                            <option value="FreeShipping">Free Shipping</option>
+                                        </select>
+                                        <span asp-validation-for="discountType" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="value" class="control-label">Value <code>(SAR)</code></label>
+                                        <input asp-for="value" type="number" class="form-control form-control-user"
+                                               aria-describedby="value" placeholder="Value">
+                                        <span asp-validation-for="value" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="numberOfUse" class="control-label">Maximum Number Of Use</label>
+                                        <input asp-for="numberOfUse" type="number" class="form-control form-control-user"
+                                               aria-describedby="numberOfUse" placeholder="Number Of Use">
+                                        <span asp-validation-for="numberOfUse" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="startOn" class="control-label">Start On</label>
+                                        <input asp-for="startOn" type="date" class="form-control form-control-user"
+                                               aria-describedby="startOn" placeholder="start On" value="@Model?.startOn.ToString("yyyy-MM-dd")">
+                                        <span asp-validation-for="startOn" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="expireOn" class="control-label">Expire On</label>
+                                        <input asp-for="expireOn" type="date" class="form-control form-control-user"
+                                               aria-describedby="expireOn" placeholder="expire On" value="@Model?.expireOn.ToString("yyyy-MM-dd")">
+                                        <span asp-validation-for="expireOn" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="minimumSpent" class="control-label">Minimum Spent <code>(SAR)</code></label>
+                                        <input asp-for="minimumSpent" type="number" class="form-control form-control-user"
+                                               aria-describedby="maximumDiscount" placeholder="Minimum Spent">
+                                        <span asp-validation-for="minimumSpent" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="maximumDiscount" class="control-label">Maximum Discount <code>(SAR)</code></label>
+                                        <input asp-for="maximumDiscount" type="number" class="form-control form-control-user"
+                                               aria-describedby="maximumDiscount" placeholder="maximum Discount">
+                                        <span asp-validation-for="maximumDiscount" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="mr-3">Enable/Disable</label>
+                                        <label class="switch">
+                                            <input type="checkbox" asp-for="isActive">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit">
+                                        Save  <i class="fas fa-save fa-lg text-white-50"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

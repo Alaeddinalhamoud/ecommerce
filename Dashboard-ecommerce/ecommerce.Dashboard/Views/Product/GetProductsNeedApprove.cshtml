@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ecommerce.Data.Product> 
+@{
+    ViewData["Title"] = "Products Need Approve";
+}
+
+<link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Products Need Appove</h1>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center" id="indexTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody class="align-middle">
+
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="align-middle">@item?.id</td>
+                                    <td class="align-middle">@item?.name</td>
+                                    <td class="align-middle">@item?.price</td>
+                                    <td class="align-middle">
+                                        <a asp-action="Details" asp-controller="Product" asp-route-id="@item?.id" class="btn-info btn-circle btn-md">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                        <a asp-action="ProductApprove" asp-controller="Product" asp-route-id="@item?.id" class="btn-warning btn-circle btn-md">
+                                            <i class="fas fa-check-circle"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+@section scripts {
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/datatables-page.js"></script>
+}

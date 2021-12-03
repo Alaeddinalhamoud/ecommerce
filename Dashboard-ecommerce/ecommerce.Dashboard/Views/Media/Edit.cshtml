@@ -1,0 +1,64 @@
+﻿@model ecommerce.Dashboard.Models.MvMedia
+@{
+    var oprationName = Model?.id == 0 ? "Add" : "Update";
+    ViewData["Title"] = $"{oprationName} Media File";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-lg-block">
+
+                            @if (Model?.mediaType == ecommerce.Data.MediaType.Image)
+                            {
+                                <img src="@Model?.path" class="img-thumbnail img-fluid" />
+                            }
+                            else
+                            {
+                                <div class="py-5 px-5 align-middle">
+                                    <i class="fas fa-file-pdf fa-7x"></i>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">@oprationName Media</h1>
+                                </div>
+                                <form class="user" asp-action="Save" asp-controller="Media" method="post">
+                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                    <input asp-for="productId" type="text" class="form-control form-control-user" aria-describedby="productId" hidden>
+
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="name" class="control-label"></label>
+                                        <input asp-for="name" type="text" class="form-control form-control-user"
+                                               aria-describedby="name" placeholder="Name">
+                                        <span asp-validation-for="name" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="alt" class="control-label"></label>
+                                        <input asp-for="alt" type="text" class="form-control form-control-user"
+                                               aria-describedby="lat" placeholder="Brand Name">
+                                        <span asp-validation-for="alt" class="text-danger"></span>
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit">
+                                        @oprationName  <i class="fas fa-chevron-circle-right fa-lg text-white-50"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

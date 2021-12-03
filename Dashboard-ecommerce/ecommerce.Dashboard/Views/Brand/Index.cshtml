@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ecommerce.Data.Brand>
+@{
+    ViewData["Title"] = "Brands";
+}
+
+<link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Brand</h1>
+        <a asp-controller="Brand" asp-action="Save" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-plus-circle fa-sm text-white-50"></i> Add Brand
+        </a>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Brands List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center" id="indexTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Image</th>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody class="align-middle">
+
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="@item?.imagePath" class="img-thumbnail imageDataTable" />
+                                    </td>
+                                    <td class="align-middle">@item?.id</td>
+                                    <td class="align-middle">@item?.name</td>
+                                    <td class="align-middle">
+                                        <a asp-action="Details" asp-controller="Brand" asp-route-id="@item?.id" class="btn-success btn-circle btn-md">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-controller="Brand" asp-route-id="@item?.id" class=" btn btn-warning btn-circle btn-md">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        @{
+                                            if (item.isDeleted)
+                                            {
+                                                <a asp-action="Delete" asp-controller="Brand" asp-route-id="@item?.id" asp-route-value="false" title="retrun Brand" class=" btn btn-dark btn-circle btn-md">
+                                                    <i class="fas fa-undo-alt"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-action="Delete" asp-controller="Brand" asp-route-id="@item?.id" asp-route-value="true" title="delete Brand" class=" btn btn-danger btn-circle btn-md">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+ 
+
+@section scripts {
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/datatables-page.js"></script>
+}

@@ -1,0 +1,281 @@
+﻿@model ecommerce.Dashboard.Models.MVSetting
+@{
+    ViewData["Title"] = "Website Settings";
+    var logo = Model?.logo ?? "/img/NoImage.jpg";
+}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-cogs"></i> Website Settings</h1>
+    <form class="user" asp-action="Save" asp-controller="Setting" method="post"  enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-info-circle"></i> WebSite information</h6>
+                    </div>
+                    <div class="card-body">
+                        <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="websiteName" class="control-label">Website Name</label>
+                            <input asp-for="websiteName" type="text" class="form-control form-control-user" aria-describedby="website name" placeholder="Website Name" required>
+                            <span asp-validation-for="websiteName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="email" class="control-label">Email</label>
+                            <input asp-for="email" type="email" class="form-control form-control-user" aria-describedby="email" placeholder="Email" required>
+                            <span asp-validation-for="email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="salesEmail" class="control-label">Sales Email</label>
+                            <input asp-for="salesEmail" type="email" class="form-control form-control-user" aria-describedby="email" placeholder="Sales Email" required>
+                            <span asp-validation-for="salesEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="helpDeskEmail" class="control-label">HelpDesk Email</label>
+                            <input asp-for="helpDeskEmail" type="email" class="form-control form-control-user" aria-describedby="helpDeskEmail" placeholder="HelpDesk Email" required>
+                            <span asp-validation-for="helpDeskEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="address" class="control-label">address</label>
+                            <input asp-for="address" type="text" class="form-control form-control-user" aria-describedby="address" placeholder="Address" required>
+                            <span asp-validation-for="address" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="phone" class="control-label">Phone</label>
+                            <input asp-for="phone" type="text" class="form-control form-control-user" aria-describedby="phone" placeholder="Phone">
+                            <span asp-validation-for="phone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="description" class="control-label">description</label>
+                            <input asp-for="description" type="text" class="form-control form-control-user" aria-describedby="description" placeholder="Description">
+                            <span asp-validation-for="description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="tidioScript" class="control-label">Tidio Script</label>
+                            <input asp-for="tidioScript" type="text" class="form-control form-control-user" aria-describedby="tidio Script" placeholder="Tidio Script">
+                            <span asp-validation-for="tidioScript" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="tax" class="control-label">Tax %</label>
+                            <input asp-for="tax" type="number" class="form-control form-control-user" aria-describedby="Tax" placeholder="Tax %" required>
+                            <span asp-validation-for="tax" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="shippingCost" class="control-label">Shipping Cost</label>
+                            <input asp-for="shippingCost" type="number" class="form-control form-control-user" aria-describedby="Shipping Cost" placeholder="Shipping Cost" required>
+                            <span asp-validation-for="shippingCost" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="orderReturnDays" class="control-label">Order Return Days</label>
+                            <input asp-for="orderReturnDays" type="number" class="form-control form-control-user" aria-describedby="order Return Days" placeholder="order Return Days" required>
+                            <span asp-validation-for="orderReturnDays" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Vendor Agreement Contract <code>(PDF)</code>:</label>
+                            <input asp-for="fileToUpload" type="file" class="form-control" multiple accept=".pdf" />
+                            <span asp-validation-for="shippingCost" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-twitter"></i> Social Media Links</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="facebookLink" class="control-label">Facebook</label>
+                            <input asp-for="facebookLink" type="text" class="form-control form-control-user" aria-describedby="facebook Link" placeholder="Facebook Link">
+                            <span asp-validation-for="facebookLink" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="twitterLink" class="control-label">Twitter</label>
+                            <input asp-for="twitterLink" type="text" class="form-control form-control-user" aria-describedby="twitter Link" placeholder="Twitter Link">
+                            <span asp-validation-for="twitterLink" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="instgramLink" class="control-label">Instgram</label>
+                            <input asp-for="instgramLink" type="text" class="form-control form-control-user" aria-describedby="instgram Link" placeholder="Instgram Link">
+                            <span asp-validation-for="instgramLink" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bar Chart -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-toggle-on"></i> Enable Features</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isSlider" type="checkbox" class="custom-control-input" id="customCheckisSlider">
+                                <label class="custom-control-label" for="customCheckisSlider">Do you want to Display <strong>Slider</strong>?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isMostViewdProduct" type="checkbox" class="custom-control-input" id="customCheckisMostViewdProduct">
+                                <label class="custom-control-label" for="customCheckisMostViewdProduct">Do you want to Display <strong>Most Viewd Products</strong>?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isNewArrivalProduct" type="checkbox" class="custom-control-input" id="customCheckisNewArrivalProduct">
+                                <label class="custom-control-label" for="customCheckisNewArrivalProduct">Do you want to Display <strong>New Arrival Products</strong>?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isRecentlyViewedProduct" type="checkbox" class="custom-control-input" id="customCheckisRecentlyViewedProduct">
+                                <label class="custom-control-label" for="customCheckisRecentlyViewedProduct">Do you want to Display <strong>Recently Viewed Product</strong>?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isTidioScript" type="checkbox" class="custom-control-input" id="customIsTidioScript">
+                                <label class="custom-control-label" for="customIsTidioScript">Do you want to Display <strong>Tidio Chat</strong>?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isVendorEnabled" type="checkbox" class="custom-control-input" id="customIsVendorEnabled">
+                                <label class="custom-control-label" for="customIsVendorEnabled">Do you want to Enable <strong>Vendor Form</strong>?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="enableCoupon" type="checkbox" class="custom-control-input" id="customEnableCoupon">
+                                <label class="custom-control-label" for="customEnableCoupon">Do you want to Enable <strong>Coupons</strong>?</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bar PaymentMethods -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-toggle-on"></i> Payment Settings</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isCash" type="checkbox" class="custom-control-input" id="customCheckisCash">
+                                <label class="custom-control-label" for="customCheckisCash">Do you want to Display <strong>Cash</strong> Payment?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isCard" type="checkbox" class="custom-control-input" id="customCheckisCard">
+                                <label class="custom-control-label" for="customCheckisCard">Do you want to Display <strong>Card</strong>  Payment?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payTabsMerchantProfileID" class="control-label">PayTabs Merchant Profile ID</label>
+                            <input asp-for="payTabsMerchantProfileID" type="number" class="form-control form-control-user" aria-describedby="payTabsMerchantProfileID" placeholder="PayTabs Merchant Profile ID" required>
+                            <span asp-validation-for="payTabsMerchantProfileID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payTabsClientKey" class="control-label">PayTabs Client Key</label>
+                            <input asp-for="payTabsClientKey" type="text" class="form-control form-control-user" aria-describedby="payTabsClientKey" placeholder="PayTabs Client Key" required>
+                            <span asp-validation-for="payTabsClientKey" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payTabsServerKey" class="control-label">PayTabs Server Key</label>
+                            <input asp-for="payTabsServerKey" type="text" class="form-control form-control-user" aria-describedby="payTabsServerKey" placeholder="PayTabs Server Key" required>
+                            <span asp-validation-for="payTabsServerKey" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payTabsAPIUrl" class="control-label">PayTabs API Url</label>
+                            <input asp-for="payTabsAPIUrl" type="text" class="form-control form-control-user" aria-describedby="payTabsAPIUrl" placeholder="PayTabs API Url" required>
+                            <span asp-validation-for="payTabsAPIUrl" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bar Chart -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-sort-numeric-up-alt"></i> Number Of Products</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="numberOfSliders" class="control-label">Number Of Sliders (between 1 and 10)</label>
+                            <input asp-for="numberOfSliders" type="range" min="1" max="10" class="form-control-range form-control-user" aria-describedby="number Of Sliders" placeholder="number Of Sliders">
+                            <p>Value: <span id="numberOfSlidersValue"></span></p>
+                            <span asp-validation-for="numberOfSliders" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="pageSize" class="control-label">Page Size (between 1 and 50)</label>
+                            <input asp-for="pageSize" type="range" min="1" max="50" class="form-control-range form-control-user" aria-describedby="page Size" placeholder="page Size">
+                            <p>Value: <span id="pageSizeValue"></span></p>
+                            <span asp-validation-for="pageSize" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Donut Chart -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"> <i class="fa fa-image"></i> Logo</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <img src="@logo" class="img-thumbnail" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input asp-for="isLogo" type="checkbox" class="custom-control-input" id="customChecklogo">
+                                <label class="custom-control-label" for="customChecklogo">Do you want to Update the Logo?</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-danger"> <i class="fa fa-tools"></i> Maintenance </h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="custom-control custom-checkbox small">
+                            <input asp-for="enableMaintenance" type="checkbox" class="custom-control-input" id="customCheckenableMaintenance">
+                            <label class="custom-control-label" for="customCheckenableMaintenance">Do you want to Enable <strong>Maintenance</strong>?</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-2">
+            <button class="btn btn-primary btn-user btn-block mb-2" type="submit">
+                Update  <i class="fas fa-cloud-upload-alt  text-white-50"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    var sliderPageSize = document.getElementById("pageSize");
+    var outputPageSizeValue = document.getElementById("pageSizeValue");
+    outputPageSizeValue.innerHTML = sliderPageSize.value;
+
+    sliderPageSize.oninput = function () {
+        outputPageSizeValue.innerHTML = this.value;
+    }
+
+    var sliderNumberOfSliders = document.getElementById("numberOfSliders");
+    var outputNumberOfSliders = document.getElementById("numberOfSlidersValue");
+    outputNumberOfSliders.innerHTML = sliderNumberOfSliders.value;
+
+    sliderNumberOfSliders.oninput = function () {
+        outputNumberOfSliders.innerHTML = this.value;
+    }
+
+</script>

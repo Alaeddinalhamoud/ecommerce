@@ -1,0 +1,111 @@
+﻿@model ecommerce.Data.MetaTag
+@{
+    ViewData["Title"] = "Meta Tags";
+}
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-tags"></i> Meta Tags</h1>
+                                </div>
+                                <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+                                <form class="user" asp-action="Save" asp-controller="MetaTag" method="post">
+                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                    <input asp-for="productId" type="text" class="form-control form-control-user" aria-describedby="productId" hidden>
+                                    <input asp-for="metaTagType" type="text" class="form-control form-control-user" aria-describedby="metaTagType" hidden>
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="title" class="control-label">Title</label>
+                                        <input asp-for="title" type="text" class="form-control form-control-user" aria-describedby="title" placeholder="Title" required>
+                                        <span asp-validation-for="title" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="sitename" class="control-label">Site Name</label>
+                                        <input asp-for="sitename" type="text" class="form-control form-control-user" aria-describedby="sitename" placeholder="Site Name" required>
+                                        <span asp-validation-for="sitename" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="url" class="control-label">URL</label>
+                                        <input asp-for="url" type="text" class="form-control form-control-user" aria-describedby="url" placeholder="URL" required>
+                                        <span asp-validation-for="url" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="type" class="control-label">Page Type</label>
+                                        <select class="custom-control custom-select-lg" asp-for="type">
+                                            <option value="website">Website</option>
+                                            <option value="article">Article</option>
+                                            <option value="blog">Blog</option>
+                                            <option value="book">Book</option>
+                                            <option value="game">Game</option>
+                                            <option value="movie">Movie</option>
+                                            <option value="food">Food</option>
+                                            <option value="city">City</option>
+                                            <option value="country">Country</option>
+                                            <option value="company">Company</option>
+                                            <option value="hotel">Hotel</option>
+                                            <option value="restaurant">Restaurant</option>
+                                        </select>
+                                        <span asp-validation-for="type" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="image" class="control-label">Image(Logo url)</label>
+                                        <input asp-for="image" type="text" class="form-control form-control-user" aria-describedby="logo" placeholder="Logo" required>
+                                        <span asp-validation-for="image" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="imageAlt" class="control-label">Image Alt</label>
+                                        <input asp-for="imageAlt" type="text" class="form-control form-control-user" aria-describedby="imageAlt" placeholder="Image Alt" required>
+                                        <span asp-validation-for="imageAlt" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="locale" class="control-label">Page Language</label>
+                                        <select class="custom-control custom-select-lg" asp-for="locale">
+                                            <option value="en_GB">English</option>
+                                            <option value="ar_SA">Arabic</option>
+                                            <option value="fr_FR">French</option>
+                                        </select>
+                                        <span asp-validation-for="locale" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="video" class="control-label">Video(YouTube)</label>
+                                        <input asp-for="video" type="text" class="form-control form-control-user" aria-describedby="video" placeholder="Video">
+                                        <span asp-validation-for="video" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="keywords" class="control-label">Keywords</label>
+                                        <input asp-for="keywords" type="text" data-role="tagsinput" class="form-control form-control-user" aria-describedby="Keywords" placeholder="Add Keywords">
+                                        <span asp-validation-for="keywords" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="description" class="control-label">Description</label>
+                                        <input asp-for="description" type="text" class="form-control form-control-user" aria-describedby="description" placeholder="Description">
+                                        <span asp-validation-for="description" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <a target="_blank" href="https://developers.facebook.com/docs/sharing/webmasters/" class="text-danger">
+                                            How to Fill it?
+                                            <span class="fas fa-external-link-alt"></span>
+                                        </a>
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit">
+                                        Save  <i class="fas fa-save fa-lg text-white-50"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

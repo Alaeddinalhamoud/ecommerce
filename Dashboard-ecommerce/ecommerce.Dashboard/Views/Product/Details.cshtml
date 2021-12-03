@@ -1,0 +1,315 @@
+﻿@model ecommerce.Data.MVData.ProductDetail
+@{
+    ViewData["Title"] = "Product Details";
+    var NewButtonCaption = String.IsNullOrWhiteSpace(Model?.metaTagTitle) ? "Add" : "Update";
+}
+
+<link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <!-- Outer Row -->
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <!-- Outer Row -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-0">
+        <h5 class="mb-0 text-gray-800"><span class="fas fa-fw fa-boxes mr-1"></span>Product Details</h5>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            @{
+                if (!Model.isApproved)
+                {
+                    <div class="border border-warning text-warning">
+                        <i class="fas fa-exclamation-triangle fa-2x p-1"></i> Warning, this Product needs to be approved.
+                    </div>
+                }
+
+                if (Model.isDeleted)
+                {
+                    <div class="border border-danger text-danger">
+                        <i class="fas fa-exclamation-triangle fa-2x p-1"></i> Warning, this Product Is deleled.
+                    </div>
+                }
+            }
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!--Body-->
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="Details-tab" data-toggle="tab" href="#Details" role="tab" aria-controls="Details" aria-selected="true">Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="Gallary-tab" data-toggle="tab" href="#Gallary" role="tab" aria-controls="Gallary" aria-selected="false">Image Gallary</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="Specifications-tab" data-toggle="tab" href="#Specifications" role="tab" aria-controls="Specifications" aria-selected="false">Product Specifications</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="MetaTag-tab" data-toggle="tab" href="#MetaTag" role="tab" aria-controls="MetaTag" aria-selected="false">Product MetaTag</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="Details" role="tabpanel" aria-labelledby="Details-tab">
+                                    <!-- Details start-->
+                                    <div class="p-5">
+                                        <div class="text-left">
+                                            <p class="h4 text-gray-900 mb-2"><strong>Id:</strong> @Model?.id</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Name:</strong> @Model?.name</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Qty:</strong> @Model?.qty</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Package Type:</strong> @Model?.packageType</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Old Price:</strong> @Model?.oldPrice SAR</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Price:</strong> @Model?.price SAR</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Country Of Origin:</strong> @Model?.placeOfOrigin</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Lot Number:</strong> @Model?.LotNumber</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Inventory Code:</strong> @Model?.inventoryCode</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Free Shipping?</strong> @(Model.freeShipping ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Free Tax?</strong> @(Model.freeTax ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</p>
+                                            <hr />
+                                            <p class="h4 text-gray-900 mb-2"><strong>barCode:</strong> @Model?.barcode</p>
+                                            @{
+                                                if (!String.IsNullOrEmpty(Model?.barcode))
+                                                {
+                                                    <img alt="Barcoded value @Model?.barcode" src="http://bwipjs-api.metafloor.com/?bcid=code128&text=@Model.barcode&includetext">
+                                                }
+                                            }
+                                            <hr />
+                                            <p class="h4 text-gray-900 mb-2"><strong>Short description:</strong> @Model?.shortDescription</p>
+                                            <br />
+                                            <p class="h4 text-gray-900 mb-2"><strong>Description:</strong> @Model?.description</p>
+                                            <hr />
+                                            <p class="h4 text-gray-900 mb-2"><strong>Created by:</strong> @Model?.createdBy</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Created date:</strong> @Model?.createDate.ToShortDateString()</p>
+                                            <p class="h4 text-gray-900 mb-2"><strong>Last modified:</strong> @Model?.updateDate.ToShortDateString()</p>
+                                        </div>
+                                        <hr>
+                                        <a asp-action="Index" asp-controller="Product" class="btn btn-secondary btn-icon-split mb-2">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-undo"></i>
+                                            </span>
+                                            <span class="text">Back</span>
+                                        </a>
+                                        <a asp-action="Edit" asp-controller="Product" asp-route-id="@Model?.id" class="btn btn-warning btn-icon-split mb-2">
+                                            <span class="icon text-white-50">
+                                                <i class="far fa-edit"></i>
+                                            </span>
+                                            <span class="text">Edit</span>
+                                        </a>
+                                    </div>
+                                    <!-- Details ends-->
+                                </div>
+                                <div class="tab-pane fade" id="Gallary" role="tabpanel" aria-labelledby="Gallary-tab">
+                                    <!--GA start-->
+                                    <!-- DataTales Example  Media Gallary-->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <form class="user" asp-action="MultiUpload" asp-controller="Media" method="post">
+                                                <!--Send you to add new images with product id-->
+                                                <input id="id" name="id" value="@Model?.id" hidden />
+                                                <input id="sourceController" name="sourceController" value="Product" hidden />
+                                                <button type="submit" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                    <i class="fas fa-plus-circle fa-sm text-white-50"></i> Add Media File
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered text-center" id="GallaryindexTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">File</th>
+                                                            <th scope="col">Type</th>
+                                                            <th scope="col">Alt</th>
+                                                            <th scope="col">Create Date</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th scope="col">File</th>
+                                                            <th scope="col">Type</th>
+                                                            <th scope="col">Alt</th>
+                                                            <th scope="col">Create Date</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        @foreach (var item in Model.medias)
+                                                        {
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    @if (item?.mediaType == ecommerce.Data.MediaType.Image)
+                                                                    {
+                                                                        <img src="@item?.path" class="img-thumbnail imageDataTable" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <i class="fas fa-file-pdf fa-2x"></i>
+                                                                    }
+                                                                </th>
+                                                                <td>@item?.mediaType</td>
+                                                                <td>@item?.alt</td>
+                                                                <td>@item?.createDate.ToShortDateString()</td>
+                                                                <td class="align-middle">
+                                                                    <a asp-action="Edit" asp-controller="Media" asp-route-id="@item?.id" class=" btn btn-warning btn-circle btn-md">
+                                                                        <i class="far fa-edit"></i>
+                                                                    </a>
+                                                                    <a asp-action="Delete" asp-controller="Media" asp-route-id="@item?.id" class="btn btn-danger btn-circle btn-md">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--GA start-->
+                                </div>
+                                <div class="tab-pane fade" id="Specifications" role="tabpanel" aria-labelledby="Specifications-tab">
+                                    <!-- DataTales Example -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <a asp-controller="ProductSpecification" asp-action="Save" asp-route-id="@Model?.id" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                <i class="fas fa-plus-circle fa-sm text-white-50"></i> Add Specification
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered text-center" id="SpecificationsindexTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Id</th>
+                                                            <th scope="col">Feature</th>
+                                                            <th scope="col">Specification</th>
+                                                            <th scope="col">Create Date</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th scope="col">Id</th>
+                                                            <th scope="col">Feature</th>
+                                                            <th scope="col">Specification</th>
+                                                            <th scope="col">Create Date</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        @foreach (var item in Model.productSpecifications)
+                                                        {
+                                                            <tr>
+                                                                <th scope="row">@item?.id</th>
+                                                                <td>@item?.name</td>
+                                                                <td>@item?.value</td>
+                                                                <td>@item?.createDate.ToShortDateString()</td>
+                                                                <td class="align-middle">
+                                                                    <a asp-action="Edit" asp-controller="ProductSpecification" asp-route-id="@item?.id" class=" btn btn-warning btn-circle btn-md">
+                                                                        <i class="far fa-edit"></i>
+                                                                    </a>
+                                                                    <button type="button" data-toggle="modal" data-target="#deleteModal" data-id="@item?.id" data-name="@item?.name" class="btn btn-danger btn-circle btn-md">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- DataTales Example -->
+                                </div>
+                                <div class="tab-pane fade" id="MetaTag" role="tabpanel" aria-labelledby="MetaTag-tab">
+                                    <!-- DataTales Example -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <a asp-controller="MetaTag" asp-action="NewMetaTag" asp-route-productId="@Model?.id" asp-route-name="@Model?.name" asp-route-image="@Model?.medias?.FirstOrDefault()?.path" asp-route-video="@Model?.videoUrl" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                <i class="fas fa-plus-circle fa-sm text-white-50"></i> @NewButtonCaption MetaTag
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="text-left">
+                                                <p class="h4 text-gray-900 mb-2"><strong>Page Title:</strong> @Model?.metaTagTitle</p>
+                                                <p class="h4 text-gray-900 mb-2"><strong>Page Type:</strong> @Model?.metaTagType</p>
+                                                <p class="h4 text-gray-900 mb-2"><strong>Description:</strong> @Model?.metaTagDescription</p>
+                                                <p class="h4 text-gray-900 mb-2"><strong>Url:</strong> @Model?.metaTagUrl</p>
+                                                <p class="h4 text-gray-900 mb-2"><strong>Locale:</strong> @Model?.metaTagLocale</p>
+                                                <p class="h4 text-gray-900 mb-2"><strong>Sitename:</strong> @Model?.metaTagSitename</p>
+                                                @if (!String.IsNullOrWhiteSpace(Model?.metaTagVideo))
+                                                {
+                                                    <p class="h4 text-gray-900 mb-2"><strong>Video:</strong> <a target="_blank" href="@Model?.metaTagVideo">Link <span class="fas fa-external-link-alt"></span></a></p>
+                                                }
+                                                @if (!String.IsNullOrWhiteSpace(Model?.metaTagKeywords))
+                                                {
+                                                    <p class="h4 text-gray-900 mb-2">
+                                                        <strong>Keywords:</strong>
+                                                        @foreach (var keyword in Model.metaTagKeywords.Split(","))
+                                                        {
+                                                        <span class="badge badge-secondary">@keyword</span>
+                                                        }
+                                                    </p>
+                                                }
+                                                @if (!String.IsNullOrWhiteSpace(Model.metaTagImage))
+                                                {
+                                                    <p class="h4 text-gray-900 mb-2"><strong>Image:</strong> @Model?.metaTagImageAlt</p>
+                                                    <img src="@Model?.metaTagImage" class="img-fluid img-thumbnail" />
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- DataTales Example -->
+                                </div>
+                                <!--Specification start-->
+                            </div>
+                        </div>
+                        <!--Body-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--To Delete Product specification-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-body-content" id="deleteModalLabel"></h4>
+                <form class="user" asp-action="Delete" asp-controller="ProductSpecification" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="productSpecificationId" name="productSpecificationId" hidden />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-undo"></i>Close</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/datatables-page.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#GallaryindexTable').DataTable();
+            $('#SpecificationsindexTable').DataTable();
+        });
+    </script>
+}

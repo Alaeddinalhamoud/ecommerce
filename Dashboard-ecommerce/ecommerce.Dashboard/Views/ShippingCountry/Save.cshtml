@@ -1,0 +1,52 @@
+﻿@model ecommerce.Dashboard.Models.MVShippingCountry
+@{
+    var oprationName = Model?.id == 0 ? "Add" : "Update";
+    ViewData["Title"] = $"{oprationName} Shipping Country";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">@oprationName Shipping Country</h1>
+                                </div>
+                                <form class="user" asp-action="Save" asp-controller="ShippingCountry" method="post">
+                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <input asp-for="country" type="text" class="form-control form-control-user"
+                                               aria-describedby="country" placeholder="Country">
+                                        <span asp-validation-for="country" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="code" type="text" class="form-control form-control-user"
+                                               aria-describedby="code" placeholder="Code">
+                                        <span asp-validation-for="code" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <a class="text-danger" target="_blank" href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">
+                                            You can find the required country code. <span class="fa fa-external-link-alt"></span>
+                                        </a>
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit">
+                                        Save  <i class="fas fa-save fa-lg text-white-50"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

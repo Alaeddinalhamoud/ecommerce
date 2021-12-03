@@ -1,0 +1,52 @@
+﻿@model ecommerce.Dashboard.Models.MVFAQ
+@{
+    var oprationName = Model?.id == 0 ? "Add" : "Update";
+    ViewData["Title"] = $"{oprationName} FAQ";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">@oprationName FAQ</h1>
+                                </div>
+                                <form class="user" asp-action="Save" asp-controller="FAQ" method="post">
+                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <input asp-for="question" type="text" class="form-control form-control-user"
+                                               aria-describedby="question" placeholder="Question">
+                                        <span asp-validation-for="question" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea data-val="true"
+                                                  data-val-maxlength="The field Description must be a string or array type with a maximum length of &#x27;1024&#x27;."
+                                                  data-val-maxlength-max="1024"
+                                                  data-val-minlength="The field Description must be a string or array type with a minimum length of &#x27;5&#x27;."
+                                                  data-val-minlength-min="5" asp-for="answer" type="text" class="form-control form-control-user"
+                                                  aria-describedby="Answer" placeholder="Answer">
+                                         </textarea>
+                                        <span asp-validation-for="answer" class="text-danger"></span>
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit">
+                                        Save  <i class="fas fa-save fa-lg text-white-50"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

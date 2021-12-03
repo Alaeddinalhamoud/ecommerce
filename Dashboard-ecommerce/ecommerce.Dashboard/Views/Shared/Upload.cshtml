@@ -1,0 +1,61 @@
+﻿@model UtilityFunctions.Data.FileUploaderRequest
+@{
+    ViewData["Title"] = $"File Upload";
+}
+
+<link href="~/lib/dropzone/min/dropzone.min.css" rel="stylesheet" />
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">File Upload</h1>
+                                </div>
+                                <div class="card mb-2 py-0 border-left-primary">
+                                    <div class="card-body">
+                                        <p>
+                                            Please, choose an image to upload.
+                                        </p>
+                                        <p class="text-danger">
+                                            <span class="fas fa-info-circle"></span> If you are uploading an image for a slider, please upload a clear image with width bigger equal to the height.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Change /upload-target to your upload address -->
+                                <form asp-action="Upload" asp-controller="Media" class="dropzone" id="dropzoneJsForm">
+                                    <input asp-for="id" hidden="hidden" value="@Model?.id" />
+                                    <input asp-for="sourceController" hidden="hidden" value="@Model?.sourceController" />
+                                </form>
+                                <br />
+                                <button class="btn btn-primary btn-user btn-block d-none" id="submit-all" type="submit">
+                                    <i class="fas fa-cloud-upload-alt fa-lg text-white-50"></i>  Upload
+                                </button>
+                                <a id="btn-done" class="btn btn-info btn-user btn-block d-none" asp-action="@(Model.sourceController == "Setting" ? "AdvancedSettings" :"Details")" asp-controller="@Model.sourceController" asp-route-id="@Model?.id">
+                                    <i class="fas fa-check fa-lg text-white-50"></i> Done
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script src="~/lib/dropzone/min/dropzone.min.js"></script>
+    <script src="~/lib/dropzone/min/dropzone-amd-module.min.js"></script>
+    <script src="~/js/DropZoneImageUploader/dropzone-SingleImageOneMb.js"></script>
+}
+
+

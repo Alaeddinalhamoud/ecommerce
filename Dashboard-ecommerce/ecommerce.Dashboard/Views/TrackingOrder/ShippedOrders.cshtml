@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ecommerce.Data.TrackingOrder>
+@{
+    ViewData["Title"] = "Shipped Orders";
+}
+
+
+<link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Shipped Orders</h1>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Shipped Orders List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center" id="indexTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>OrderId</th>
+                            <th>Tracking Status</th>
+                            <th>Date</th>
+                            <th>Tracking Link</th>
+                            <th>Courier Tracking Number</th>
+                            <th>Curier Comapny</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>OrderId</th>
+                            <th>Tracking Status</th>
+                            <th>Date</th>
+                            <th>Tracking Link</th>
+                            <th>Courier Tracking Number</th>
+                            <th>Curier Comapny</th>
+                        </tr>
+                    </tfoot>
+                    <tbody class="align-middle">
+
+                        @{
+                            foreach (var item in Model.OrderBy(x => x.updateDate))
+                            {
+                                <tr>
+                                    <td class="align-middle">
+                                        <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item?.orderId">
+                                            @item?.orderId
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">@item?.trackingStatus</td>
+                                    <td class="align-middle">@item?.date.ToShortDateString()</td>
+                                    <td class="align-middle">
+                                        <a href="@item?.trackingUrl" class="btn-success btn-circle btn-md">
+                                            <i class="fa fa-link"></i>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">@item?.courierTrackingNumber</td>
+                                    <td class="align-middle">@item?.curierCopmany</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/datatables-page.js"></script>
+}
+

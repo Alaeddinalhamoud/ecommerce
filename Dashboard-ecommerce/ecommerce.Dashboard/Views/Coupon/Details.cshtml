@@ -1,0 +1,46 @@
+﻿@model ecommerce.Data.Coupon
+@{
+    ViewData["Title"] = "Coupon Details";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-left">
+                                    <p class="h4 text-gray-900 mb-2"><strong>Coupon Name: </strong> @Model?.couponName</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Code: </strong>@Model?.code</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Value: </strong>@Model?.value SAR</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Maximum Number Of Use: </strong>@Model?.numberOfUse</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Start On: </strong>@Model?.startOn.ToShortDateString()</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Expire On: </strong>@Model?.expireOn.ToShortDateString()</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Maximum Discount: </strong>@Model?.maximumDiscount SAR</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Enabled: </strong>@(Model.isActive.Equals(true) ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</p>
+                                </div>
+                                <hr>
+                                <a asp-action="Index" asp-controller="Coupon" class="btn btn-secondary btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-undo"></i>
+                                    </span>
+                                    <span class="text form-control">Back</span>
+                                </a>
+                                <a asp-action="Edit" asp-controller="Coupon" asp-route-id="@Model?.id" class="btn btn-warning btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    <span class="text form-control">Edit</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

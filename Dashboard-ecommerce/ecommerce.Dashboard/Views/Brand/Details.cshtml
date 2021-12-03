@@ -1,0 +1,52 @@
+﻿@model ecommerce.Data.Brand
+@{
+    ViewData["Title"] = "Brand Details";
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            @{
+                if (Model.isDeleted)
+                {
+                    <div class="border border-danger text-danger">
+                        <i class="fas fa-exclamation-triangle fa-2x p-1"></i> Warning, this Brand Is deleled.
+                    </div>
+                }
+            }
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-lg-block">
+                            <img src="@Model?.imagePath" class="img-thumbnail img-fluid" />
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-left">
+                                    <p class="h4 text-gray-900 mb-2"><strong>Name:</strong> @Model?.name</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Created date:</strong> @Model?.createDate.ToShortDateString()</p>
+                                    <p class="h4 text-gray-900 mb-2"><strong>Last modified:</strong> @Model?.updateDate.ToShortDateString()</p>
+                                </div>
+                                <hr>
+                                <a asp-action="Index" asp-controller="Brand" class="btn btn-secondary btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-undo"></i>
+                                    </span>
+                                    <span class="text form-control">Back</span>
+                                </a>
+                                <a asp-action="Edit" asp-controller="Brand" asp-route-id="@Model?.id" class="btn btn-warning btn-icon-split mb-2">
+                                    <span class="icon text-white-50">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    <span class="text form-control">Edit</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

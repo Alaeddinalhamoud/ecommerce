@@ -1,0 +1,152 @@
+﻿@model IEnumerable<ecommerce.Data.Order>
+@using ecommerce.Data;
+@{
+    ViewData["Title"] = "Pending Orders";
+}
+
+<link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h5 class="mb-0 text-gray-800"><span class="fas fa-fw fa-shipping-fast mr-1"></span>Pending Orders</h5>
+    </div>
+    <!-- Tabs Start -->
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="Card-tab" data-toggle="tab" href="#Card" role="tab" aria-controls="Card" aria-selected="true">Card</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="Cash-tab" data-toggle="tab" href="#Cash" role="tab" aria-controls="Cash" aria-selected="false">Cash</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="Card" role="tabpanel" aria-labelledby="Card-tab">
+            <!--ordered start-->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="CardindexTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                            <tbody class="align-middle">
+                                @{
+                                    foreach (var item in Model.Where(card => card.paymentMethod.Equals(PaymentMethod.Card)))
+                                    {
+                                        <tr>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item?.id">
+                                                    @item?.id
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">@item?.createDate.ToShortDateString()</td>
+                                            <td class="align-middle">@item?.total</td>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="Order" asp-route-id="@item?.id" class="btn-success btn-circle btn-md">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--Ordered Ends-->
+        </div>
+        <div class="tab-pane fade" id="Cash" role="tabpanel" aria-labelledby="Cash-tab">
+            <!--PickUp start-->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="CashindexTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                            <tbody class="align-middle">
+                                @{
+                                    foreach (var item in Model.Where(card => card.paymentMethod.Equals(PaymentMethod.Cash)))
+                                    {
+                                        <tr>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item?.id">
+                                                    @item?.id
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">@item?.createDate.ToShortDateString()</td>
+                                            <td class="align-middle">@item?.total</td>
+                                            <td class="align-middle">
+                                                <a asp-action="GetOrder" asp-controller="Order" asp-route-id="@item?.id" class="btn-success btn-circle btn-md">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--PickUp Ends-->
+        </div>       
+    </div>
+
+    <!-- Tabs Ends -->
+</div>
+
+@section scripts {
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/datatables-page.js"></script>
+    <script src="~/js/TrackingOrder/trackingOrderModelPopUp.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#CardindexTable').DataTable(
+                {
+                    "order": [[0, "desc"]]
+                });
+            $('#CashindexTable').DataTable({
+                "order": [[0, "desc"]]
+            });
+            $('#STCPayindexTable').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}
+

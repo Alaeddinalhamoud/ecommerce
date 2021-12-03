@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ecommerce.Data.PaymentTransaction>
+@{
+    ViewData["Title"] = "Transaction";
+}
+
+<link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Transactions</h1> 
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Transactions List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center" id="indexTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Invoice Number</th>
+                            <th>Full Name</th>
+                            <th>Order</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Date</th> 
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Invoice Number</th>
+                            <th>Full Name</th>
+                            <th>Order</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Date</th> 
+                        </tr>
+                    </tfoot>
+                    <tbody class="align-middle">
+
+                        @{
+                            foreach (var item in Model.OrderBy(x => x.createDate))
+                            {
+                                <tr>
+                                    <td class="align-middle">@item?.id</td>
+                                    <td class="align-middle">@item?.fullName</td>
+                                    <td class="align-middle">
+                                        <a asp-action="GetOrder" asp-controller="order" asp-route-id="@item?.orderId">
+                                            @item?.orderId
+                                        </a> 
+                                    </td>
+                                    <td class="align-middle">@item?.amount</td>
+                                    <td class="align-middle">@item?.status</td>
+                                    <td class="align-middle">@item?.createDate.ToShortDateString()</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/datatables-page.js"></script>
+}

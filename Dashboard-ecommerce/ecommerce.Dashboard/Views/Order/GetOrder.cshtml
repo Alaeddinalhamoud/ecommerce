@@ -1,0 +1,279 @@
+﻿@model ecommerce.Data.MVData.OrderDetails
+@{
+    ViewData["Title"] = "Order";
+}
+
+<div class="container-fluid">
+    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Order</h1>
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Customer Name</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model?.FullName</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Payment Status</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                @{
+                                    var paid = Model.isPaid ? "Paid" : "UnPaid";
+                                }
+                                @paid
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Order Tracking Status</div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@Model?.trackingStatus</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-truck fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.paymentMethod.Equals(ecommerce.Data.PaymentMethod.Cash) && !Model.isPaid)
+        {
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Cash Payment</div>
+                                <div class="mb-0  text-gray-800">
+                                    <!--If cash display button to pay the order-->
+                                    <button data-orderId="@Model?.orderId" data-userName="@Model?.FullName"
+                                            data-email="@Model?.email" data-phone="@Model?.phone"
+                                            data-userId="@Model?.createdBy" data-paymentMethod="2" title="Pay it" type="button" data-toggle="modal"
+                                            data-target="#ModalUpdatePaymentStatus" class="open-AddBookDialog btn btn-warning btn-md">
+                                        Pay It Cash
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-university fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Order Status</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                @Model?.Status
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-university fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Order</h6>
+        </div>
+        <div class="card-body">
+
+
+            <div class="table-responsive">
+                @if (Model.orderLineProducts is null && Model.orderLineProducts.Count.Equals(0))
+                {
+                    <span class="fa fa-cart-plus fa-2x"></span> <strong>This order is empty.</strong>
+                }
+                else
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Free tax</th>
+                                <th>Free Shipping</th>
+                                <th>Qty</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.orderLineProducts)
+                            {
+                                <tr>
+                                    <td><a asp-action="Details" asp-controller="Product" asp-route-id="@item?.productId"><img src="@item?.productImage" width="100" alt="Wishlist produt image"></a></td>
+                                    <td><a asp-action="Details" asp-controller="Product" asp-route-id="@item?.productId">@item?.prodcutName</a></td>
+                                    <td>@item?.price SAR</td>
+                                    <td>@(item.freeTax ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</td>
+                                    <td>@(item.freeShipping ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</td>
+                                    <td>@item?.qty</td>
+                                    <td>@(item?.qty*item.price) SAR</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"> <i class="fas fa-truck"></i> Shipping Address</h6>
+                </div>
+                <div class="card-body">
+                    <p><strong>Addressline 1:</strong> @Model?.orderAddress?.addressline1</p>
+                    <p><strong>Addressline 2:</strong> @Model?.orderAddress?.addressline2</p>
+                    <p><strong>House Number:</strong> @Model?.orderAddress?.houseNumber, @Model?.orderAddress?.street</p>
+                    <p><strong>City:</strong> @Model?.orderAddress?.city</p>
+                    <p><strong>Country:</strong> @Model?.orderAddress?.country</p>
+                    <p><strong>Code</strong> @Model?.orderAddress?.code</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">  <i class="fas fa-dollar-sign"></i> Total</h6>
+                </div>
+                <div class="card-body">
+                    <p><strong>Payment Transaction:</strong> @Model?.paymentTransaction</p>
+                    <p><strong>SubTotal:</strong> @Model?.subTotal SAR</p>
+                    <p><strong>Shipping:</strong> @Model?.shippingCost SAR</p>
+                    <p><strong>Tax %@String.Format("{0:0.00}", Model?.tax):</strong> @Model?.taxCost SAR</p>
+                    @if (!Model.discount.Equals(0))
+                    {
+                        <p><strong>Discount:</strong> @Model?.total SAR</p>
+                    }
+                    <p><strong>Total:</strong> @Model?.total SAR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<!--Pop Up-->
+<div class="modal fade" id="ModalUpdatePaymentStatus" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pay It Cash</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" asp-action="pay" asp-controller="Payment" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Order Id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="userId" name="userId" placeholder="user Id" readonly hidden>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="paymentMethod" name="paymentMethod" placeholder="payment Method" readonly hidden>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Reference:</label>
+                        <input id="paymentReference" class="form-control" name="paymentReference" placeholder="Payment Reference" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-undo"></i>    Close </button>
+                        <button type="submit" class="btn btn-warning">Pay It <i class="fas fa-money-bill"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+
+    <script>
+        $(document).on("click", ".open-AddBookDialog", function () {
+            var orderId = $(this).data('orderid');
+            $(".modal-body #orderId").val(orderId);
+
+            var userName = $(this).data('username');
+            $(".modal-body #userName").val(userName);
+
+            var email = $(this).data('email');
+            $(".modal-body #email").val(email);
+
+            var phone = $(this).data('phone');
+            $(".modal-body #phone").val(phone);
+
+            var userId = $(this).data('userid');
+            $(".modal-body #userId").val(userId);
+
+            var paymentMethod = $(this).data('paymentmethod');
+            $(".modal-body #paymentMethod").val(paymentMethod);
+
+            $('#addBookDialog').modal('show');
+        });
+    </script>
+
+}
