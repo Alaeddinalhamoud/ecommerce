@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ecommerce.AzUtilityFunctions", "ecommerce.AzUtilityFunctions\ecommerce.AzUtilityFunctions.csproj", "{D91CD1B6-5427-482F-A2A8-F1E66B04C204}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityFunctions.Data", "UtilityFunctions.Data\UtilityFunctions.Data.csproj", "{97A8D682-0F8E-47AB-A22F-940ED11B5C20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D91CD1B6-5427-482F-A2A8-F1E66B04C204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D91CD1B6-5427-482F-A2A8-F1E66B04C204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D91CD1B6-5427-482F-A2A8-F1E66B04C204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D91CD1B6-5427-482F-A2A8-F1E66B04C204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97A8D682-0F8E-47AB-A22F-940ED11B5C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97A8D682-0F8E-47AB-A22F-940ED11B5C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97A8D682-0F8E-47AB-A22F-940ED11B5C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97A8D682-0F8E-47AB-A22F-940ED11B5C20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92533BE5-217B-4D3E-81A1-C897E3517195}
+	EndGlobalSection
+EndGlobal

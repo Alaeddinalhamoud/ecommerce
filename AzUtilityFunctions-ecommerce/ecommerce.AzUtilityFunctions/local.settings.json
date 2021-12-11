@@ -1,0 +1,22 @@
+{
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "SENDGRID_APIKEY": "",
+    "WebsiteSetting:APIUrl": "https://localhost:44310",
+    "WebsiteSetting:AuthServerSecret": "",
+    "WebsiteSetting:APIAuthUrl": "https://localhost:44331",
+    "PayTabs_API_URL": "https://secure.paytabs.sa/payment/query",
+    "PayTabs_PROFILE_SERVER_KEY": "KeyHere",
+    "PayTabs_PROFILE_ID": 0,
+    "Tech_Email": "email@example.com",
+    "SMTP_HOST": "smtp.Example.com",
+    "SMTP_EAMIL": "info@Example.com",
+    "SMTP_PASSWORD": "",
+    "USE_SENDER": "ZOHO",
+    "Website_Live_URL": "https://Example.com",
+    "Website_Live_SA_URL": "https://Example.sa"
+
+  }
+}
