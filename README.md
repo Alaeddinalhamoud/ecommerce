@@ -1,9 +1,10 @@
 # ecommerce
 ecommerce web  application
-Bulid using:
+Built using:
 - .NET Core 5 
 - Azure Functions
 - Ids 4
+- SQL Server DB
 
 Projects:
 - API (Published on github)
