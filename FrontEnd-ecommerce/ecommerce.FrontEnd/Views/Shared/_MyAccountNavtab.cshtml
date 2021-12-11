@@ -1,0 +1,15 @@
+﻿@model string
+
+@if (!String.IsNullOrEmpty(Model))
+{
+    <div class="dashboard_tab_button">
+        <ul role="tablist" class="nav flex-column dashboard-list">
+            <li><a asp-action="Index" asp-controller="Account" class="nav-link @(Model.Equals("Index") ? "active" : "")">Account Manager</a></li>
+            <li><a asp-action="AccountDetails" asp-controller="Account" class="nav-link @(Model.Equals("Account Details") ? "active" : "")">Account details</a></li>
+            <li><a asp-action="MyOrders" asp-controller="Account" class="nav-link @(Model.Equals("My Orders") ? "active" : "")">Orders</a></li>
+            <li><a asp-action="MyAddresses" asp-controller="Account" class="nav-link @(Model.Equals("My Address") ? "active" : "")">Addresses</a></li>
+            <li><a asp-action="ChangePassword" asp-controller="Account" class="nav-link @(Model.Equals("Password") ? "active" : "")">Change Password</a></li>
+            <vc:vendor-form selected-page="@Model"></vc:vendor-form>
+        </ul>
+    </div>
+}

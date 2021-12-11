@@ -1,0 +1,45 @@
+﻿@model Dictionary<int, int>
+
+@{
+    var Readonly = Model.Keys.FirstOrDefault().Equals(0) ? "Readonly" : "";
+    var Disabled = Model.Keys.FirstOrDefault().Equals(0) ? "disabled" : "";
+    var isDisabled = Model.Keys.FirstOrDefault().Equals(0) ? "isDisabled" : "";
+}
+
+<label for="qty">quantity</label>
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-action="AddToCart" asp-controller="Cart"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#cart_qty"
+          data-ajax-loading="#spinnerAddToCart-@Model.Values.FirstOrDefault()">
+        <input id="qty" name="qty" min="0" max="@Model.Keys.FirstOrDefault()" value="1" type="number" @Readonly required>
+        <label class="sr-only" for="productNum">
+            product Number
+            <input id="productNum" name="productNum" value="@Model.Values.FirstOrDefault()" type="number" hidden required>
+        </label>
+        <button class="button @isDisabled" type="submit" @Disabled>
+            <span class="lnr lnr-cart"></span>
+            add to cart
+            <span id="spinnerAddToCart-@Model.Values.FirstOrDefault()" style="display:none;">
+                <i class="fa fa-spinner fa-spin yellow"></i>
+            </span>
+        </button>
+    </form>
+}
+else
+{
+    <form asp-action="RedirectToProduct" asp-controller="Cart" method="get">
+        <input id="qty" name="qty" min="0" max="@Model.Keys.FirstOrDefault()" value="1" type="number" @Readonly required>
+        <label class="sr-only" for="productNum">product Number</label>
+        <input id="id" name="id" value="@Model.Values.FirstOrDefault()" type="text" hidden required>
+        <button class="button @isDisabled" type="submit" @Disabled>
+            <span class="lnr lnr-cart"></span>
+            add to cart
+        </button>
+    </form>
+}
+
+

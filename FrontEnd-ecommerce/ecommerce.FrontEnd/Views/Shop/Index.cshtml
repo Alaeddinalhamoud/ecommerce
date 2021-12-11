@@ -1,0 +1,59 @@
+﻿@model ecommerce.FrontEnd.Models.PaginationModel
+@{
+    ViewData["Title"] = "Shop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--shop  area start-->
+<div class="shop_area shop_reverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-12">
+                <!--sidebar widget start-->
+                <aside class="sidebar_widget">
+                    <div class="widget_inner">
+                       <!--Render sidebar categories-->
+                        <vc:shop-categories></vc:shop-categories>
+                    </div>
+                </aside>
+                <!--sidebar widget end-->
+            </div>
+            <div class="col-lg-9 col-md-12">
+                <!--shop wrapper start-->
+                <!--shop toolbar start-->
+                <div class="shop_title">
+                    <h1>shop</h1>
+                </div>
+                <div class="shop_toolbar_wrapper">
+                    <div class="shop_toolbar_btn">
+
+                        <button id="grid_3" data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"><p class="sr-only">Grid 3</p></button>
+
+                        <button id="grid_4" data-role="grid_4" type="button" class=" btn-grid-4" data-toggle="tooltip" title="4"><p class="sr-only">Grid 4</p></button>
+
+                        <button id="grid_list" data-role="grid_list" type="button" class="btn-list" data-toggle="tooltip" title="List"><p class="sr-only">List</p></button>
+                    </div>
+                    <div class="">                       
+                        <!--Ajaxrender here for ShopOrderBy-->
+                        <partial name="_ShopOrderby" /> 
+                    </div>
+                </div>
+                <!--shop toolbar end-->
+                <div class="text-center mb-1">
+                    <span id="spinnerShopOrderBy" style="display:none;">
+                        <i class="fa fa-spinner fa-spin fa-4x yellow"></i>
+                    </span>
+                </div>
+                <div id="ShopProducts">
+                    <!--AJAX will render here-->
+                    <partial name="_ShopProducts" model="@Model" />
+                </div>
+                <!--shop toolbar end-->
+                <!--shop wrapper end-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--shop  area end-->
+
+

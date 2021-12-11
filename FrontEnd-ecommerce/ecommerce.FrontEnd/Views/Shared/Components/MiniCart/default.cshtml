@@ -1,0 +1,63 @@
+﻿@model ecommerce.Data.MVData.CartLineDetails
+@using ecommerce.Data.Helper
+@using Boxed.AspNetCore;
+@{
+    if (Model != null && Model.cartLineProduct.Count() > 0)
+    {
+        var totalCart = TotalCart.GetTotalCart(Model);
+        <div class="mini_cart">
+            @if (Model.cartLineProduct != null && Model.cartLineProduct.Count() > 0)
+            {
+                @foreach (var item in Model.cartLineProduct)
+                {
+                    <div class="cart_item">
+                        <div class="cart_img">
+                            <a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.prodcutName))"><img src="@(String.IsNullOrEmpty(item.productImage) ? "/assets/img/ZeroData.svg" : item.productImage)" alt="@item.prodcutName"></a>
+                        </div>
+                        <div class="cart_info">
+                            <a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.prodcutName))">@item.prodcutName</a>
+                            <span class="quantity">Qty: @item.qty</span>
+                            <span class="price_cart">@item.total USD</span>
+
+                        </div>
+                        @*<div class="cart_remove">
+                                <a href="#"><i class="ion-android-close"></i></a>
+                            </div>*@
+                    </div>
+                }
+            }
+            <div class="mini_cart_table">
+                <div class="cart_total">
+                    <span>Sub total:</span>
+                    <span class="price">@totalCart.subtotal USD</span>
+                </div>
+                <div class="cart_total">
+                    <span>Shipping Cost:</span>
+                    <span class="price">@totalCart.shippingCost USD</span>
+                </div>
+                <div class="cart_total">
+                    <span>Tax %@Model.tax:</span>
+                    <span class="price">@totalCart.taxCost USD</span>
+                </div>
+                <div class="cart_total @totalCart.couponHidden">
+                    <span>Coupon <code>@Model?.couponCode</code></span>
+
+                    <span class="cart_amount text-danger">-@totalCart.cartDiscount USD</span>
+                </div>
+                <div class="cart_total mt-10">
+                    <span>total:</span>
+                    <span class="price">@totalCart.total USD</span>
+                </div>
+            </div>
+            <div class="mini_cart_footer">
+                <div class="cart_button">
+                    <a asp-action="Mycart" asp-controller="Cart">View cart</a>
+                </div>
+                <div class="cart_button">
+                    <a asp-action="Checkout" asp-controller="Cart">Checkout</a>
+                </div>
+            </div>
+        </div>
+
+    }
+}

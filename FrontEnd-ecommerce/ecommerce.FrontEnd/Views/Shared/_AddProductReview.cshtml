@@ -1,0 +1,89 @@
+﻿@model int
+
+<div id="newreviewform">
+    <div class="comment_title">
+        <h2>Add a review </h2>
+        <p>Your email address will not be published. Required fields are marked </p>
+    </div>
+    <div class="product_ratting mb-10">
+        <h3>Your rating</h3>
+        <a class='starrr' id='star1'><p class="sr-only">Rating Stars</p></a>
+    </div>
+    <div class="product_review_form">
+        <form asp-action="AddReview" asp-controller="Review"
+              data-ajax="true"
+              data-ajax-method="POST"
+              data-ajax-complete="onComplete"
+              data-ajax-success="onSuccess"
+              data-ajax-failure="onFailed"
+              data-ajax-mode="replace"
+              data-ajax-loading="#spinnerAddToReview-@Model"
+              data-ajax-update="#confirmbox">
+            <label for="rating" class="sr-only">rating</label>
+            <input id="rating" name="rating" type="number" hidden="hidden" value="0" />
+            <label for="productId" class="sr-only">productId</label>
+            <input id="productId" name="productId" type="number" hidden="hidden" value="@Model" required />
+            <div class="row">
+                <div class="col-12">
+                    <label for="reviewDescription">Your review </label>
+                    <textarea name="reviewDescription" id="reviewDescription" required></textarea>
+                </div>
+                @{
+                    var readOnly = String.Empty;
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        readOnly = "readonly";
+                    }
+                }
+                <div class="col-lg-6 col-md-6">
+                    <label for="reviewerName">Name</label>
+                    <input id="reviewerName" name="reviewerName" type="text" value="@(String.IsNullOrEmpty(User?.FindFirst(c => c.Type == "nickname")?.Value) ? "" : User?.FindFirst(c => c.Type == "nickname")?.Value)" required @readOnly>
+                </div>
+                <div class="col-lg-6 col-md-6"> 
+                    <label for="reviewerEmail">Email </label>
+                    <input id="reviewerEmail" name="reviewerEmail" type="email" value="@(String.IsNullOrEmpty(User?.FindFirst(c => c.Type == "email")?.Value) ? "" : User?.FindFirst(c => c.Type == "email")?.Value)" required @readOnly>
+                </div>
+            </div>
+            <button type="submit">
+                Submit
+                <span id="spinnerAddToReview-@Model" style="display:none;">
+                    <i class="fa fa-spinner fa-spin yellow"></i>
+                </span>
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<div id="confirmbox" class="product_review_form text-center"></div>
+
+
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/StarRating/starrr.js"></script>
+<script type="text/javascript"> 
+    var reviewForm = document.getElementById("newreviewform");
+    var onComplete = function () {
+        reviewForm.style.display = "none";
+    };
+    var onSuccess = function (context) {
+        reviewForm.style.display = "none";
+    }
+    var onFailed = function (context) {
+        alert("Failed submitting.");
+    };
+</script>
+
+<script>
+    $('#star1').starrr({
+        change: function (e, value) {
+            if (value) {
+                $("#rating").val(value);
+            }
+        }
+    });
+</script>
+

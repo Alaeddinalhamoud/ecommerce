@@ -1,0 +1,162 @@
+﻿@model ecommerce.FrontEnd.Models.PaginationModel
+@using Boxed.AspNetCore 
+
+
+<div class="row shop_wrapper">
+    @if (Model.Count == 0)
+    {
+        <div class="col-lg-4 col-md-4 col-12 center">
+            <img class="img-fluid" alt="Empty Search" src="/assets/img/searchEmpty.png" />
+        </div>
+    }
+    @foreach (var item in Model.Data)
+    {
+        <!--Loop Start-->
+        <div class="col-lg-4 col-md-4 col-12 ">
+            <div class="single_product">
+                <div class="product_name grid_name">
+                    <h3><a href="/product/@item.id/@(FriendlyUrlHelper.GetFriendlyTitle(item.name))">@item.name</a></h3>
+                    <p class="manufacture_product">
+                        @{
+                            MVShopCategory categoryData = new MVShopCategory()
+                            {
+                                categoryId = item.categoryId,
+                                categoryName = item.categoryName,
+                                goToAction = "page"
+                            };
+                        }
+                        <partial name="_CategoryLink" model="categoryData" />
+                    </p>
+                </div>
+                <div class="product_thumb">
+                    @{
+                        var media = item.medias.Where(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)).Count() <= 0 ? "/assets/img/ZeroData.svg" : item.medias.FirstOrDefault(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)).path;
+                        var mediaLast = item.medias.Where(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)).Count() <= 0 ? "/assets/img/ZeroData.svg" : item.medias.LastOrDefault(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)).path;
+
+                    }
+                    <a class="primary_img" href="/product/@item.id/@(FriendlyUrlHelper.GetFriendlyTitle(item.name))">
+                        <img itemprop="image" class="imgsize-176" src="@media" alt="Product @item.name">
+                        <p class="sr-only">@item.name</p>
+                    </a>
+                    <a class="secondary_img" href="/product/@item.id/@(FriendlyUrlHelper.GetFriendlyTitle(item.name))">
+                        <img itemprop="image" class="imgsize-176" src="@mediaLast" alt="Product @item.name">
+                        <p class="sr-only">@item.name</p>
+                    </a>
+                    @{
+                        <!--Last 3 days added (Should be from db)-->
+                        var NewProduct = item.createDate >= DateTime.Now.AddDays(-3) ? "" : "hidden";
+                    }
+                    <div class="label_product @NewProduct">
+                        <span class="label_sale ">
+                            New
+                        </span>
+                    </div>
+                    <div class="action_links">
+                        <ul>
+                            @*<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>*@
+                            <li class="wishlist">
+                                @*<a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a>*@
+                                <partial name="_AddToWishlist" model="@item.id" />
+                            </li>
+                            @*<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="product_content grid_content">
+                    <div class="content_inner">
+                        <div class="product_ratings">
+                            <partial name="_Rating" model="@item.rating" />
+                        </div>
+                        <div class="product_footer d-flex align-items-center">
+                            <div class="price_box">
+                                <span class="current_price">@item.price USD</span>
+                                @if (!item.oldPrice.Equals(0))
+                                {
+                                    <span class="old_price">@item.oldPrice USD</span>
+                                }
+                            </div>
+                            <div class="add_to_cart">
+                                @*<a href="cart.html" title="add to cart"><span class="lnr lnr-cart"></span></a>*@
+                                @if (!item.qty.Equals(0))
+                                {
+                                    <partial name="_AddSingleProductToCart" model="@item.id" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_content list_content">
+                    <div class="left_caption">
+                        <div class="product_name">
+                            <h3><a href="/product/@item.id/@(FriendlyUrlHelper.GetFriendlyTitle(item.name))">@item.name</a></h3>
+                        </div>
+                        <div class="product_ratings" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                            <partial name="_Rating" model="@item.rating" />
+                        </div>
+                        <div class="product_desc">
+                            <p>@item.shortDescription</p>
+                        </div>
+                    </div>
+                    <div class="right_caption">
+                        <div class="text_available">
+                            @if (item.qty.Equals(0))
+                            {
+                                <p class="text-danger">Sold out</p>
+                            }
+                            else
+                            {
+                                <p>availabe: <span>@item.qty in stock</span></p>
+                            }
+                        </div>
+                        <div class="price_box">
+                            <span class="current_price">@item.price USD</span>
+                            @if (!item.oldPrice.Equals(0))
+                            {
+                                <span class="old_price">@item.oldPrice USD</span>
+                            }
+                        </div>
+                        <div class="cart_links_btn">
+                            @*<a href="#" title="add to cart">add to cart</a>*@
+                            @if (!item.qty.Equals(0))
+                            {
+                                <partial name="_AddSingleProductToCart" model="@item.id" />
+                            }
+                        </div>
+                        <div class="action_links_btn">
+                            <ul>
+                                @*<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>*@
+                                <li class="wishlist">
+                                    @*<a href="wishlist.html" title="Add to Wishlist">
+                                          <span class="lnr lnr-heart"></span>
+                                        </a>*@
+                                    <partial name="_AddToWishlist" model="@item.id" />
+                                </li>
+                                @*<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>*@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LoopEnds-->
+    }
+
+</div>
+
+<div class="shop_toolbar t_bottom">
+    <partial name="_Pagination" model="@Model" />
+</div>
+
+
+<script>
+    var w = screen.width;
+    var h = screen.height;
+    if (w <= 768) {
+        document.getElementById("grid_3").classList.remove("active");
+        document.getElementById("grid_list").classList.add("active");
+        var parentsDiv = $('.shop_wrapper');
+        var viewMode = 'grid_list';
+        parentsDiv.removeClass('grid_3 grid_4 grid_5 grid_list').addClass(viewMode);
+        parentsDiv.children().addClass('col-12').removeClass('col-lg-3 col-lg-4 col-md-4 col-sm-6 col-cust-5');
+    }
+</script>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ecommerce.Data.Order>
+@{
+    ViewData["Title"] = "My Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var page = "My Orders";
+}
+<!-- my account start  -->
+<section class="main_content_area">
+    <div class="container"> 
+        <div class="account_dashboard">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <partial name="_MyAccountNavtab" model="page" />
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard_content"> 
+                        <h3>Orders</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="@(item.isPaid ? "text-success" : "text-danger")">@item.id</td>
+                                            <td>@item.createDate.ToShortDateString()</td>
+                                            <td>
+                                                <span class="success">
+                                                    @{
+                                                        if (item.status == ecommerce.Data.Status.Returned)
+                                                        {
+                                                          <i class="text-danger">Returned</i>
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.isPaid)
+                                                            {
+                                                                <i class="text-success">Completed</i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="text-danger">Pending</i>
+                                                            }
+                                                        }
+                                                    }
+                                                </span>
+                                            </td> 
+                                            <td>@item.total USD </td> 
+                                            <td><a asp-action="GetOrder" asp-controller="Order" asp-route-id="@item.id" class="view">view</a></td>
+                                        </tr>
+                                    }  
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- my account end   -->

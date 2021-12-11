@@ -1,0 +1,266 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<Libraries.ecommerce.GoogleReCaptcha.Models.GoogleReCaptchaSettings> googleReCaptchaSettings
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Example @ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <partial name="_MetaTagChecker" />
+    <!-- CSS
+    ========================= -->
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="~/assets/css/plugins.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link href="~/css/site.css" rel="stylesheet" />
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WBGP7BJ');
+    </script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <div id="cover"></div>
+    @*<div class="corner-ribbon top-left sticky orange shadow">Test Mode</div>*@
+    <!--header area start-->
+    <header class="header_area header_padding">
+        <!--header top start-->
+        <div class="header_top top_two">
+            <div class="container">
+                <div class="top_inner">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6">
+                            <partial name="_FollowUs" />
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="top_right text-right">
+                                <partial name="_TopLinks">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--header top start-->
+        <!--header middel start-->
+        <div class="header_middle middle_two">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-3">
+                        <vc:logo></vc:logo>
+                    </div>
+                    <div class="col-lg-9 col-md-9">
+                        <div class="middel_right">
+                            <div class="search-container search_two" itemscope itemtype="https://schema.org/WebSite">
+                                <meta itemprop="url" content="https://www.Example.com" />
+                                <partial name="_searchBox" />
+                            </div>
+                            <div class="middel_right_info">
+                                <div class="header_wishlist">
+                                    <a asp-action="MyWishlist" asp-controller="WishList">
+                                        <span class="lnr lnr-heart"></span>
+                                        Wish list
+                                    </a>
+                                    @*Will be updated by ajax*@
+                                    @{
+                                        if (User.Identity.IsAuthenticated)
+                                        {
+                                            <span id="wishlist_qty" class="wishlist_quantity">
+                                                <vc:wishlist-count user-id="@User.FindFirst(c => c.Type == "sub").Value"></vc:wishlist-count>
+                                            </span>
+                                        }
+                                    }
+                                </div>
+                                <div class="mini_cart_wrapper">
+                                    <a asp-action="Mycart" asp-controller="Cart"><span class="lnr lnr-cart"></span>My Cart </a>
+                                    @*Will be updated by ajax*@
+                                    @{
+                                        if (User.Identity.IsAuthenticated)
+                                        {
+                                            <span id="cart_qty" class="cart_quantity">
+                                                <vc:cart-line-count user-id="@User.FindFirst(c => c.Type == "sub").Value"></vc:cart-line-count>
+                                            </span>
+                                            <!--mini cart-->
+                                            <vc:mini-cart user-id="@User.FindFirst(c => c.Type == "sub").Value"></vc:mini-cart>
+                                            <!--mini cart end-->
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--header middel end-->
+        <!--header bottom satrt-->
+        <div class="header_bottom bottom_two sticky-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <div class="header_bottom_container">
+                            <div class="categories_menu">
+                                <vc:layout-categories></vc:layout-categories>
+                            </div>
+                            <div class="main_menu">
+                                <nav>  <partial name="_MainMenu" /></nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--header bottom end-->
+
+
+
+    </header>
+
+    
+    <div class="menu">
+        <nav class="menu__nav">
+            <ul class="menu__list r-list">
+                <li class="menu__group">
+                    <a href="#0" class="menu__link r-link">Home</a>
+                </li>
+                <li class="menu__group">
+                    <a href="#0" class="menu__link r-link">About me</a>
+                </li>
+                <li class="menu__group">
+                    <a href="#0" class="menu__link r-link">Services</a>
+                </li>
+                <li class="menu__group">
+                    <a href="#0" class="menu__link r-link">Portfolio</a>
+                </li>
+                <li class="menu__group">
+                    <a href="#0" class="menu__link r-link">Blog</a>
+                </li>
+                <li class="menu__group">
+                    <a href="#0" class="menu__link r-link">Contacts</a>
+                </li>
+            </ul>
+        </nav>
+        <button class="menu__toggle r-button" type="button">
+            <span class="menu__hamburger m-hamburger">
+                <span class="m-hamburger__label">
+                    <span class="menu__screen-reader screen-reader">Open menu</span>
+                </span>
+            </span>
+        </button>
+    </div>
+    <!--header area end-->
+    <!--Offcanvas menu area start-->
+    @*<div class="off_canvars_overlay"></div>
+        <div class="Offcanvas_menu canvas_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="canvas_open">
+                            <span>MENU1</span>
+                            <a href="javascript:void(0)"><i class="ion-navicon"></i><p class="sr-only">Menu</p></a>
+                        </div>
+                        <div class="Offcanvas_menu_wrapper">
+                            <div class="canvas_close">
+                                <a href="#"><i class="ion-android-close"></i><p class="sr-only">canvas close</p></a>
+                            </div>
+                            <div class="top_right text-right">
+                                <partial name="_TopLinks">
+                            </div>
+                            <div class="Offcanvas_follow">
+                                <partial name="_FollowUs" />
+                            </div>
+                            <div class="search-container" itemscope itemtype="https://schema.org/WebSite">
+                                <meta itemprop="url" content="https://www.Example.com" />
+                                <partial name="_searchBox" />
+                            </div>
+                            <div id="menu" class="text-left ">
+                                <partial name="_MainMenu" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <!--Alert System-->
+    <div class="header_bottom bottom_two">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <vc:alert></vc:alert>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*@if (Microsoft.AspNetCore.Mvc.RazorPages.Page as para  == "Home")
+        {
+            <partial name="_Breadcrumbs" />
+        }*@
+
+    <!--Offcanvas menu area end-->
+
+
+    @RenderBody()
+    <!--call to action start-->
+    <partial name="_Recommendations" />
+    <!--call to action end-->
+    <!--footer area start-->
+    <vc:footer></vc:footer>
+    <!--footer area end-->
+    <!-- modal area end-->
+    <!-- JS
+    ============================================ -->
+    <!-- Plugins JS -->
+    <script src="~/assets/js/plugins.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+    <!--Alaeddin Added Start-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-unobtrusive-ajax/dist/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/js/Notify/notify.min.js"></script>
+    <!--GoogleReCaptcha Start-->
+    <script src="https://www.google.com/recaptcha/api.js?render=@googleReCaptchaSettings.Value.ReCaptchaSiteKey"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@googleReCaptchaSettings.Value.ReCaptchaSiteKey', { action: 'submit' }).then(function (token) {
+                $(".googlerecaptchatoken").val(token);
+                $(".Captipn-googleReCaptcha").removeClass("d-none");
+                $(".spinner-googleReCaptcha").addClass("d-none")
+            });
+        });
+    </script>
+    <!--GoogleReCaptcha Ends-->
+    <vc:tidio></vc:tidio>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f35a3c35703d2bf"></script>
+    <script src="~/js/JS.Cookie/js.cookie.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    @RenderSection("Scripts", required: false)
+    <!--Alaeddin Added Ends-->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBGP7BJ"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+</body>
+</html>

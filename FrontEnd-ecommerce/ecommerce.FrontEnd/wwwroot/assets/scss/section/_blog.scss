@@ -1,0 +1,84 @@
+/* 05. blog area css here */
+.blog_carousel{
+    & .owl-nav{
+        position: absolute;
+        top: -56px;
+        right: 0;
+        background: $white;
+        display: flex;
+        padding: 0 9px;
+        border-radius: 25px;
+        border: 1px solid $dark_grey;
+        @media #{$large-mobile}{
+           display: none;
+        }
+        & > div{
+            width: 25px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 20px;
+            color: #a9a9a9;
+            text-align: center;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            &:hover{
+                color: $secondary_color;
+            }
+        }
+    }
+}
+
+.single_blog{
+    border: 1px solid $grey_color;
+}
+.blog_content {
+	padding: 19px 19px 24px 19px;
+    & h3{
+        font-size: 15px;
+        text-transform: capitalize;
+        line-height: 22px;
+        margin-bottom: 14px;
+        font-weight: 400;
+        padding-bottom: 17px;
+        position: relative;
+        font-family: $open-sans;
+        & a{
+            &:hover{
+                color: $secondary_color;
+            }
+        }
+        &::before{
+            content: "";
+            width: 36px;
+            height: 1px;
+            background: #d6d6d6;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }
+}
+
+.date_post{
+    & span{
+        line-height: 22px;
+        background: $secondary_color;
+        display: inline-block;
+        padding: 0 11px;
+        font-size: 12px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        margin-bottom: 12px;
+    }
+	
+}
+
+
+.blog_desc{
+    & p{
+        line-height: 22px;
+        font-size: 13px;
+    }
+}
+
+

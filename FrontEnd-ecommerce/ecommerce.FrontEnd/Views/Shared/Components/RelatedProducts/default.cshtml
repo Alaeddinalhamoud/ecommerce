@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ecommerce.Data.MVData.ProductDetail>
+@if (Model != null && Model.Count() > 0)
+{
+    <section class="product_area mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section_title">
+                        <h2><span> <strong>Related</strong>Products</span></h2>
+                    </div>
+                    <div class="product_carousel product_column5 owl-carousel">
+
+                        @foreach (var item in Model)
+                        {
+                            <partial name="_SingleProductMiniCarousel" model="item" />
+                        }
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </section>
+}

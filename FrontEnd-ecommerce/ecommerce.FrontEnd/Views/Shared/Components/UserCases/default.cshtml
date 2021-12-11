@@ -1,0 +1,61 @@
+﻿@model ecommerce.Data.MVData.MVReportUserCases
+
+@{
+    if (Model != null && (Model.OrderComplaintCases.Count() > 0 || Model.OrderReturnCases.Count() > 0))
+    {
+        <h3><span class="fa fa-balance-scale"></span> Cases</h3>
+        <div id="accordion">
+            @if (Model?.OrderComplaintCases != null && Model?.OrderComplaintCases.Count() > 0)
+            {
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Complaint Cases
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <ul>
+                                @foreach (var item in Model?.OrderComplaintCases)
+                                {
+                                    <li>
+                                        🔶 Case# @item?.id <a class="mr-1" asp-action="GetOrder" asp-controller="Order" asp-route-id="@item?.orderId">@item?.orderId</a>  Status: @item?.status  Date: @item?.createDate.ToShortDateString()
+                                    </li>
+                                }
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model?.OrderReturnCases != null && Model.OrderReturnCases.Count() > 0)
+            {
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Return Cases
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            <ul>
+                                @foreach (var item in Model?.OrderReturnCases)
+                                {
+                                    <li>
+                                        🔶 Case# @item?.id <a class="mr-1" asp-action="GetOrder" asp-controller="Order" asp-route-id="@item?.orderId">@item?.orderId</a>  Status: @item?.status  Date: @item?.createDate.ToShortDateString()
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+}

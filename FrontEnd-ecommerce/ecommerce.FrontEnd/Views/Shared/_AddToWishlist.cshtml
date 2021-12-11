@@ -1,0 +1,44 @@
+﻿@model int
+
+@if (User.Identity.IsAuthenticated)
+{
+    var randomId = Guid.NewGuid().ToString(); 
+    <a asp-action="AddToWishlist" asp-controller="WishList" asp-route-id="@Model"
+       data-ajax-complete="onComplete"
+       data-ajax-success="onSuccess"
+       data-ajax-failure="onFailed"
+       data-ajax="true" data-ajax-mode="replace" data-ajax-update="#wishlist_qty"
+       data-ajax-loading="#spinnerWishlist-@randomId" title="Add to wishlist"
+       onclick="NotificationWishList();">
+        <span id="spinnerWishlist-@randomId" style="display:none;">
+            <span class="fa fa-spinner fa-spin"></span>
+        </span>
+        <span class="sr-only">Add to wishlist</span>
+        <vc:wishlist-status user-id="@User.FindFirst(c => c.Type == "sub").Value" product-id="@Model"></vc:wishlist-status>
+    </a>
+}
+else
+{
+    <a asp-action="index" asp-controller="WishList" title="Add to wishlist">
+        <span class="lnr lnr-heart"></span>
+        <p class="sr-only">Add to wishlist</p>
+    </a>
+}
+
+
+<script type="text/javascript">
+
+    function NotificationWishList() {
+        $.notify("Product has been added to your wishlist.", "success");
+    }
+
+    var onComplete = function () {
+
+    };
+    var onSuccess = function (context) {
+
+    }
+    var onFailed = function (context) {
+        alert("Failed submitting.");
+    };
+</script>

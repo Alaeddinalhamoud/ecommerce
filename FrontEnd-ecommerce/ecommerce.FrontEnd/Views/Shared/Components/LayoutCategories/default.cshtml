@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ecommerce.Data.Category>
+
+<div class="categories_title">
+    <h2 class="categori_toggle">Browse categories</h2>
+</div>
+<div class="categories_menu_toggle">
+    <ul>
+        @foreach (var item in Model?.Take(5))
+        {
+            <li>
+                <a asp-action="Index" asp-controller="Shop"
+                   asp-route-categoryId="@item.id" asp-route-categoryFiltter="Category">
+                    @item.name
+                </a>
+            </li>
+        }
+        @if (Model != null && Model.Count() > 5)
+        {
+            <li id="cat_toggle" class="has-sub">
+                <a href="#"> More Categories</a>
+                <ul class="categorie_sub">
+                    @foreach (var item in Model.Skip(5))
+                    {
+                        <li>
+                            <a asp-action="index" asp-controller="Shop"
+                               asp-route-categoryId="@item.id" asp-route-categoryFiltter="Category">
+                                @item.name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>

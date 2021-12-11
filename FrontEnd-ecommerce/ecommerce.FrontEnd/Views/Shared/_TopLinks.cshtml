@@ -1,0 +1,46 @@
+﻿<ul>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <li class="top_links">
+            <a asp-action="login" asp-controller="Home"><i class="fa fa-sign-in"></i> Sign In </a>
+        </li>
+        <li class="top_links">
+            <a href="https://auth.Example.com/Account/register?ReturnUrl=https://Example.com">Sign Up </a>
+        </li>
+    }
+    else
+    {
+        <li class="top_links">
+            <a href="#"><i class="ion-android-person"></i> Hello, @User?.FindFirst(c => c.Type == "nickname")?.Value<i class="ion-ios-arrow-down"></i></a>
+            <ul class="dropdown_links">
+                <li><a asp-action="Checkout" asp-controller="Cart">Checkout </a></li>
+                <li><a asp-action="Index" asp-controller="Account">My Account </a></li>
+                <li><a asp-action="Mycart" asp-controller="Cart">Shopping Cart</a></li>
+                <li><a asp-action="MyWishlist" asp-controller="Wishlist">Wishlist</a></li>
+            </ul>
+        </li>
+        <li><a asp-action="logout" asp-controller="Home">Logout</a></li>
+    }
+<li class="language">
+    <div id="google_translate_element"></div>
+    @*<a href="">*@
+    @*<img src="/assets/img/logo/language.png" alt="English language"> English*@
+    @*<a id="engLang" class="d-none" onclick="changeLanguage('/en/en');"><img src="/assets/img/logo/language.png" alt="English"> English</a>
+    <a id="arLang" onclick="changeLanguage('/en/ar');"><img src="/assets/img/logo/arabic.png" alt="English"> Arabic</a>*@
+    @*<i class="ion-ios-arrow-down"></i></a>
+        <img src="" />
+                <ul class="dropdown_language">
+                    <li><a href="#"><img src="/assets/img/logo/language.png" alt="English"> English</a></li>
+                    <li><a href="#"><img src="/assets/img/logo/language2.png" alt="Arabic"> Arabic</a></li>
+                </ul>*@
+</li>
+    <li class="currency">
+        @*<a href="">*@
+        USD @*<i class="ion-ios-arrow-down"></i></a>*@
+        @*<ul class="dropdown_currency">
+                <li><a href="#">EUR – Euro</a></li>
+                <li><a href="#">GBP – British Pound</a></li>
+                <li><a href="#">INR – India Rupee</a></li>
+            </ul>*@
+    </li>
+</ul>

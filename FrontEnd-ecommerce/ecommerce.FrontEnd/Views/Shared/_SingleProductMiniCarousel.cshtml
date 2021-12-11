@@ -1,0 +1,59 @@
+﻿@model ecommerce.Data.MVData.ProductDetail
+@using Boxed.AspNetCore
+
+
+@{
+    var media = Model.medias.Where(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)).Count() <= 0 ? "/assets/img/ZeroData.svg" : Model.medias.FirstOrDefault(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)).path;
+    var mediaLast = Model.medias.Where(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)).Count() <= 0 ? "/assets/img/ZeroData.svg" : Model.medias.LastOrDefault(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)).path;
+}
+
+<div class="single_product" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <div class="product_name" itemprop="name">
+        <h3><a href="/product/@Model.id/@(FriendlyUrlHelper.GetFriendlyTitle(Model.name))">@Model.name</a></h3>
+        @*<p class="manufacture_product"><a href="#">@Model.categoryName</a></p>*@
+    </div>
+    <div class="product_thumb">
+        <a class="primary_img" href="/product/@Model.id/@(FriendlyUrlHelper.GetFriendlyTitle(Model.name))">
+            <img itemprop="image" class="imgsize-176" src="@media" alt="@Model.name">
+        </a>
+        <a class="secondary_img" href="/product/@Model.id/@(FriendlyUrlHelper.GetFriendlyTitle(Model.name))">
+            <img itemprop="image" class="imgsize-176" src="@mediaLast" alt="@Model.name">
+        </a>
+        @*<div class="label_product">
+            <span class="label_sale">-57%</span>
+             </div>*@
+        <div class="action_links">
+            <ul>
+                @*<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>*@
+                <li class="wishlist">
+                    @*<a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a>*@
+                    <partial name="_AddToWishlist" model="@Model.id" />
+                </li>
+                @*<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>*@
+            </ul>
+        </div>
+    </div>
+    <div class="product_content">
+        <div class="product_ratings" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+            <partial name="_Rating" model="@Model.rating" />
+        </div>
+        <div class="product_footer d-flex align-items-center">
+            <div class="price_box">
+                <span class="regular_price">
+                    <span itemprop="price" content="@Model.price">@Model.price</span>
+                    <span itemprop="priceCurrency" content="USD">USD</span>
+                    @if (!Model.oldPrice.Equals(0))
+                    {
+                        <span class="old_price">@Model.oldPrice USD</span>
+                    }
+                </span>
+            </div>
+            <div class="add_to_cart">
+                @if (!Model.qty.Equals(0))
+                {
+                    <partial name="_AddSingleProductToCart" model="@Model.id" />
+                }
+            </div>
+        </div>
+    </div>
+</div>

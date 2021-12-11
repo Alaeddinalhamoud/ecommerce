@@ -1,0 +1,9 @@
+﻿@model ecommerce.Data.POJO
+
+@{
+    if (!Model.flag)
+    {
+        //The Id is Product Id returned from the CheckCustomerReview in review API
+        <partial name="_AddProductReview" model="@Convert.ToInt32(Model.id)" />
+    } 
+}

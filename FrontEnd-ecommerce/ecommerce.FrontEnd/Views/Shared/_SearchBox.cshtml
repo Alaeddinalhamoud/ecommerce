@@ -1,0 +1,11 @@
+﻿<form asp-action="index" asp-controller="Shop" method="get" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+    <div class="search_box">
+        <meta itemprop="target" content="/Shop?searchBox={searchBox}" />
+        <label for="searchBox" class="sr-only">Search</label>
+        <input itemprop="query-input" name="searchBox" value="@ViewData["currentFilter"]" placeholder="Search entire store here ..." type="text" autocomplete="on" required>
+        <button type="submit">
+            <p class="sr-only">search</p>
+            <i class="ion-ios-search-strong"></i>
+        </button>
+    </div>
+</form>  

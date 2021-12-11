@@ -1,0 +1,29 @@
+﻿@model ecommerce.Data.MetaTag
+
+@if(!(Model is null))
+{
+    <!--Google Meta-->
+    <meta name="Description" content="@Model?.description">
+    <meta name="author" content="@Model?.sitename">
+    <meta name="keywords" content="@Model?.keywords">
+    <meta name="image" content="@Model?.image" />
+    <!--FB Meta-->
+    <meta property="og:title" content="@Model?.title" />
+    <meta property="og:type" content="@Model?.type" />
+    <meta property="og:url" content="@Model?.url" />
+    <meta property="og:image" content="@Model?.image" />
+    <meta property="og:description" content="@Model?.description" />
+    <meta property="og:locale" content="@Model?.locale" />
+    <meta property="og:site_name" content="@Model?.sitename" />
+    <meta property="og:image:alt" content="@Model?.imageAlt" />
+    <meta property="og:video" content="@Model?.video" />
+    <!--Twitter Meta-->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Model?.sitename" />
+    <meta name="twitter:creator" content="@Model?.sitename" />
+    <meta name="twitter:description" content="@Model?.description" />
+    <meta name="twitter:image" content="@Model?.image" />
+    <meta name="twitter:site" content="@Model?.sitename" />
+    <meta name="twitter:title" content="@Model?.title" />
+}
+

@@ -1,0 +1,54 @@
+﻿
+<ul itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" asp-action="Index" asp-controller="Home">
+            <span itemprop="name">Home</span>
+        </a>
+        <meta itemprop="position" content="1" />
+    </li>
+    <li class="mega_items" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" asp-action="index" asp-controller="Shop">
+            <span itemprop="name">Shop</span>
+        </a>
+        <meta itemprop="position" content="2" />
+    </li>
+    @*<li>
+            <a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
+            <ul class="sub_menu pages">
+                <li><a href="blog-details.html">blog details</a></li>
+                <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
+                <li><a href="blog-sidebar.html">blog sidebar</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">pages <i class="fa fa-angle-down"></i></a>
+            <ul class="sub_menu pages">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">services</a></li>
+                <li><a href="faq.html">Frequently Questions</a></li>
+                <li><a href="login.html">login</a></li>
+                <li><a href="compare.html">compare</a></li>
+                <li><a href="privacy-policy.html">privacy policy</a></li>
+                <li><a href="coming-soon.html">Coming Soon</a></li>
+            </ul>
+        </li>*@
+    <vc:page nav-id="Main"></vc:page>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" asp-action="FAQ" asp-controller="Home">
+            <span itemprop="name">FAQs</span>
+        </a>
+        <meta itemprop="position" content="3" />
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" asp-action="AboutUs" asp-controller="Home">
+            <span itemprop="name">About Us</span>
+        </a>  <meta itemprop="position" content="4" />
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" asp-action="ContactUs" asp-controller="Home">
+            <span itemprop="name">Contact Us</span>
+        </a>
+        <meta itemprop="position" content="5" />
+    </li>
+
+</ul>

@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<!--contact map start-->
+<div class="contact_map mt-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="map-area">
+                    <div id="googleMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--contact map end-->
+<!--contact area start-->
+<div class="contact_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="contact_message content">
+                    <h3>contact us</h3>
+                    <address>
+                        <ul>
+                            <li><i class="fa fa-address-book"></i></li>
+                            <li><i class="fa fa-phone"><a href="tel:+111111111111">+111111111111 </a></i></li>
+                            <li><i class="fa fa-phone"><a href="tel:+111111111111">+111111111111 </a></i></li>
+                            <li><i class="fa fa-phone"><a href="tel:+111111111111">+111111111111 </a></i></li>
+                            <li><i class="fa fa-phone"><a href="tel:+111111111111"> +111111111111</a></i></li>
+                            <li><i class="fa fa-envelope-o"></i> <a href="mailto:sales@Example.com">sales@Example.com</a></li>
+                            <li><i class="fa fa-envelope-o"></i> <a href="mailto:hussam@mExample.com">hussam@Example.com</a> </li>
+                            <li><i class="fa fa-envelope-o"></i> <a href="mailto:info@Example.com">info@Example.com</a> </li>
+                        </ul>
+                    </address>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="contact_message form">
+                    <partial name="_TellUsYourFeedback" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Privacy Policy area end-->
+<!--map js code here-->
+@section scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJu3YwpJf6K5u1EVMtncPm4CD3209OWnw"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="~/assets/js/map.js"></script>
+}

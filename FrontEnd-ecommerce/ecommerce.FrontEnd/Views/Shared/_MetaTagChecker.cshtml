@@ -1,0 +1,18 @@
+﻿@{
+    if (Context.Request.Path.HasValue)
+    {
+        string action = Context.Request.RouteValues?.FirstOrDefault(a => a.Key.Contains("action")).Value?.ToString();
+        if (action.Contains("Details"))
+        {
+            string id = Context.Request.RouteValues?.FirstOrDefault(a => a.Key.Contains("id")).Value?.ToString();
+            if (!String.IsNullOrEmpty(id))
+            {
+                <vc:meta-tag meta-tag-id="@id"></vc:meta-tag>
+            }
+        }
+        else
+        {
+            <vc:meta-tag meta-tag-id="0"></vc:meta-tag>
+        }
+    }
+}

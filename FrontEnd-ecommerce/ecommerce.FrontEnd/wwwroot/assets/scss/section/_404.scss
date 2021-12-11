@@ -1,0 +1,108 @@
+/* 09. error page css heer   */
+.header_error{
+    border-bottom: 1px solid $grey_color;
+}
+.error_form{
+    text-align: center;
+    & h1{
+        font-size: 200px;
+        font-weight: 700;
+        color: $secondary_color;
+        letter-spacing: 10px;
+        line-height: 160px;
+        margin: 0 0 60px;
+        @media #{$large-mobile}{
+            font-size: 130px;
+            line-height: 120px;
+            letter-spacing: 4px;
+            margin: 0 0 45px;
+        }
+    }
+    & h2{
+        font-size: 24px;
+        text-transform: uppercase;
+        font-weight: 500;
+        line-height: 30px;
+        margin-bottom: 19px;
+        @media #{$large-mobile}{
+            font-size: 18px;
+            line-height: 22px;
+            margin-bottom: 17px;
+        }
+    }
+    & p{
+       font-size: 17px;
+        font-weight: 400;
+        line-height: 26px;
+        margin-bottom: 30px; 
+        @media #{$large-mobile}{
+            font-size: 15px;
+            margin-bottom: 28px;
+            line-height: 23px;
+        }
+    }
+    & form{
+        width: 450px;
+        margin: 0 auto;
+        position: relative;
+        @media #{$large-mobile}{
+            width: 100%;
+        }
+        & input{
+            padding: 0 60px 0 30px;
+            background: #f8f8f8;
+            border: 1px solid #ddd; 
+            color: $fonts_color;
+            height: 40px;
+            width: 100%;
+            border-radius: 3px;
+            
+        }
+        & button{
+            position: absolute;
+            right: 0;
+            height: 100%;
+            border: none;
+            background: no-repeat;
+            font-size: 20px;
+            cursor: pointer;
+            -webkit-transition: .3s;
+            transition: .3s;
+            top: 0;
+            text-transform: uppercase;
+            padding: 0 15px;
+            font-weight: 600;
+            &:hover{
+                color: $secondary_color;
+            }
+        }
+    }
+    & a{
+        color: $body-color;
+        display: inline-block;
+        background: $fonts_color;
+        font-size: 12px;
+        font-weight: bold;
+        height: 40px;
+        line-height: 42px;
+        padding: 0 30px;
+        text-transform: uppercase;
+       margin-top: 35px;
+        border-radius: 3px;
+        &:hover{
+            background: $secondary_color;
+        }
+    }
+}
+
+.error_section {
+	padding-bottom: 70px;
+    padding-top: 59px;
+    @media #{$large-mobile}{
+        padding-bottom: 60px;
+        padding-top: 45px;
+    }
+}
+/*404 page css end*/
+
+

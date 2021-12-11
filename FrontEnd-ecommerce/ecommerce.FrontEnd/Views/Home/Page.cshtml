@@ -1,0 +1,37 @@
+﻿@model ecommerce.Data.Page
+@if (Model is null)
+{
+    <!--Privacy Policy area start-->
+    <div class="privacy_policy_main_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1> Empty Page </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    ViewData["Title"] = Model.name;
+
+    <!--Privacy Policy area start-->
+    <div class="privacy_policy_main_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1> @Model.name </h1>
+                    <hr />
+                    <div>
+                        @Html.Raw(Model.content)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<!--Privacy Policy area end-->

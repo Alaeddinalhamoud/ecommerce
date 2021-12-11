@@ -1,0 +1,123 @@
+﻿@model ecommerce.FrontEnd.Models.MVVendorApplication
+@{
+    ViewData["Title"] = "Vendor Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var page = "VendorApplication";
+}
+<!-- my account start  -->
+<section class="main_content_area">
+    <div class="container">
+
+        <div class="account_dashboard">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <partial name="_MyAccountNavtab" model="page" />
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard_content">
+                        <div id="account-details">
+                            @if (Model.status.Equals(ecommerce.Data.Status.Open) && !Model.id.Equals(0))
+                            {
+                                <div class="border border-info text-info my-3 p-2">
+                                    <h4><span class="fa fa-info-circle pr-1"></span><strong></strong>Info</h4>
+                                    <p>Your seller application number #@Model.id is under review.</p>
+                                </div>
+                            }
+                            else if (Model.status.Equals(ecommerce.Data.Status.Closed))
+                            {
+                                <div class="border border-success text-success my-3 p-2">
+                                    <h4><span class="fa fa-info-circle pr-1"></span><strong></strong>Info</h4>
+                                    <p><strong>Congratulation,</strong> Your seller application number #@Model.id has been accepted. Please, contact the sales team for more details about the selling process.</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <h3>Seller Form</h3>
+                                <div id="login" class="login">
+                                    <div class="login_form_container">
+                                        <div class="account_login_form">
+                                            @if (Model.status.Equals(ecommerce.Data.Status.Pending))
+                                            {
+                                                <div class="border border-danger text-danger my-3 p-2">
+                                                    <h4><span class="fa fa-ban pr-1"></span><strong>Rejected</strong></h4>
+                                                    <p>@Model.note</p>
+                                                </div>
+                                            }
+                                            <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+                                            <form asp-action="VendorApplication" asp-controller="Account" enctype="multipart/form-data" method="post" id="vendorAppForm">
+                                                <div asp-validation-summary="All" class="text-danger"></div>
+                                                <input type="text" asp-for="id" placeholder="Id" hidden value="@Model.id">
+                                                <label>Full Name</label>
+                                                <input asp-for="fullName" id="fullName" placeholder=" Full Name" type="text" value="@(String.IsNullOrEmpty(User?.FindFirst(c => c.Type == "nickname")?.Value) ? "" : User?.FindFirst(c => c.Type == "nickname")?.Value)" required readonly>
+                                                <label>Company Name</label>
+                                                <input type="text" asp-for="companyName" placeholder="Company Name" required>
+                                                <label>Company VAT</label>
+                                                <input type="text" asp-for="companyVAT" placeholder="Company VAT" required>
+                                                <label>Work Email</label>
+                                                <input type="email" asp-for="workEmail" placeholder="Work Email" required>
+                                                <label>Work Tel 1</label>
+                                                <input type="text" asp-for="tel1" required placeholder="Work Tel 1">
+                                                <label>Work Tel 2</label>
+                                                <input type="text" asp-for="tel2" required placeholder="Work Tel 2">
+                                                <label>CR Number</label>
+                                                <input type="text" asp-for="crNumber" required placeholder="The commercial registration number." >
+                                                <label>Owner Id Number</label>
+                                                <input type="text" asp-for="ownerIdNumber" required placeholder="The company owner (Passport number or ID ).">
+                                                <label>Company Address</label>
+                                                <input type="text" asp-for="companyAddress" placeholder="Company Address" required>
+                                                <label>Bank Name</label>
+                                                <input type="text" asp-for="bankName" placeholder="Bank Name" required>
+                                                <label>Bank Address</label>
+                                                <input type="text" asp-for="bankAddress" placeholder="Bank Address" required>
+                                                <label>Account Number</label>
+                                                <input type="text" asp-for="account" placeholder="Account Number" required>
+                                                <label>Swift Code</label>
+                                                <input type="text" asp-for="swiftCode" placeholder="Swift Code" required>
+                                                <label>IBAN</label>
+                                                <input type="text" asp-for="iBAN" placeholder="IBAN" required>
+                                                <span class="text-danger">
+                                                    Please Upload the required documents.
+                                                </span>
+                                                <ol>
+                                                    <li>The commercial registration certificate (PDF file).</li>
+                                                    <li>A copy of the owner ID.</li>
+                                                    <li>A copy of the VAT certificate.</li>                                                   
+                                                    <li><a class="" href="@Model.vendorAgreementContract">Singed copy of the Agreement contract <code class="text-danger">(Download)</code></a></li>
+                                                </ol>
+
+                                                <label>File Uploader <code>(PDF)</code>:</label>
+                                                <input asp-for="fileToUpload" type="file" class="form-control" multiple accept=".pdf" required />
+                                                <div class="save_button primary_btn default_button">
+                                                    <button type="submit">
+                                                        Submit
+                                                        <span id="spinner-MyAccount" style="display:none;">
+                                                            <i class="fa fa-spinner fa-spin yellow"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <div id="myAccount-msg" class="text-center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            $("#vendorAppForm").submit(function (event) {
+                $("#spinner-MyAccount").show();
+            });
+        });
+    </script>
+}

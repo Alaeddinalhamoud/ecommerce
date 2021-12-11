@@ -1,0 +1,26 @@
+﻿@model double
+@{
+    var num = Model;
+    if (num == 0)
+    {
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+    }
+    var res = num - Math.Truncate(num);
+    var inum = Math.Truncate(num);
+    <span itemprop="ratingValue" class="sr-only">@inum.ToString() </span>
+    <meta property="worstRating" content="1">
+    <span property="bestRating" class="sr-only">5</span>
+    <span property="reviewCount" class="sr-only">1</span>
+    for (var i = 0; i < inum; i++)
+    {
+        <i class="fa fa-star" style="color:gold;" aria-hidden="true"></i>
+    }
+    if (res != 0)
+    {
+        <i class="fa fa-star-half" style="color:gold;" aria-hidden="true"></i>
+    }
+}

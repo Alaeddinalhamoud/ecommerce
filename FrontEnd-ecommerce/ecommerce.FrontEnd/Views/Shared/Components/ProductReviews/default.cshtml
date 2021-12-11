@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ecommerce.Data.Review>
+
+@foreach (var item in Model)
+{
+    <div class="reviews_comment_box" itemprop="review" itemscope itemtype="https://schema.org/Review">
+        <div class="comment_thmb">
+            <i class="fa fa-comment fa-2x yellow"></i>
+        </div>
+        <div class="comment_text">
+            <div class="reviews_meta">
+                <div class="star_rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+                    <partial name="_Rating" model="Convert.ToDouble(item.rating)" />
+                </div>
+                <p>
+                    <strong itemprop="author">@item?.name </strong>-
+                    <meta itemprop="datePublished" content="@item?.createDate.ToShortDateString()">
+                    @item?.createDate.ToShortDateString()
+                </p>
+                <span itemprop="description">
+                    @item?.description
+                </span>
+            </div>
+        </div>
+    </div>
+}

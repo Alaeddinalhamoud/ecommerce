@@ -1,0 +1,183 @@
+﻿@model ecommerce.Data.MVData.CheckOut
+
+@{
+    ViewData["Title"] = "Check out";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hidden =  String.IsNullOrEmpty(Model.phone) ? "d-none" : String.Empty;
+    string userId = User?.FindFirst(c => c.Type == "sub").Value;
+}
+
+
+<!--Checkout page section-->
+<div class="Checkout_section mt-32">
+    <div class="container">
+        <div class="checkout_form">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <vc:user-profile-alert user-id="@userId" />
+            }
+            <div id="checkOutLayout" class="row">
+                @if (!Model.isPaid)
+                {
+                    <div class="col-lg-6 col-md-6">
+                        <div class="d-flex justify-content-between">
+                            <h3>Shipping Address</h3>
+                            <a asp-controller="Account" asp-action="SaveAddress" title="Add new Address">
+                                <span class="fa fa-plus-circle fa-2x text-warning"></span>
+                            </a>
+                        </div>
+                        <vc:shipping-address user-id="@userId"></vc:shipping-address>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        @if (String.IsNullOrEmpty(Model.orderId))
+                        {
+                            <h3>YOUR ORDER</h3>
+                            <vc:your-cart-lines cart-id="@Model.cartId"></vc:your-cart-lines>
+                        }
+                    <div class="payment_method">
+                        <h3>Payment Method</h3>
+                        @{
+                            if (Model.isCash)
+                            {
+                                <div class="panel-default">
+                                    <input name="check_method" type="radio" value="cash" />
+                                    <label>Pay Cash</label>
+                                </div>
+                            }
+
+                            if (Model.isSTCPay)
+                            {
+                                <div class="panel-default">
+                                    <input name="check_method" type="radio" value="stcpay" />
+                                    <label>STC Pay</label>
+                                </div>
+                            }
+
+                            if (Model.isCard)
+                            {
+                                <div class="panel-default">
+                                    <input name="check_method" type="radio" value="cardpay" />
+                                    <label>Pay With Card </label>
+                                </div>
+                            }
+                            <div class="panel-default">
+                                <form asp-action="Pay" asp-controller="Payment" id="card-payment-form" class="box" method="post">
+                                    <img src="/assets/img/icon/paytabs.png" class="py-2 paytabslogo" alt="paytabs Payment Methods">
+                                    <input asp-for="token" type="text" class="googlerecaptchatoken" hidden />
+                                    <input type="text" asp-for="paymentReference" class="transactionurl" hidden />
+                                    <input asp-for="addressId" value="@Model.addressId" class="myaddress" type="text" hidden />
+                                    <input asp-for="cartId" value="@Model.cartId" type="text" hidden />
+                                    <input asp-for="orderId" value="@Model.orderId" type="text" hidden />
+                                    
+                                    <input asp-for="userId" value="@Model.userId" type="text" hidden />
+                                   
+                                    <input asp-for="paymentMethod" value="" class="paymentMethod" type="number" hidden />
+                                   
+                                    <!--Render Payment Form - Template-->
+
+                                    <div class="order_button">
+                                        <button type="submit" class="@hidden" id="submitbtn">
+                                            <span class="spinner-googleReCaptcha">
+                                                <span class="fa fa-spinner fa-spin fa-2x"></span>
+                                            </span>
+                                            <span class="Captipn-googleReCaptcha d-none">
+                                                PAY @Model.total.ToString() USD
+                                            </span>                                          
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--Ends-->
+                            <span class="spinnerCheckOut mt-1" style="display:none;">
+                                <i class="fa fa-spinner fa-spin fa-2x yellow"></i><strong> Please wait we are processing your order.</strong>
+                            </span>
+
+                            if (!String.IsNullOrEmpty(hidden))
+                            {
+                                <p class="text-danger"><span class="fa fa-info-circle pr-1"></span>Please, complete your profile.</p>
+                            }
+                            <p id="addressmsg" class="text-danger d-none"><span class="fa fa-info-circle pr-1"></span>Please, Select an address.</p>
+                            <partial name="_ValidationSummary" />
+                        }
+                    </div>
+                        </div>
+                }
+                else
+                {
+                    <div class="col-12">
+                        <div class="text-center text-warning border border-warning">
+                            <span class="fa fa-dollar fa-2x p-1"></span> <strong>Your Order #@Model.orderId is Already Paid.</strong>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--Checkout page section end-->
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".box").hide();
+            $("input[name$='check_method']").click(function () {
+                var radioVal = $(this).attr("value");
+               // var targetBox = $("." + radioVal);
+               // $(".box").not(targetBox).hide();
+               // $(targetBox).show(); 
+                $('.paytabslogo').hide();
+                if (radioVal == 'cash') {
+                    $('.paymentMethod').val(2);
+                    $('.box').show();
+                } else if (radioVal === 'cardpay') {
+                    $('.paymentMethod').val(1);
+                    $('.box').show();
+                    $('.paytabslogo').show();
+                } else if (radioVal === 'stcpay') {
+                    $('.paymentMethod').val(3);
+                    $('.box').show();
+                } else {
+                    //hide pay button
+                    $('.paymentMethod').val();
+                    $('.box').hide();
+                } 
+
+                var addressVal = $('.myaddress').val();
+                console.log(addressVal);
+                if (addressVal == 0) {
+                    $('#addressmsg').removeClass('d-none');
+                    $('#submitbtn').addClass('d-none');
+                }
+               
+            });
+        });
+    </script>
+
+
+
+
+    <script type='text/javascript'>
+        function DisplaySpinner() {
+            $(".spinnerCheckOut").css("display", "block");
+        }
+
+        $("#submitbtn").click(function (event) {
+            DisplaySpinner();
+        });
+    </script>
+
+    <script type="text/javascript">
+        function selectAsDefault(cardId, addressId, myselect) { 
+            $(".myCardAddress").removeClass('bg-warning');
+            document.getElementById(cardId).classList.add('bg-warning');
+            $('.myaddress').val(addressId);
+            $('.mySelect').html("Select");
+            document.getElementById(myselect).innerHTML = "<i class='fa fa-check'></i> Selected";
+            $('#submitbtn').removeClass('d-none');
+            $('#addressmsg').addClass('d-none');
+        }
+    </script>
+
+
+}

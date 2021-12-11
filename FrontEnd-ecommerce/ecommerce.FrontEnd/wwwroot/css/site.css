@@ -1,0 +1,637 @@
+﻿ 
+
+/*a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}*/
+
+/* Provide sufficient contrast against white background */
+/*a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+/*html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+/*html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;  
+}
+*/
+
+
+/*My Code*/
+
+/*Star rating*/
+.starrr {
+    display: inline-block;
+}
+
+    .starrr a {
+        font-size: 16px;
+        padding: 0 1px;
+        cursor: pointer;
+        color: #FFD119;
+        text-decoration: none;
+    }
+
+
+
+.yellow {
+    color: #ffd54c;
+}
+
+.red {
+    color: red;
+}
+
+.green{
+    color:green;
+}
+
+.isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+.imgsize-90{
+    max-width:90px;
+}
+
+.imgsize-176{
+    max-width: 176px;
+    max-height:176px;
+}
+
+.grid_list img{
+    max-width:225px;
+    max-height:225px;
+}
+
+.grid_3 img {
+    max-width: 225px;
+    max-height: 225px;
+}
+
+.grid_4 img {
+    max-width: 135.75px;
+    max-height: 135.75px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+/* The ribbons */
+
+.corner-ribbon {
+    width: 200px;
+    background: #e43;
+    position: absolute;
+    top: 25px;
+    left: -50px;
+    text-align: center;
+    line-height: 50px;
+    letter-spacing: 1px;
+    color: #f0f0f0;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+    /* Custom styles */
+
+    .corner-ribbon.sticky {
+        position: fixed;
+    }
+
+    .corner-ribbon.shadow {
+        box-shadow: 0 0 3px rgba(0,0,0,.3);
+    }
+
+    /* Different positions */
+
+    .corner-ribbon.top-left {
+        top: 25px;
+        left: -50px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+    }
+
+    .corner-ribbon.top-right {
+        top: 25px;
+        right: -50px;
+        left: auto;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+
+    .corner-ribbon.bottom-left {
+        top: auto;
+        bottom: 25px;
+        left: -50px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+
+    .corner-ribbon.bottom-right {
+        top: auto;
+        right: -50px;
+        bottom: 25px;
+        left: auto;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+    }
+
+    /* Colors */
+
+   
+
+    .corner-ribbon.red {
+        background: #e43;
+    }
+
+    .corner-ribbon.orange {
+        background: #e82;
+    }
+
+    .corner-ribbon.yellow {
+        background: #ec0;
+    }
+
+.payment-method {
+    height: 35px !important;
+}
+
+.payment-method-stcpay {
+    height: 20px !important;
+    width: 70px !important;
+}
+
+
+/*https://codepen.io/manit/pen/uFnJw*/
+ol.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type none;
+}
+
+    ol.progtrckr li {
+        display: inline-block;
+        text-align: center;
+        line-height: 3.5em;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="2"] li {
+        width: 49%;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="3"] li {
+        width: 33%;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="4"] li {
+        width: 24%;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="5"] li {
+        width: 19%;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="6"] li {
+        width: 16%;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="7"] li {
+        width: 14%;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="8"] li {
+        width: 12%;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="9"] li {
+        width: 11%;
+    }
+
+    ol.progtrckr li.progtrckr-done {
+        color: black;
+        border-bottom: 4px solid #ffc107;
+    }
+
+    ol.progtrckr li.progtrckr-todo {
+        color: silver;
+        border-bottom: 4px solid silver;
+    }
+
+    ol.progtrckr li:after {
+        content: "\00a0\00a0";
+    }
+
+    ol.progtrckr li:before {
+        position: relative;
+        bottom: -2.5em;
+        float: left;
+        left: 50%;
+        line-height: 1em;
+    }
+
+    ol.progtrckr li.progtrckr-done:before {
+        content: "\2713";
+        color: white;
+        background-color: #ffc107;
+        height: 2.2em;
+        width: 2.2em;
+        line-height: 2.2em;
+        border: none;
+        border-radius: 2.2em;
+    }
+
+    ol.progtrckr li.progtrckr-todo:before {
+        content: "\039F";
+        color: silver;
+        background-color: white;
+        font-size: 2.2em;
+        bottom: -1.2em;
+    }
+
+
+@media only screen and (max-width: 700px) {
+    .big-screen{
+        display: none;
+    }
+}
+
+.navbar .navbar-nav > a:hover,
+.navbar .navbar-nav > a:focus {
+    color: #ffffff;
+    background-color: #ffc107;
+}
+
+
+.cardWidth {
+    width: 18rem;
+}
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0px !important;
+}
+
+#cover {
+    background: url("/assets/img/Web-Loading-Image.gif") no-repeat scroll center center #FFF;
+    position: absolute;
+    height: 100%;
+    width: 100%;   
+    z-index: 5000;
+    top: 0;
+    left: 0;
+    float: left;
+    text-align: center;
+    padding-top: 25%;
+    opacity: .70;
+}
+
+
+/*
+=====
+DEPENDENCES
+=====
+*/
+
+/* The component will reset button browser styles */
+
+.r-button {
+    --uirButtonBackgroundColor: var(--rButtonBackgroundColor, transparent);
+    --uirButtonPadding: var(--rButtonPadding, var(--rButtonPaddingTop, 0) var(--rButtonPaddingRight, 0) var(--rButtonPaddingBottom, 0) var(--rButtonPaddingLeft, 0));
+    --uirButtonBorderWidth: var(--rButtonBorderWidth, 0);
+    --uirButtonBorderStyle: var(--rButtonBorderStyle, solid);
+    --uirButtonBorderColor: var(--rButtonBorderColor, currentColor);
+    --uirButtonFontFamily: var(--rButtonFontFamily, inherit);
+    --uirButtonFontSize: var(--rButtonFontSize, inherit);
+    --uirButtonColor: var(--rButtonColor);
+    background-color: var(--uirButtonBackgroundColor);
+    padding: var(--uirButtonPadding);
+    border-width: var(--uirButtonBorderWidth);
+    border-style: var(--uirButtonBorderStyle);
+    border-color: var(--uirButtonBorderColor);
+    cursor: pointer;
+    font-family: var(--uirButtonFontFamily);
+    font-size: var(--uirButtonFontSize);
+}
+
+    .r-button::-moz-focus-inner,
+    .r-button[type="button"]::-moz-focus-inner,
+    .r-button[type="reset"]::-moz-focus-inner,
+    .r-button[type="submit"]::-moz-focus-inner {
+        /* Remove the inner border and padding in Firefox. */
+        border-style: none;
+        padding: 0;
+    }
+
+/* The component will reset browser's styles of link */
+
+.r-link {
+    --uirLinkDisplay: var(--rLinkDisplay, inline-flex);
+    --uirLinkTextColor: var(--rLinkTextColor);
+    --uirLinkTextDecoration: var(--rLinkTextDecoration, none);
+    display: var(--uirLinkDisplay) !important;
+    color: var(--uirLinkTextColor) !important;
+    text-decoration: var(--uirLinkTextDecoration) !important;
+}
+
+/* The component will reset browser's styles of list */
+
+.r-list {
+    --uirListPaddingLeft: var(--rListPaddingLeft, 0);
+    --uirListMarginTop: var(--rListMarginTop, 0);
+    --uirListMarginBottom: var(--rListMarginBottom, 0);
+    --uirListListStyle: var(--rListListStyle, none);
+    padding-left: var(--uirListPaddingLeft) !important;
+    margin-top: var(--uirListMarginTop) !important;
+    margin-bottom: var(--uirListMarginBottom) !important;
+    list-style: var(--uirListListStyle) !important;
+}
+
+/* Basic styles of the hamburger component */
+
+.m-hamburger {
+    --uiHamburgerThickness: var(--hamburgerThickness, 4px);
+    display: var(--hamburgerDisplay, inline-flex);
+    width: var(--hamburgerWidth, 28px);
+    height: var(--hamburgerHeight, 20px);
+    position: relative;
+}
+
+    .m-hamburger::before,
+    .m-hamburger::after,
+    .m-hamburger__label {
+        width: 100%;
+        height: var(--uiHamburgerThickness);
+        border-radius: var(--hamburgerBorderRadius, 5px);
+        background-color: var(--hamburgerBackgroundColor, currentColor);
+        position: absolute;
+        left: 0;
+    }
+
+    .m-hamburger::before,
+    .m-hamburger::after {
+        content: "";
+    }
+
+    .m-hamburger::before {
+        top: 0;
+    }
+
+    .m-hamburger::after {
+        bottom: 0;
+    }
+
+.m-hamburger__label {
+    /* The calculation of middle hamburger button line position */
+    top: calc(50% - calc(var(--uiHamburgerThickness) / 2));
+}
+
+/* helper to hide elements that are available only for screen readers. */
+
+.screen-reader {
+    width: var(--screenReaderWidth, 1px) !important;
+    height: var(--screenReaderHeight, 1px) !important;
+    padding: var(--screenReaderPadding, 0) !important;
+    border: var(--screenReaderBorder, none) !important;
+    position: var(--screenReaderPosition, absolute) !important;
+    clip: var(--screenReaderClip, rect(1px, 1px, 1px, 1px)) !important;
+    overflow: var(--screenReaderOverflow, hidden) !important;
+}
+
+/*
+=====
+MENU STYLES
+=====
+*/
+
+.menu {
+    --uiMenuCircleSize: var(--menuCircleSize, 6.25rem);
+    --uiMenuCircleOffset: var(--menuCircleOffset, 1rem);
+    --uiMenuCircleHeight: calc(var(--uiMenuCircleSize) / 2);
+    --uiMenuCircleBackgroundColor: var(--menuCircleBackgroundColor, currentColor);
+    --uiMenuHamburgerWidth: var(--menuHamburgerWidth, 1.75rem);
+    --uiMenuHamburgerHeight: var(--menuHamburgerHeight, 1.25rem);
+    --rButtonPaddingTop: calc(var(--uiMenuCircleHeight) - var(--uiMenuHamburgerHeight) - var(--uiMenuCircleOffset));
+    --hamburgerWidth: var(--uiMenuHamburgerWidth);
+    --hamburgerHeight: var(--uiMenuHamburgerHeight);
+    --hamburgerBackgroundColor: var(--menuHamburgerBackgroundColor, #fff);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: var(--menuZindex, 9998);
+}
+
+.menu__nav {
+    box-sizing: border-box;
+    width: 100%;
+    height: 0;
+    transition: opacity .2s ease-out;
+    opacity: 0;
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+}
+
+.menu__list {
+    width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.menu__toggle {
+    box-sizing: border-box;
+    width: var(--uiMenuCircleSize);
+    height: var(--uiMenuCircleHeight);
+    flex: none;
+    position: relative;
+    z-index: 0;
+}
+
+    .menu__toggle::before {
+        /*
+  1. The font-size property is used to simplify calculations of the element's sizes and position
+  2. The negative value for the bottom property need for hiding half of circle. 
+  */
+        content: "";
+        width: 1em;
+        height: 1em;
+        font-size: var(--uiMenuCircleSize); /* 1 */
+        background-color: var(--uiMenuCircleBackgroundColor);
+        border-radius: 50%;
+        position: absolute;
+        bottom: -.5em; /* 2 */
+        left: calc(50% - .5em);
+        z-index: -1;
+        will-change: width, height;
+        transition: transform .25s cubic-bezier(0.04, -0.1, 0.29, 0.98), width .25s cubic-bezier(0.04, -0.1, 0.29, 0.98), height .25s cubic-bezier(0.04, -0.1, 0.29, 0.98);
+    }
+
+/* styles of hamburger's animation */
+
+.m-hamburger::before,
+.m-hamburger::after,
+.m-hamburger__label {
+    transition-timing-function: ease;
+    transition-duration: .15s;
+}
+
+.m-hamburger::before,
+.m-hamburger::after {
+    transition-property: transform;
+}
+
+.m-hamburger__label {
+    transition-property: transform, opacity;
+}
+
+/*
+=====
+MENU STATES
+=====
+*/
+
+.menu__toggle:focus {
+    outline: var(--menuHaburgerOutlineOWidth, 2px) solid var(--menuHaburgerOutlineColor);
+    outline-offset: var(--menuHaburgerOutlineOffset, 5px);
+}
+
+.menu_activated {
+    height: 100%;
+}
+
+    .menu_activated .menu__nav {
+        flex-grow: 1;
+        opacity: 1;
+        will-change: opacity;
+        transition-duration: .2s;
+        transition-delay: .3s;
+    }
+
+    .menu_activated .menu__toggle::before {
+        width: 100vmax;
+        height: 100vmax;
+        transform: translate3d(-50vh, -50vh, 0) scale(5);
+        transition-duration: 1s;
+    }
+
+.menu:not(.menu_activated) .menu__list {
+    display: none;
+}
+
+.menu_activated .m-hamburger::before {
+    top: 50%;
+    transform: translate3d(0, -50%, 0) rotate(45deg);
+}
+
+.menu_activated .m-hamburger::after {
+    transform: translate3d(0, -50%, 0) rotate(135deg);
+    top: 50%;
+}
+
+.menu_activated .m-hamburger__label {
+    transform: rotate(-45deg) translate3d(-.285em,-.3em, 0);
+    opacity: 0;
+}
+
+/*
+=====
+SETTINGS
+=====
+*/
+
+:root {
+    --colorWhite: #fff;
+    --colorMain: #ffd54c;
+    --menuCircleBackgroundColor: var(--colorMain);
+    --menuHamburgerBackgroundColor: var(--colorWhite);
+    --menuHaburgerOutlineColor: var(--colorMain);
+}
+
+.menu_activated {
+    --menuHaburgerOutlineColor: var(--colorWhite);
+}
+
+/*
+=====
+Menu
+=====
+*/
+
+
+.menu__group {
+    --rLinkTextColor: var(--colorWhite);
+    padding: .5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}

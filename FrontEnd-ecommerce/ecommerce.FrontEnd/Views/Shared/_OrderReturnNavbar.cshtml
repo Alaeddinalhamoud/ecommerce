@@ -1,0 +1,14 @@
+﻿@model ecommerce.Data.MVData.OrderDetails
+@using ecommerce.Data
+<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+        @if ((DateTime.Now.Date <= Model.createDate.Date.AddDays(Model.orderReturnDays)) && (Model.Status != Status.Returned))
+        {
+            <a class="nav-item nav-link @(Model.isPaid.Equals(false) ? "disabled" : "text-dark")" asp-action="OpenOrderComplaintCase" asp-controller="OrderComplaintCase" asp-route-orderId="@Model?.orderId">Open Complaint Case</a>
+            <a class="nav-item nav-link @(Model.isPaid.Equals(false) ? "disabled" : "text-dark")" asp-action="OpenOrderReturnCase" asp-controller="OrderReturnCase" asp-route-orderId="@Model?.orderId">Return Order</a>
+        }
+        @*<a class="nav-item nav-link text-dark" href="#">Open Case</a>*@
+        <a class="nav-item nav-link  @(Model.isPaid.Equals(true) ? "disabled" : "text-dark")" asp-action="Delete" asp-controller="Order" asp-route-id="@Model?.orderId" asp-route-userId="@Model?.createdBy" title="Delete Order"> <span class="fa fa-trash-o"></span> Delete</a>
+        <a class="nav-item nav-link @(Model.isPaid.Equals(true) ? "disabled" : "text-dark")" title="RePay it" asp-action="CheckoutOrder" asp-controller="Order" asp-route-id="@Model?.orderId"><strong>Pay</strong> @Model.total USD</a>
+    </div>
+</div>

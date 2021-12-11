@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ecommerce.Data.Address>
+
+<div class="row">
+    <div class="col">
+        @if (Model == null && Model.Count().Equals(0))
+        {
+            <div class="text-center text-warning border border-warning">
+                <span class="lnr lnr-calendar-full"></span> <strong>Please, Add new Address.</strong>
+            </div>
+        }
+    </div>
+
+    <div class="d-flex align-content-start flex-wrap">
+        @foreach (var item in Model)
+        {
+            <div id="address-@item?.id" class="card myCardAddress cardWidth m-2">
+                <div class="card-body">
+                    <h5 class="card-title">@item?.fullName</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@item?.country @item?.city</h6>
+                    <p class="card-text">@item?.houseNumber @item?.street @item?.addressline1 @item?.addressline2 @item?.code</p>
+                    <a asp-action="EditAddress" asp-controller="Account" asp-route-id="@item?.id" class="card-link">Edit</a>
+                    <a id="mySelect-@item?.id" onclick="selectAsDefault('address-@item?.id', @item?.id, 'mySelect-@item?.id')" class="card-link mySelect">Select</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

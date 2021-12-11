@@ -1,0 +1,112 @@
+/* 15. contact page css here */
+.contact_area{
+    margin-bottom: 60px;
+}
+.contact_message{
+    & h3{
+        font-size: 21px;
+        text-transform: capitalize;
+        font-weight: 600;
+        line-height: 20px;
+        margin-bottom: 25px;
+        @media #{$tablet-device}{
+            margin-bottom: 20px;
+        }
+        @media #{$large-mobile}{
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+    }
+    & p{
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 20px;
+    }
+    & ul{
+        & li{
+           padding: 13px 0;
+	        border-top: 1px solid $grey_color; 
+            &:last-child{
+                padding-bottom: 0;
+            }
+            & i{
+                margin-right: 10px;
+            }
+            & a{
+                &:hover{
+                    color: $secondary_color;
+                }
+            }
+        }
+    }
+    & label{
+        line-height: 18px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    & input{
+        border: 1px solid $grey_color; 
+        height: 45px;
+        background:$white;
+        width: 100%;
+        padding: 0 20px;
+        color: $fonts_color2;
+    }
+    & textarea{
+        height: 170px;
+        border: 1px solid $grey_color;
+        background: $white;
+        resize: none;
+        margin-bottom: 20px;
+        width: 100%;
+        padding: 10px 20px;
+        color: $fonts_color;
+    }
+    & button{
+        font-weight: 400;
+        height: 42px;
+        line-height: 42px;
+        padding: 0 30px;
+        text-transform: capitalize;
+        border: none;
+        background: $fonts_color;
+        color: $white;
+        cursor: pointer;
+        @include transition(.3s);
+        border-radius: 4px;
+        &:hover{
+            background: $secondary_color;
+        }
+    }
+    &.content{
+        @media #{$tablet-device}{
+            margin-bottom: 52px;
+        }
+        @media #{$large-mobile}{
+            margin-bottom: 52px;
+        }
+        
+    }
+    &.form{
+        & p{
+            &.form-messege{
+                margin-bottom: 0;
+            }
+        }
+    }
+    
+}
+
+.contact_map{
+    margin-bottom: 57px;
+
+}
+
+
+.map-area{
+    & #googleMap{
+        height: 460px;
+        width: 100%;
+    }    
+}
+/*contact page css end*/

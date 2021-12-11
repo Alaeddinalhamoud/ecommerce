@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ecommerce.Data.Address>
+@{
+    ViewData["Title"] = "My Address";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var page = "My Address";
+}
+<!-- my account start  -->
+<section class="main_content_area">
+    <div class="container">
+        <div class="account_dashboard">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <partial name="_MyAccountNavtab" model="page" />
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard_content">
+                        <div class="d-flex justify-content-between">
+                            <h3>My Addresses</h3>
+                            <a asp-controller="Account" asp-action="SaveAddress" title="Add new Address">
+                                <span class="fa fa-plus-circle fa-2x text-warning"></span>
+                            </a>
+                        </div>
+                        <div class="d-flex align-content-start flex-wrap">
+                            @foreach (var item in Model)
+                            {
+                                <div class="card cardWidth m-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@item.fullName</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">@item.country @item.city</h6>
+                                        <p class="card-text">@item.houseNumber @item.street @item.addressline1 @item.addressline2 @item.code</p>
+                                        <a asp-action="EditAddress" asp-controller="Account" asp-route-id="@item.id" class="card-link">Edit</a>
+                                        <a asp-action="DeleteAddress" asp-controller="Account" asp-route-id="@item.id" class="card-link text-danger">Delete</a>
+                                        @*<a href="#" class="card-link">Delete</a>*@
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- my account end   -->

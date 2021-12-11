@@ -1,0 +1,30 @@
+﻿@model ecommerce.Data.Setting
+
+@{
+    ViewData["Title"] = "";
+}
+
+@{
+    if (Model != null && Model.isSlider)
+    {
+        <vc:slider number-of-sliders="@Model?.numberOfSliders"></vc:slider>
+    } 
+    <partial name="_ShippingArea" />
+
+    if (User.Identity.IsAuthenticated && Model != null && Model.isRecentlyViewedProduct)
+    {
+        <vc:recently-viewed-products user-id="@User.FindFirst(c => c.Type == "sub").Value"></vc:recently-viewed-products>
+
+    }
+    if (Model != null && Model.isMostViewdProduct)
+    {
+        <vc:most-viewed-products></vc:most-viewed-products>
+
+    } 
+
+    if (Model != null && Model.isNewArrivalProduct)
+    {
+        <vc:new-arrival-products></vc:new-arrival-products>
+    }
+
+}

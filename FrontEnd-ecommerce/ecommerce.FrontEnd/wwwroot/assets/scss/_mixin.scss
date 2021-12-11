@@ -1,0 +1,33 @@
+
+/* transition */
+@mixin transition($property){
+    -webkit-transition: $property;
+        transition: $property;
+}
+
+/* flex */
+@mixin flex($property){
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center
+}
+
+/* transform */
+@mixin transform($property) {
+  -webkit-transform: $property;
+      -ms-transform: $property;
+          transform: $property;
+}
+
+
+/* opacity */
+@mixin opacity($opacity){
+    opacity: $opacity;
+    -ms-filter: $opacity;
+}
+
+
+
+
+

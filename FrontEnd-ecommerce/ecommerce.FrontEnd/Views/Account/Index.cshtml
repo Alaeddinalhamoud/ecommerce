@@ -1,0 +1,31 @@
+﻿@model ecommerce.Data.ApplicationUser
+@{
+    ViewData["Title"] = "My Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var pageName = "Index";
+}
+<!-- my account start  -->
+<section class="main_content_area">
+    <div class="container">
+        <div class="account_dashboard">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <partial name="_MyAccountNavtab" model="@pageName" />
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard_content">
+                        <div class="tab-pane fade show active" id="dashboard">
+                            <h3>Account Manager </h3>
+                            <p><strong>Hello,</strong> @Model.name</p>
+                            <p><strong>Your last login:</strong> @Model.lastLogin</p>
+                            <vc:user-cases user-id="@Model.Id"></vc:user-cases>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- my account end   -->

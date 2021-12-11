@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ecommerce.Data.MVData.WishlistProduct>
+@using Boxed.AspNetCore
+@{
+    ViewData["Title"] = "My wishlist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+} <!--wishlist area start -->
+
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="wishlist_area mt-30">
+        <div class="container">
+            <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+            <form action="#">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table_desc wishlist">
+                            <div class="cart_page table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product_remove">Delete</th>
+                                            <th class="product_thumb">Image</th>
+                                            <th class="product_name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product_quantity">Stock Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="product_remove"><a asp-action="RemoveFromMyWishlist" asp-controller="WishList" asp-route-id="@item.id"><i class="fa fa-trash-o"></i></a></td>
+                                                <td class="product_thumb"><a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.productName))"><img class="imgsize-90" src="@(String.IsNullOrEmpty(item.productImage) ? "/assets/img/ZeroData.svg" : item.productImage)" alt="Wishlist produt image"></a></td>
+                                                <td class="product_name"><a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.productName))">@item.productName</a></td>
+                                                <td class="product-price">@item?.price USD</td>
+                                                @{
+                                                    var productStatus = item.qty.Equals(0) ? "Out Of Stock" : "In Stock";
+                                                    var iconAndColor = item.qty.Equals(0) ? "red fa fa-times" : "green fa fa-check";
+                                                }
+                                                <td class="product_quantity"><i class="@iconAndColor"></i> @productStatus</td>
+                                                @{
+                                                    var enableAddToCart = item.qty.Equals(0) ? "isDisabled" : "";
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-12">
+                    <div class="wishlist_share">
+                        <h4>Share on:</h4>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--wishlist area end -->
+}
+else
+{
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="table_desc wishlist">
+                    <div class="cart_page table-responsive">
+                        <div class="text-center text-warning border border-warning">
+                            <span class="lnr lnr-cart fa-2x"></span> <strong>Your Wishlist is empty.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

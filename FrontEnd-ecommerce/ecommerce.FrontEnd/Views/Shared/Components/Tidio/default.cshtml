@@ -1,0 +1,8 @@
+﻿@model ecommerce.Data.Setting
+ 
+@if (Model != null && Model.isTidioScript)
+{
+    @Html.Raw(Model?.tidioScript)
+}
+ 
+

@@ -1,0 +1,43 @@
+﻿<div id="FeedbackForm">
+    <h3>Tell us your Feedback</h3>
+    <div>
+        <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+    </div>
+    <form asp-action="SendFeedback" asp-controller="Home" method="post">
+        <p>
+            @{
+                var readOnly = String.Empty;
+                if (User.Identity.IsAuthenticated)
+                {
+                    readOnly = "readonly";
+                }
+            }
+            <label for="name"> Your Name (required)</label>
+            <input name="name" id="name" placeholder="Name *" type="text" value="@(String.IsNullOrEmpty(User?.FindFirst(c => c.Type == "nickname")?.Value) ? "" : User?.FindFirst(c => c.Type == "nickname")?.Value)" required @readOnly>
+        </p>
+        <p>
+            <label for="email"> Your Email (required)</label>
+            <input name="email" id="email" placeholder="Email *" type="email" value="@(String.IsNullOrEmpty(User?.FindFirst(c => c.Type == "email")?.Value) ? "" : User?.FindFirst(c => c.Type == "email")?.Value)" required @readOnly>
+        </p>
+        <p>
+            <label for="subject"> Subject</label>
+            <input name="subject" id="subject" placeholder="Subject *" type="text" required>
+            <input name="token" id="toekn" placeholder="Subject *" type="text" class="googlerecaptchatoken" hidden>
+        </p>
+        <div class="contact_textarea">
+            <label for="message"> Your Message</label>
+            <textarea placeholder="Message *" name="message" id="message" class="form-control2" required></textarea>
+        </div>
+        <button type="submit">
+            Send
+            <span id="spinnerFeedBack" style="display:none;">
+                <i class="fa fa-spinner fa-spin yellow"></i>
+            </span>
+        </button>
+        <p class="form-messege"></p>
+    </form>
+
+</div>
+
+
+

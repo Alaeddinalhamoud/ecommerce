@@ -1,0 +1,5 @@
+﻿@model ecommerce.Data.Setting
+@if (Model.isVendorEnabled)
+{
+    <li><a asp-action="VendorApplication" asp-controller="Account" class="nav-link @(Model.description.Equals("VendorApplication") ? "active" : "")">Seller Form</a></li>
+}

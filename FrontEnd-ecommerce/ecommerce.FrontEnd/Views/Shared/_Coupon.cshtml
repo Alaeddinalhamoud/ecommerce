@@ -1,0 +1,12 @@
+﻿<div class="col-lg-6 col-md-6">
+    <div class="coupon_code left">
+        <h3>Coupon</h3>
+        <form asp-action="CouponChecker" asp-controller="Coupon" method="post">
+            <div class="coupon_inner">
+                <p>Enter your coupon code if you have one.</p>
+                <input name="code" id="code" placeholder="Coupon code" type="text" required>
+                <button type="submit">Apply coupon</button>
+            </div>
+        </form>
+    </div>
+</div>

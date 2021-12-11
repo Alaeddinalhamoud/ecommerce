@@ -1,0 +1,31 @@
+﻿@model int
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    var randomId = Guid.NewGuid().ToString();
+    <a asp-action="AddSingleToCart" asp-controller="Cart" asp-route-id="@Model"
+       data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cart_qty"
+       data-ajax-loading="#spinnerCart-@randomId" title="Add to Cart"
+       onclick="NotificationCart();">
+        <span class="lnr lnr-cart"></span>
+        <span id="spinnerCart-@randomId" style="display:none;">
+            <i class="fa fa-spinner fa-spin"></i>
+        </span>
+        <p class="sr-only">Add to cart</p>
+    </a>
+}
+else
+{
+    <a asp-action="RedirectToProduct" asp-controller="Cart" asp-route-id="@Model" title="Add to cart">
+        <p class="sr-only">Add to Cart</p>
+        <span class="lnr lnr-cart"></span>
+    </a>
+}
+
+
+<script>
+    function NotificationCart() {
+        $.notify("Product has been added to your cart.", "success");
+    }
+</script>

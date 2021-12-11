@@ -1,0 +1,62 @@
+﻿@model ecommerce.Data.Address
+@{
+    ViewData["Title"] = "Edit Address";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var page = "Edit Address";
+}
+<!-- my account start  -->
+<section class="main_content_area">
+    <div class="container">
+
+        <div class="account_dashboard">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <partial name="_MyAccountNavtab" model="page" />
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard_content">
+                        <div id="account-details">
+                            <h3>My Address</h3>
+                            <div class="login">
+                                <div class="login_form_container">
+                                    <div class="account_login_form">
+                                        <form asp-action="SaveAddress" asp-controller="Account" method="post">
+                                            <input type="text" asp-for="id" hidden />
+                                            <input type="text" asp-for="createdBy" hidden />
+                                            <label>Full Name</label>
+                                            <input type="text" asp-for="fullName" required>
+                                            <label>House Number</label>
+                                            <input type="text" asp-for="houseNumber" required>
+                                            <label>Street</label>
+                                            <input type="text" asp-for="street" required>
+                                            <label>Address line 1</label>
+                                            <input type="text" asp-for="addressline1" required>
+                                            <label>Address line 2</label>
+                                            <input type="text" asp-for="addressline2" placeholder="Address line 2">
+                                            <label>City</label>
+                                            <input type="text" asp-for="city" required placeholder="City">
+                                            <label>Code</label>
+                                            <input type="text" asp-for="code" placeholder="Code" required>
+                                            <label>Country</label>
+                                            <select asp-for="country" class="form-control"
+                                                    asp-items="@(new SelectList(ViewBag.ShippingCountries, "code", "country"))" required></select>
+                                            <div class="save_button primary_btn default_button">
+                                                <button type="submit">
+                                                    Save
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <div id="myAccount-msg" class="text-center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- my account end   -->

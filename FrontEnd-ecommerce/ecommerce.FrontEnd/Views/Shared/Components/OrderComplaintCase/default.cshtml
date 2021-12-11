@@ -1,0 +1,8 @@
+﻿@model ecommerce.Data.OrderComplaintCase
+
+@if(Model != null){
+<div class="border border-success text-success my-3 p-2">
+    <h4><span class="fa fa-info-circle pr-1"></span><strong>Order Complaint - Case# @Model?.id status is @Model?.status</strong></h4>
+    <p>@Model?.messageToCustomer</p>
+</div>
+}

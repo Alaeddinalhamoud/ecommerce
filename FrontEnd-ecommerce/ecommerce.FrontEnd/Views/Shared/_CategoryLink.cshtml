@@ -1,0 +1,21 @@
+﻿@model MVShopCategory
+
+@if (Model.goToAction.Equals("page"))
+{
+    <a onclick="fragment();" asp-action="page" asp-controller="Shop"
+       asp-route-categoryFiltter="Category"
+       asp-route-categoryId="@Model.categoryId"
+       data-ajax="true" data-ajax-mode="replace"
+       data-ajax-update="#ShopProducts" data-ajax-loading="#spinnerShopOrderBy" title="@Model.categoryName Category">
+        @Model.categoryName
+    </a>
+}
+else
+{
+    <a onclick="fragment();" asp-action="index" asp-controller="Shop"
+       asp-route-categoryFiltter="Category"
+       asp-route-categoryId="@Model.categoryId"
+       title="@Model.categoryName Category">
+        @Model.categoryName       
+    </a>
+}

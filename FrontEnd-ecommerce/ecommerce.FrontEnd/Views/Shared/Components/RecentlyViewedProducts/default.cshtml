@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ecommerce.Data.MVData.RecentlyViewedProductDetail>
+@using Boxed.AspNetCore
+@if (Model != null && Model.Count() > 0)
+{
+    <section class="product_area mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section_title">
+                        <h2><span> <strong>Recently Viewed</strong>Products</span></h2>
+                    </div>
+                    <div class="product_carousel product_column5 owl-carousel">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="single_product">
+                                <div class="product_name">
+                                    <h3><a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.productName))">@item?.productName</a></h3>
+                                    @*<p class="manufacture_product"><a href="#">@item.categoryName</a></p>*@
+                                </div>
+                                <div class="product_thumb">
+                                    @{
+                                        var media = String.IsNullOrEmpty(item?.productImage) ? "/assets/img/ZeroData.svg" : item?.productImage;
+                                    }
+                                    <a class="primary_img" href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.productName))">
+                                        <img class="imgsize-176" src="@media" alt="@item?.productName">
+                                    </a>
+                                    <a class="secondary_img" href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.productName))">
+                                        <img class="imgsize-176" src="@media" alt="@item?.productName">
+                                    </a>
+                                    @*<div class="label_product">
+                                        <span class="label_sale">-57%</span>
+                                         </div>*@
+                                    <div class="action_links">
+                                        <ul>
+                                            @*<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>*@
+                                            <li class="wishlist">
+                                                @*<a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a>*@
+                                                <partial name="_AddToWishlist" model="@item?.productId" />
+                                            </li>
+                                            @*<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>*@
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_ratings">
+                                        <partial name="_Rating" model="@item?.rating" />
+                                    </div>
+                                    <div class="product_footer d-flex align-items-center">
+                                        <div class="price_box">
+                                            <span class="regular_price">@item?.price USD</span>
+                                            @if (!item.oldPrice.Equals(0))
+                                            {
+                                                <span class="old_price">@item?.oldPrice USD</span>
+                                            }
+                                        </div>
+                                        <div class="add_to_cart">
+                                            @if (!item.qty.Equals(0))
+                                            {
+                                                <partial name="_AddSingleProductToCart" model="@item?.productId" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </section>
+}
+

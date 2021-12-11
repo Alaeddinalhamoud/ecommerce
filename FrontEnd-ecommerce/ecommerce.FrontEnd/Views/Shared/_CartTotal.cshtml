@@ -1,0 +1,36 @@
+﻿@model ecommerce.Data.MVData.CartLineDetails
+@using ecommerce.Data.Helper
+@{
+    var totalCart = TotalCart.GetTotalCart(Model);
+}
+<div class="col-lg-6 col-md-6">
+    <div class="coupon_code right">
+        <h3>Cart Totals</h3>
+        <div class="coupon_inner">
+            <div class="cart_subtotal">
+                <p>Subtotal</p>
+                <p class="cart_amount">@totalCart.subtotal USD</p>
+            </div>
+            <div class="cart_subtotal ">
+                <p>Shipping</p>
+                <p class="cart_amount">@totalCart.shippingCost USD</p>
+            </div>
+            @*<a href="#">Calculate shipping</a>*@
+            <div class="cart_subtotal @totalCart.couponHidden">
+                <p>Coupon <code>@Model?.couponCode</code> @Model?.couponName</p>
+                <p class="cart_amount text-danger">-@totalCart.cartDiscount USD  <a asp-action="CouponRemove" asp-controller="Coupon" asp-route-id="@Model.cartId">(Remove)</a></p>
+            </div>
+            <div class="cart_subtotal ">
+                <p>Tax @Model.tax%</p>
+                <p class="cart_amount">@String.Format("{0:0.00}", totalCart.taxCost) USD</p>
+            </div>
+            <div class="cart_subtotal">
+                <p>Total</p>
+                <p class="cart_amount">@String.Format("{0:0.00}", totalCart.total) USD</p>
+            </div>
+            <div class="checkout_btn">
+                <a asp-action="Checkout" asp-controller="Cart">Proceed to Checkout</a>
+            </div>
+        </div>
+    </div>
+</div>

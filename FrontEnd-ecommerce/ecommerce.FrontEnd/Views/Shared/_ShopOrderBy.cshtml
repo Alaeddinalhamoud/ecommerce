@@ -1,0 +1,54 @@
+﻿@*<div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort by average rating
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>*@
+    <form asp-action="page" asp-controller="Shop"
+          data-ajax="true"
+          data-ajax-method="GET"
+          data-ajax-complete="onComplete"
+          data-ajax-success="onSuccess"
+          data-ajax-failure="onFailed"
+          data-ajax-mode="replace"
+          data-ajax-update="#ShopProducts"
+          data-ajax-loading="#spinnerShopOrderBy"
+          class="select_option" id="ShopOrderBy">
+        <label class="sr-only">sortOrder</label>
+        <select name="sortOrder" id="sortOrder">
+            <option selected value="1">Sort by popularity</option>
+            <option value="2">Sort by average rating</option>
+            <option value="3">Sort by newness</option>
+            <option value="4">Sort by price: low to high</option>
+            <option value="5">Sort by price: high to low</option>
+            <option value="6">Product Name: A to Z</option>
+            <option value="7">Product Name: Z to A</option>
+        </select>
+       
+    </form>
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    var onComplete = function () {
+    };
+    var onSuccess = function (context) {
+
+    }
+    var onFailed = function (context) {
+        alert("Failed, Contact Support :P");
+    };
+</script>
+<script>
+    $(document).ready(function () {
+        console.log("ready!");
+        $("#sortOrder").on("change", function () {
+            $("#ShopOrderBy").submit();
+        });
+    });
+</script>

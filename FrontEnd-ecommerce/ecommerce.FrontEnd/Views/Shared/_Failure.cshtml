@@ -1,0 +1,13 @@
+﻿@model string
+
+<h4>Your data submission has been failed.</h4>
+<i class="fa fa-times-circle fa-4x red"></i>
+@{
+    if (!String.IsNullOrEmpty(Model))
+    {
+        <br />
+        <span class="red">@Model</span>
+    }
+}
+
+

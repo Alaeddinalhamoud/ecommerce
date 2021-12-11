@@ -1,0 +1,177 @@
+
+/*  18. my account css here */
+.dashboard_tab_button{
+    @media #{$large-mobile}{
+       margin-bottom: 20px;
+    }
+    & ul{
+        & li{
+            margin-bottom: 5px;
+            & a{
+                font-size: 14px;
+                color: $white; 
+                font-weight: 500;
+                text-transform: capitalize;
+                background: $fonts_color;
+                border-radius: 3px;
+                &:hover{
+                   background: $secondary_color;
+                    color: $white; 
+                }
+                &.active{
+                    background: $secondary_color;
+                    
+                }
+            }
+        }
+    }
+}
+
+
+.main_content_area {
+	padding: 32px 0 55px;
+    @media #{$large-mobile}{
+      padding: 35px 0 55px;
+    }
+}
+.dashboard_content{
+    & h3{ 
+        font-size: 22px;
+        text-transform: capitalize;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    & h4{
+        font-size: 20px;
+        text-transform: capitalize;
+        font-weight: 500;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    & a{
+        color: $secondary_color;
+	    font-weight: 500; 
+        &:hover{
+            color: $fonts_color;
+        }
+    }
+    & p{
+        & a{
+            color: $secondary_color;
+	        font-weight: 500;
+            &:hover{
+                color: $fonts_color;
+            }
+        }
+    }
+}
+
+
+.table-responsive{
+    & table{
+        & thead{
+            background:$secondary_color5;
+             & tr{
+                 & th{
+                     text-align: center;
+                 } 
+            }
+        }
+        & tbody{
+            & tr{
+                
+                & td{
+                    border-right: 1px solid $grey_color;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    font-size: 14px;
+                    text-align: center;
+                    min-width: 150px;
+                    &:last-child{
+                        & a{
+                            color: $secondary_color;
+                            &:hover{
+                                color: $fonts_color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    & .table{
+        border-left: 1px solid $grey_color;
+        border-bottom: 1px solid $grey_color;
+        border-right: 1px solid $grey_color;
+    }
+}
+
+
+
+.dashboard_content  {
+    & address{
+        font-weight: 500;
+    }
+}
+
+
+
+.input-radio span input[type="radio"], .account_login_form form span input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+	margin-right: 2px;
+	position: relative;
+	top: 2px;
+}
+.input-radio  {
+    & span{
+        font-weight: 500;
+        padding-right: 10px;
+    }
+}
+
+
+
+.account_login_form   {
+    & form{
+        & > input{ 
+            border: 1px solid #ddd;
+            background: none;
+            height: 40px;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 0 20px;
+            color: $fonts_color;
+        }
+        & span{
+            &.custom_checkbox{
+                display: flex;
+                & input{
+                    top: 5px;
+                    margin-right: 7px;
+                }
+                & label{
+                    margin-bottom: 0;
+                }
+            }
+        }
+        & .save_button{
+            & button{
+                padding: 0 20px;
+                height: 30px;
+                line-height: 30px;
+                border: 0;
+                background: $fonts_color;
+                color: $white;
+                border-radius: 4px;
+                margin-top: 10px;
+                &:hover{
+                    background: $secondary_color;
+                }
+            }
+        }
+    }
+}
+
+
+/*my account css end*/

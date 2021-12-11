@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ecommerce.Data.Slider>
+    <!--slider area start-->
+<section class="slider_section slider_two mb-50">
+    <div class="slider_area owl-carousel">
+        @foreach (var item in Model)
+        {
+            <div class="single_slider d-flex align-items-center" data-bgimg="@(String.IsNullOrEmpty(item?.imagePath) ? "/assets/img/ZeroData.svg" : item.imagePath)">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="slider_content">
+                                <h2>@item?.name</h2>
+                                <h1>@item?.description</h1>
+                                @if (!String.IsNullOrEmpty(item?.link))
+                                {
+                                    <a class="button" href="@item?.link">@(String.IsNullOrEmpty(item?.buttonCaption) ? "Find More" : item?.buttonCaption)</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!--slider area end-->

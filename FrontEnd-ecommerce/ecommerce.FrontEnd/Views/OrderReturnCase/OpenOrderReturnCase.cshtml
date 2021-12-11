@@ -1,0 +1,74 @@
+﻿@model ecommerce.FrontEnd.Models.MVOrderReturnCase
+@{
+    ViewData["Title"] = "Open Order Return Case";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var page = "My Orders";
+}
+<!-- my account start  -->
+<section class="main_content_area">
+    <div class="container">
+        <div class="account_dashboard">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <partial name="_MyAccountNavtab" model="page" />
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard_content">
+                        <div id="account-details">
+                            <h3>Open Order Return Case</h3>
+                            <p>Order # @Model.orderId</p>
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <div class="login">
+                                        <div class="login_form_container">
+                                            <div class="account_login_form">
+                                                <form class="user" asp-action="Save" asp-controller="OrderReturnCase" enctype="multipart/form-data" method="post">
+                                                    <input asp-for="id" type="text" class="form-control form-control-user" aria-describedby="id" hidden>
+                                                    <input asp-for="orderId" type="text" value="@Model.orderId" class="form-control form-control-user" aria-describedby="id" hidden>
+                                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                                    <div class="form-group">
+                                                        <label asp-for="reasonId" class="control-label"></label>
+                                                        <select class="custom-control custom-select-lg" asp-for="reasonId" asp-items="Model.reasons" required>
+                                                            <option value="">-- Select --</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Image Uploader <code>(PNG,JPG)</code>:</label>
+                                                        <input asp-for="fileToUpload" type="file" class="form-control" accept="image/png, image/jpeg"  />
+                                                        <span asp-validation-for="fileToUpload" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label asp-for="customerNote" class="control-label"></label>
+                                                        <textarea data-val="true"
+                                                                  data-val-maxlength="The field Description must be a string or array type with a maximum length of &#x27;1024&#x27;."
+                                                                  data-val-maxlength-max="1024"
+                                                                  data-val-minlength="The field Description must be a string or array type with a minimum length of &#x27;5&#x27;."
+                                                                  data-val-minlength-min="5"
+                                                                  asp-for="customerNote" type="text" class="form-control form-control-user" aria-describedby="Description" placeholder="Description" required>
+                                                        </textarea>
+                                                        <span asp-validation-for="customerNote" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="save_button primary_btn default_button">
+                                                        <button type="submit">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- my account end   -->

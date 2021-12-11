@@ -1,0 +1,50 @@
+﻿@model ecommerce.Data.MVData.CartLineDetails
+@using ecommerce.Data.Helper
+@if (Model != null)
+{
+    var totalCart = TotalCart.GetTotalCart(Model);
+    <div class="order_table table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.cartLineProduct != null && Model.cartLineProduct.Count() > 0)
+                {
+                    @foreach (var item in Model.cartLineProduct)
+                    {
+                        <tr>
+                            <td> @item.prodcutName <strong> × @item.qty</strong></td>
+                            <td><strong>@item.total USD</strong></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Cart Subtotal</th>
+                    <td>@totalCart.subtotal USD</td>
+                </tr>
+                <tr>
+                    <th>Shipping</th>
+                    <td><strong>@totalCart.shippingCost USD</strong></td>
+                </tr>
+                <tr>
+                    <th>Tax @Model.tax%</th>
+                    <td><strong>@String.Format("{0:0.00}", totalCart.taxCost) USD</strong></td>
+                </tr>
+                <tr class="@totalCart.couponHidden">
+                    <th>Coupon <code>@Model?.couponCode</code></th>
+                    <td class="text-danger">-@totalCart.cartDiscount USD</td>
+                </tr>
+                <tr class="order_total">
+                    <th>Order Total</th>
+                    <td><strong>@totalCart.total USD</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+}

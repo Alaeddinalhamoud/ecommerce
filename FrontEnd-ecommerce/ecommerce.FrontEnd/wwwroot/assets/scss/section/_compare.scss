@@ -1,0 +1,138 @@
+/*--
+     25. compare css here
+-----------------------------------------*/
+.compaer-page{
+    margin: 32px 0 60px;
+}
+
+.compare-table {
+    & .table {
+        & tbody {
+            & tr {
+                &:first-child {
+                    border-top: 1px solid #eeeeee;
+                }
+                & td {
+                    text-align: center;
+                    border: none;
+                    padding: 25px 30px;
+                    vertical-align: middle;
+                    border-bottom: 1px solid #eeeeee;
+                    border-left: 1px solid #eeeeee;
+                    &:last-child {
+                        border-right: 1px solid #eeeeee;
+                    }
+                    &.first-column {
+                        min-width: 180px;
+                        font-size: 17px;
+                        font-weight: 600;
+                        margin: 0;
+                        line-height: 1;
+                    }
+                    &.product-image-title {
+                        min-width: 305px;
+                        vertical-align: bottom;
+                        & .image {
+                            clear: both;
+                            width: 100%;
+                            margin-bottom: 40px;
+                            & img {
+                                max-width: 100%;
+                            }
+                        }
+                        & .category {
+                            clear: both;
+                            color: #454545;
+                            float: left;
+                            font-size: 13px;
+                            letter-spacing: 0.5px;
+                            line-height: 15px;
+                            margin-bottom: 7px;
+                            margin-top: 15px;
+                            text-transform: capitalize;
+                        }
+                        & .title {
+                            float: left;
+                            clear: both;
+                            font-size: 15px;
+                            font-weight: 600;
+                            line-height: 20px;
+                            margin-bottom: 10px;
+                            &:hover{
+                                color: $secondary_color;
+                            }
+                        }
+                    }
+                    &.pro-desc {
+                        & p {
+                            text-align: left;
+                            margin: 0;
+                        }
+                    }
+                    &.pro-price {
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+                    &.pro-color {
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+                    &.pro-stock {
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+                    &.pro-addtocart {
+                        // Add To Cart
+                        & .add-to-cart {
+                            position: relative;
+                            background: $secondary_color;
+                            border-radius: 4px;
+                            display: inline-block;
+                            width: 170px;
+                            padding: 10px 6px;
+                            transition: all 0.7s; 
+                            color: $fonts_color;
+                            &:hover{
+                                background: $fonts_color;
+                                color: $white;
+                            }
+                            & span {
+                                transition: .3s;
+                                font-size: 13px;
+                                text-transform: uppercase;
+                                font-weight: 700;
+                                line-height: 21px;
+                                overflow: hidden;
+                                display: block;
+                                text-align: center;
+                            }
+                            
+                        }
+                    }
+                    &.pro-remove {
+                        & button {
+                            border: none;
+                            background-color: transparent;
+                            padding: 0;
+                            & i {
+                                font-size: 20px;
+                            }
+                            &:hover{
+                                color:  $secondary_color;
+                            }
+                        }
+                    }
+                    &.pro-ratting {
+                        & a {
+                            font-size: 14px;
+                            color: $fonts_color;
+                            &:hover{
+                                color:  $secondary_color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

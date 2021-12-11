@@ -1,0 +1,92 @@
+﻿@model ecommerce.Data.MVData.CartLineDetails
+@using Boxed.AspNetCore;
+@{
+    ViewData["Title"] = "My Cart";
+ Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null && Model.cartLineProduct.Count() > 0)
+{
+    <!--shopping cart area start -->
+    <div class="shopping_cart_area mt-32">
+        <div class="container">
+            <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+            @if (User.Identity.IsAuthenticated)
+            {
+                <vc:user-profile-alert user-id="@User?.FindFirst(c => c.Type == "sub").Value" />
+            }
+            <div class="row">
+                <div class="col-12">
+                    <div class="table_desc">
+                        <div class="cart_page table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="product_remove">Delete</th>
+                                        <th class="product_thumb">Image</th>
+                                        <th class="product_name">Product</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product-price">Free Tax</th>
+                                        <th class="product_quantity">Quantity</th>
+                                        <th class="product_total">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.cartLineProduct != null && Model.cartLineProduct.Count() > 0)
+                                    {
+                                        @foreach (var item in Model.cartLineProduct)
+                                        {
+                                            <tr>
+                                                <td class="product_remove"><a title="Remove @item.prodcutName from the cart" asp-action="RemoveFromMyCart" asp-controller="Cart" asp-route-id="@item.cartLineId"><i class="fa fa-trash-o"></i></a></td>
+                                                <td class="product_thumb">
+                                                    <a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.prodcutName))"><img class="imgsize-90" src="@(String.IsNullOrEmpty(item.productImage) ? "/assets/img/ZeroData.svg" : item.productImage)" alt="@item.prodcutName"></a></td>
+                                                <td class="product_name"><a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.prodcutName))">@item.prodcutName</a>
+                                            </td>
+                                            <td class="product-price">@item.price USD</td>
+                                            <td class="product-price">@(item.freeTax.Equals(true) ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</td>
+                                            <td class="product_quantity">
+                                                <partial name="_ModifyProductQty" model="Tuple.Create(item.productId, item.qty, item.cartLineId);" />
+                                            </td>
+                                            <td class="product_total">@item.total USD</td>
+                                        </tr>
+                                    }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cart_submit">
+                            <button type="button" onclick="location.reload();">update cart Totals</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coupon code area start-->
+            <div class="coupon_area">
+                <div class="row">
+                    @if (Model.couponEnabled)
+                    {
+                        <partial name="_Coupon" />
+                    }
+                    <!--Cart part-->
+                    <partial name="_CartTotal" model="@Model" />
+                </div>
+            </div>
+            <!--coupon code area end-->
+        </div>
+    </div>
+    <!--shopping cart area end -->
+}
+else
+{
+    <div class="shopping_cart_area mt-32 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center text-warning border border-warning">
+                        <span class="lnr lnr-cart fa-2x"></span> <strong>Your Cart is empty.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

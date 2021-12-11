@@ -1,0 +1,16 @@
+﻿@model ecommerce.Data.Setting
+
+@if (!String.IsNullOrEmpty(Model.facebookLink))
+{
+    <li><a href="@Model.facebookLink"><i class="ion-social-facebook"></i><p class="sr-only">facebook</p></a></li>
+}
+
+@if (!String.IsNullOrEmpty(Model.twitterLink))
+{
+    <li><a href="@Model.twitterLink"><i class="ion-social-twitter"></i><p class="sr-only">Twitter</p></a></li>
+}
+
+@if (!String.IsNullOrEmpty(Model.instgramLink))
+{
+    <li><a href="@Model.instgramLink"><i class="ion-social-instagram-outline"></i><p class="sr-only">Instgram</p></a></li>
+}

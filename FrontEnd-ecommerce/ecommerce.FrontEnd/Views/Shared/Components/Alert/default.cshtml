@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ecommerce.Data.Alert>
+
+@{
+    if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            if (item.alertType.Equals(ecommerce.Data.AlertType.Warning))
+            {
+                <div class="border border-warning text-warning my-3 p-2">
+                    <h4><span class="fa fa-warning pr-1"></span><strong>@item.title</strong></h4>
+                    <p>@item.body</p>
+                </div>
+            }
+
+            if (item.alertType.Equals(ecommerce.Data.AlertType.Danger))
+            {
+                <div class="border border-danger text-danger my-3 p-2">
+                    <h4><span class="fa fa-ban pr-1"></span><strong>@item.title</strong></h4>
+                    <p>@item.body</p>
+                </div>
+            }
+
+            if (item.alertType.Equals(ecommerce.Data.AlertType.Success))
+            {
+                <div class="border border-success text-success my-3 p-2">
+                    <h4><span class="fa fa-info-circle pr-1"></span><strong>@item.title</strong></h4>
+                    <p>@item.body</p>
+                </div>
+            }
+        }
+    }
+}

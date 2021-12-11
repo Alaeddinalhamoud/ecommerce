@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ecommerce.Data.FAQ>
+@{
+    ViewData["Title"] = "FAQ";
+}
+<!--faq area start-->
+
+<div class="faq_content_area mt-32">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>FAQ</h1>
+                <div class="faq_content_wrapper">
+                    <h4>Below are frequently asked questions, you may find the answer for yourself.</h4>
+                    <p>If there's anything else you'd like to ask, <a href="mailto:helpdesk@Example.com">Contact us</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Accordion area-->
+<div class="accordion_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="accordion" class="card__accordion" itemscope itemtype="https://schema.org/FAQPage">
+                    @foreach (var item in Model)
+                    {
+                        <div class="card card_dipult" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <div class="card-header card_accor" id="heading-@item.id" itemprop="name">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse-@item.id" aria-expanded="true" aria-controls="collapse-@item.id">
+                                    @item.question
+                                    <i class="fa fa-plus"></i>
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <div id="collapse-@item.id" class="collapse" aria-labelledby="heading-@item.id" data-parent="#accordion" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <div class="card-body" itemprop="text">
+                                    <p>@item.answer</p>
+                                </div>
+                            </div>
+                        </div>
+                     }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Accordion area end-->
+<!--faq area end-->

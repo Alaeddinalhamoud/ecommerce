@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ecommerce.Data.Page>
+
+@{
+    foreach (var item in Model)
+    {
+        if (User.Identity.IsAuthenticated && item.isPrivate)
+        {
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" asp-action="Page" asp-controller="Home" asp-route-id="@item?.id">
+                    <span itemprop="name">@item?.name</span>
+                </a>
+                <meta itemprop="position" content="@item.id" />
+            </li>
+        }
+        else if (!item.isPrivate)
+        {
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" asp-action="Page" asp-controller="Home" asp-route-id="@item?.id">
+                    <span itemprop="name">@item?.name</span>
+                </a>
+                <meta itemprop="position" content="@item.id" />
+            </li>
+        }
+    }
+}

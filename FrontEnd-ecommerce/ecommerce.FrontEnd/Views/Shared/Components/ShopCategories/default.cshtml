@@ -1,0 +1,69 @@
+﻿@model ecommerce.Data.MVData.ShopCategories
+
+
+<div class="widget_list widget_categories">
+    <h2>Categories</h2>
+    <ul>
+        @foreach (var category in Model.categories)
+        {
+            <li>
+                @{
+                    MVShopCategory categoryData = new MVShopCategory()
+                    {
+                        categoryId = category.id,
+                        categoryName = category.name,
+                        goToAction = "page"
+                    };
+                }
+                @*<input type="checkbox">*@
+                @*<span class="checkmark"></span>*@
+                <partial name="_CategoryLink" model="categoryData" />
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="widget_list widget_categories">
+    <h2>Brands</h2>
+    <ul>
+        @foreach (var brand in Model.brands)
+        {
+            <li>
+                @{
+                    MVShopCategory brandData = new MVShopCategory()
+                    {
+                        categoryId = brand.id,
+                        categoryName = brand.name,
+                        goToAction = "page"
+                    };
+                }
+                @*<input type="checkbox">*@
+                @*<span class="checkmark"></span>*@
+                <partial name="_BrandLink" model="brandData" />
+            </li>
+        }
+    </ul>
+</div>
+<div class="widget_list widget_categories">
+    <h2>Product Types</h2>
+    <ul>
+        @foreach (var productType in Model.productTypes)
+        {
+            <li>
+                @{
+                    MVShopCategory productTypeData = new MVShopCategory()
+                    {
+                        categoryId = productType.id,
+                        categoryName = productType.name,
+                        goToAction = "page"
+                    };
+                }
+                @*<input type="checkbox">*@
+                @*<span class="checkmark"></span>*@
+                <partial name="_ProductTypeLink" model="productTypeData" />
+            </li>
+        }
+
+
+    </ul>
+</div>

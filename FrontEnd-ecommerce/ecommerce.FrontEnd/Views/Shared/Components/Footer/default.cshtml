@@ -1,0 +1,98 @@
+﻿@model ecommerce.Data.Setting
+@{
+    var logo = String.IsNullOrEmpty(Model?.logo) ? "/assets/img/logo/logo.png" : Model?.logo;
+}
+<footer class="footer_widgets">
+    <div class="container">
+        <div class="footer_top">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="widgets_container contact_us">
+                        <div class="footer_logo">
+                            <a asp-action="Index" asp-controller="home"><img src="@logo" alt="Logo Footer"></a>
+                        </div>
+                        <div class="footer_contact">
+                            <p>
+                                @Model?.description
+                            </p>
+                            <p><span>Address</span> @Model?.address</p>
+                            <p><span>Need Help?</span>Call: <a href="tel:@Model?.phone">@Model?.phone</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="widgets_container widget_menu">
+                        <h3>Information</h3>
+                        <div class="footer_menu">
+                            <ul>
+                                <vc:page nav-id="Information"></vc:page>
+                                @*<li><a asp-action="AboutUs" asp-controller="Home">About Us</a></li>
+                                    <li><a asp-action="Privacy" asp-controller="Home">Privacy Policy</a></li>
+                                    <li><a asp-action="TermsConditions" asp-controller="Home">Terms & Conditions</a></li>
+                                    <li><a asp-action="Returns" asp-controller="Home">Delivery & Returns</a></li>*@
+                                <li><a asp-action="FAQ" asp-controller="Home">FAQ</a></li>
+                                <li><a asp-action="ContactUs" asp-controller="Home">Contact Us</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="widgets_container widget_menu">
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <h3>Extras</h3>
+                                <div class="footer_menu">
+                                    <ul>
+                                        <li><a asp-action="Checkout" asp-controller="Cart">Checkout </a></li>
+                                        <li><a asp-action="Index" asp-controller="Account">My Account </a></li>
+                                        <li><a asp-action="MyAddress" asp-controller="Account">My Address</a></li>
+                                        <li><a asp-action="Mycart" asp-controller="Cart">Shopping Cart</a></li>
+                                        <li><a asp-action="MyOrders" asp-controller="Account">Order History</a></li>
+                                        <li><a asp-action="MyWishlist" asp-controller="Wishlist">Wishlist</a></li>
+                                        <vc:page nav-id="Extras"></vc:page>
+                                    </ul>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    @*<div class="widgets_container">
+                            <h3>Newsletter Subscribe</h3>
+                            <p>We’ll never share your email address with a third-party.</p>
+                            <div class="subscribe_form">
+                                <form id="mc-form" class="mc-form footer-newsletter">
+                                    <input id="mc-email" type="email" autocomplete="off" placeholder="Enter you email address here..." />
+                                    <button id="mc-submit">Subscribe</button>
+                                </form>
+                                 mailchimp-alerts Start
+                                <div class="mailchimp-alerts text-centre">
+                                    <div class="mailchimp-submitting"></div> mailchimp-submitting end
+                                    <div class="mailchimp-success"></div> mailchimp-success end
+                                    <div class="mailchimp-error"></div> mailchimp-error end
+                                </div> mailchimp-alerts end
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <div class="footer_bottom">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="copyright_area">
+                        <p>Copyright &copy; @DateTime.Now.Year <a href="#">@Model?.websiteName</a> All Right Reserved.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="footer_payment text-right">
+                        <a href="#"><img src="/assets/img/icon/visa.png" class="payment-method" alt="visa mastro Payment Methods"></a>
+                        <a href="#"><img src="/assets/img/icon/StcPay.png" class="payment-method-stcpay" alt="STC PAY Payment Methods"></a>
+                        <a href="#"><img src="/assets/img/icon/paytabs2.png" class="payment-method" alt="paytabs Payment Methods"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,9 @@
+﻿@model ecommerce.FrontEnd.Models.MVShopCategory
+
+<a onclick="fragment();" asp-action="@Model.goToAction" asp-controller="Shop"
+   asp-route-categoryFiltter="ProductType"
+   asp-route-categoryId="@Model.categoryId"
+   data-ajax="true" data-ajax-mode="replace"
+   data-ajax-update="#ShopProducts" data-ajax-loading="#spinnerShopOrderBy" title="@Model.categoryName Product Type">
+    @Model.categoryName
+</a>

@@ -1,0 +1,180 @@
+﻿@model ecommerce.Data.MVData.OrderDetails
+@using ecommerce.Data
+@using Boxed.AspNetCore;
+@{
+    ViewData["Title"] = "My Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var page = "My Orders";
+}
+<!-- my account start  -->
+<section class="main_content_area">
+    <div class="container">
+        <div class="account_dashboard">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <partial name="_MyAccountNavtab" model="page" />
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <partial name="_StatusMessage" model='TempData.Peek("StatusMessage")' />
+                    <vc:order-open-cases order-id="@Model?.orderId"></vc:order-open-cases>
+                    <vc:order-return-case order-id="@Model?.orderId"></vc:order-return-case>
+                    <vc:order-complaint-case order-id="@Model?.orderId"></vc:order-complaint-case>
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard_content">
+                        <h3>Order Details</h3>
+                        <p>Ordered on <span class="fa fa-calendar"></span> @Model?.createDate.ToShortDateString() | Order # @Model?.orderId</p>
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <a class="navbar-brand">
+                                <i class="fa fa-bell text-warning"></i>
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <partial name="_OrderReturnNavbar" model="@Model" />
+                        </nav>
+
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold">
+                                    Order Status Tracking : @Model?.trackingStatus
+                                </h5>
+                                <div class="big-screen">
+                                    @{
+                                        string statusPickedUp = "todo";
+                                        string statusDispatched = "todo";
+                                        string statusInTransit = "todo";
+                                        string statusDelivered = "todo";
+
+                                        switch (Model?.trackingStatus)
+                                        {
+                                            case TrackingStatus.Ordered:
+                                                break;
+                                            case TrackingStatus.PickedUp:
+                                                statusPickedUp = "done";
+                                                break;
+                                            case TrackingStatus.Dispatched:
+                                                statusDispatched = "done";
+                                                statusPickedUp = "done";
+                                                break;
+                                            case TrackingStatus.InTransit:
+                                                statusInTransit = "done";
+                                                statusDispatched = "done";
+                                                statusPickedUp = "done";
+                                                break;
+                                            case TrackingStatus.Delivered:
+                                                statusDelivered = "done";
+                                                statusInTransit = "done";
+                                                statusDispatched = "done";
+                                                statusPickedUp = "done";
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    <ol class="progtrckr" data-progtrckr-steps="5">
+                                        <li class="progtrckr-done">Ordered</li>
+                                        <li class="progtrckr-@(statusPickedUp)">PickedUp</li>
+                                        <li class="progtrckr-@(statusDispatched)">Dispatched</li>
+                                        <li class="progtrckr-@(statusInTransit)">InTransit</li>
+                                        <li class="progtrckr-@(statusDelivered)">Delivered</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cart_page table-responsive mt-4">
+                            @if (Model is null)
+                            {
+                                <span class="lnr lnr-cart fa-2x"></span> <strong>This order is empty.</strong>
+                            }
+                            else
+                            {
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product_thumb">Image</th>
+                                            <th class="product_name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-price">Free Tax</th>
+                                            <th class="product_quantity">Qty</th>
+                                            <th class="product_quantity">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.orderLineProducts)
+                                        {
+                                            <tr>
+                                                <td class="product_thumb"><a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.prodcutName))"><img src="@(String.IsNullOrEmpty(item.productImage) ? "/assets/img/ZeroData.svg" : item.productImage)" alt="@item.prodcutName"></a></td>
+                                                <td class="product_name"><a href="/product/@item.productId/@(FriendlyUrlHelper.GetFriendlyTitle(item.prodcutName))">@item.prodcutName</a></td>
+                                                <td class="product-price">@item.price USD</td>
+                                                <td class="product-price">@(item.freeTax.Equals(true) ? Html.Raw("&#9989;") : Html.Raw("&#x26D4;"))</td>
+                                                <td class="product_quantity">@item.qty</td>
+                                                <td class="product_quantity">@(item.qty * item.price) USD</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h5 class="font-weight-bolder">Delivery Address</h5>
+                                        <p>@Model?.FullName</p>
+                                        <p>@Model?.orderAddress?.addressline1 @Model?.orderAddress?.addressline2</p>
+                                        <p>@Model?.orderAddress?.houseNumber @Model?.orderAddress?.street</p>
+                                        <p>@Model?.orderAddress?.city</p>
+                                        <p>@Model?.orderAddress?.country</p>
+                                        <p>@Model?.orderAddress?.code</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-weight-bolder">Payment Method</h5>
+                                        <p>@Model.paymentMethod</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-weight-bolder">Order Summary</h5>
+                                        <p>SubTotal: @Model?.subTotal USD</p>
+                                        <p>Shipping: @Model?.shippingCost USD</p>
+                                        <p>VAT %@String.Format("{0:0.00}", Model?.tax): @Model?.taxCost USD</p>
+                                        @if (!Model.discount.Equals(0))
+                                        {
+                                            <p><strong>Discount:</strong> <span class="text-danger">@Model?.discount USD</span></p>
+                                        }
+                                        <p><strong>Total:</strong> <span class="text-danger">@Model?.total USD</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <h5 class="font-weight-bolder">💳 Transactions</h5>
+                                <p class="card-text  @(Model.isPaid ? "text-success" : "text-danger")">
+                                    Payment Status:
+                                      @(Model.isPaid ? "Paid" : "UnPaid")                                    
+                                </p>
+                                <p>Payment Tranaction: @Model?.paymentTransaction</p>
+                                @if (Model?.Status == Status.Returned)
+                                {
+                                    <p class="text-danger">Order Status: @Model?.Status</p>
+                                }
+                            </div>
+                            @{
+                                if (Model.trackingOrder != null && Model.trackingOrder.updateDate !=  DateTime.Parse("01/01/0001 00:00:00"))
+                                {
+                                    <div class="card-footer bg-transparent">
+                                        <h5 class="font-weight-bolder">🚛 Delivery info</h5>
+                                        <p class="card-text @(String.IsNullOrEmpty(Model.trackingOrder.courierTrackingNumber) ? "d-none" : "")"> Courier Tracking Number : <a href="@Model?.trackingOrder?.trackingUrl">@Model?.trackingOrder?.courierTrackingNumber</a><p>
+                                        <p class="card-text @(String.IsNullOrEmpty(Model.trackingOrder.curierCopmany) ? "d-none" : "")"> Curier Copmany :  @Model?.trackingOrder?.curierCopmany <p>
+                                        <p class="card-text @(Model.trackingOrder.expectedArrival == DateTime.Parse("01/01/0001 00:00:00") ? "d-none" : "")"> Expected Arrival : @Model?.trackingOrder?.expectedArrival.ToShortDateString()<p>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- my account end   -->

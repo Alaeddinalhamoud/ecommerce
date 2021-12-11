@@ -1,0 +1,22 @@
+/*brand css here*/
+.brand_area{
+    &.mb-42{
+        @media #{$large-mobile}{
+            margin-bottom: 50px;
+        }
+    }
+}
+.brand_container{
+    & .single_brand{
+        & img{
+            width: inherit;
+            margin: 0 auto;
+        }
+    }
+}
+.brand_container{
+    border: 1px solid $dark_grey;
+    padding: 34px 0;
+    border-radius: 3px;
+}
+

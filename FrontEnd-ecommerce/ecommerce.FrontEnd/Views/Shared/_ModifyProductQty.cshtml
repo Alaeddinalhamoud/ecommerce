@@ -1,0 +1,37 @@
+﻿@model Tuple<int, int, int>
+@*Item1 is the product Id,
+    Item2 is the QTY
+    item3 is CartLineId*@
+
+@{ 
+    var disable = Model.Item2.Equals(0) ? "d-none" : "";
+}
+
+<div class="d-flex justify-content-around">
+    <div class="checkout_btn @disable">
+        <a asp-action="ModifyProductQty" asp-controller="Cart" asp-route-id="@Model.Item1" asp-route-currentQty="@Model.Item2"
+           asp-route-qtyOpration="-1" asp-route-cartLineId="@Model.Item3"          
+           title="Remove one Product" class="btn" onclick="RemoveNotificationCart();">
+            -
+        </a>
+    </div>
+    <div id="cart_qty_@Model.Item1"> @Model.Item2</div>
+    <div class="checkout_btn">
+        <a asp-action="ModifyProductQty" asp-controller="Cart" asp-route-id="@Model.Item1" asp-route-currentQty="@Model.Item2"
+           asp-route-qtyOpration="1" asp-route-cartLineId="@Model.Item3"
+           title="Add One more Product" class="btn" onclick="AddNotificationCart();">
+            +
+        </a>
+    </div>
+</div>
+
+
+<script>
+    function AddNotificationCart() {
+        $.notify("One more Product has been added to your cart.", "success");
+    }
+
+    function RemoveNotificationCart() {
+        $.notify("One Product has been removed from your cart.", "warn");
+    }
+</script>

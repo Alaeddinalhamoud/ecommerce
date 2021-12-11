@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="robots.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Boxed.AspNetCore" Version="6.0.0" />
+    <PackageReference Include="ecommerce.Data" Version="2.0.0-CI-20210208-204523" />
+    <PackageReference Include="Libraries.ecommerce.GoogleReCaptcha" Version="2.0.0-CI-20210113-200449" />
+    <PackageReference Include="Libraries.ecommerce.RazorHtmlEmails" Version="2.0.0-CI-20210208-204141" />
+    <PackageReference Include="Libraries.ecommerce.Services" Version="2.0.0-CI-20210208-204037" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.16.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+    <PackageReference Include="UtilityFunctions.Data" Version="2.0.0-CI-20210204-201535" />
+  </ItemGroup>
+
+</Project>

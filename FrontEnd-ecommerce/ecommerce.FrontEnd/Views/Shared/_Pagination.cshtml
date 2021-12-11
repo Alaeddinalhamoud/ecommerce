@@ -1,0 +1,75 @@
+﻿@model ecommerce.FrontEnd.Models.PaginationModel
+@{
+    var prevDisabled = !Model.ShowPrevious ? "disabled" : "";
+    var nextDisabled = !Model.ShowNext ? "disabled" : "";
+}
+
+<div class="pagination">
+    <ul>
+        <li>
+            <a onclick="fragment();" asp-action="page" asp-controller="Shop"
+               asp-route-currentpage="1"
+               asp-route-sortOrder="@ViewData["NameSortParm"]"
+               asp-route-categoryFiltter="@ViewData["CategoryFiltter"]"
+               asp-route-categoryId="@ViewData["CategoryId"]"
+               asp-route-searchBox="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled p-1" data-ajax="true" data-ajax-mode="replace"
+               data-ajax-update="#ShopProducts" data-ajax-loading="#spinnerShopOrderBy" title="First Page">
+                <span class="fa fa-angle-double-left"></span>
+            </a>
+        </li>
+        <li>
+            <a onclick="fragment();" asp-action="page" asp-controller="Shop"
+               asp-route-currentpage="@(Model.CurrentPage - 1)"
+               asp-route-sortOrder="@ViewData["NameSortParm"]"
+               asp-route-categoryFiltter="@ViewData["CategoryFiltter"]"
+               asp-route-categoryId="@ViewData["CategoryId"]"
+               asp-route-searchBox="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled p-1" data-ajax="true" data-ajax-mode="replace"
+               data-ajax-update="#ShopProducts" data-ajax-loading="#spinnerShopOrderBy" title="Previous">
+                <span class="fa fa-angle-left"></span>
+            </a>
+        </li>
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "current" : "")">
+                <a onclick="fragment();" asp-action="page" asp-controller="Shop"
+                   asp-route-currentpage="@i"
+                   asp-route-sortOrder="@ViewData["NameSortParm"]"
+                   asp-route-categoryFiltter="@ViewData["CategoryFiltter"]"
+                   asp-route-categoryId="@ViewData["CategoryId"]"
+                   asp-route-searchBox="@ViewData["CurrentFilter"]"
+                   class="btn btn-default p-1" data-ajax="true" data-ajax-mode="replace"
+                   data-ajax-update="#ShopProducts" data-ajax-loading="#spinnerShopOrderBy" title="PageNumebr @i">
+                    @*<span class="lnr lnr-arrow-left-circle"></span>*@
+                    @i
+                </a>
+                @*<a asp-action="page" asp-controller="shop" asp-route-currentpage="@i" class="page-link">@i</a>*@
+            </li>
+        }
+        <li>
+            <a onclick="fragment();" asp-action="page" asp-controller="Shop"
+               asp-route-currentpage="@(Model.CurrentPage + 1)"
+               asp-route-sortOrder="@ViewData["NameSortParm"]"
+               asp-route-categoryFiltter="@ViewData["CategoryFiltter"]"
+               asp-route-categoryId="@ViewData["CategoryId"]"
+               asp-route-searchBox="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled p-1" data-ajax="true" data-ajax-mode="replace"
+               data-ajax-update="#ShopProducts" data-ajax-loading="#spinnerShopOrderBy" title="Next">
+                <span class="fa fa-angle-right"></span>
+            </a>
+        </li>
+        <li>
+            <a onclick="fragment();" asp-action="page" asp-controller="Shop"
+               asp-route-currentpage="@(Model.TotalPages)"
+               asp-route-sortOrder="@ViewData["NameSortParm"]"
+               asp-route-categoryFiltter="@ViewData["CategoryFiltter"]"
+               asp-route-categoryId="@ViewData["CategoryId"]"
+               asp-route-searchBox="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled p-1" data-ajax="true" data-ajax-mode="replace"
+               data-ajax-update="#ShopProducts" data-ajax-loading="#spinnerShopOrderBy" title="Last Page">
+                <span class="fa fa-angle-double-right"></span>
+            </a>
+        </li>
+    </ul>
+</div>

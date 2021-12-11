@@ -1,0 +1,259 @@
+﻿@model ecommerce.Data.MVData.ProductDetail
+@{
+    ViewData["Title"] = $" {Model.name}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Dictionary<int, int> addtocart = new Dictionary<int, int>();
+    addtocart.Add(Model.qty, Model.id);
+    MVShopCategory categoryData = new MVShopCategory()
+    {
+        categoryId = Model.categoryId,
+        categoryName = Model.categoryName,
+        goToAction = "index"
+    };
+
+    var productStatus = Model.qty.Equals(0) ? "Out Of Stock" : "In Stock";
+    var iconAndColor = Model.qty.Equals(0) ? "red fa fa-times" : "green fa fa-check";
+}
+
+
+
+@if (!Model.isApproved || Model.isDeleted)
+{
+    <div itemscope itemtype="http://schema.org/Product">
+        <section class="product_details mt-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="text-warning border border-warning text-center">
+                            <span class="fa fa-info-circle fa-2x p-1"> This Product is under review.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+else
+{
+    <!--product details start-->
+    <div itemscope itemtype="http://schema.org/Product">
+        <section class="product_details mt-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product-details-tab">
+                            @if (Model.medias.Count() > 0)
+                            {
+                                <div id="img-1" class="zoomWrapper single-zoom">
+                                    <a href="#">
+                                        <img itemprop="image" id="zoom1" src="@Model.medias?.FirstOrDefault().path" data-zoom-image="@Model.medias?.FirstOrDefault().path" alt="big-1">
+                                    </a>
+                                </div>
+                                <div class="single-zoom-thumb">
+                                    <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
+                                        @if (!String.IsNullOrEmpty(Model?.videoUrl))
+                                        {
+                                            <li>
+                                                <img src="/assets/img/videologo.jpg" alt="Video" onclick="parent.open('@Model?.videoUrl')" />
+                                            </li>
+                                        }
+
+                                        @foreach (var media in Model.medias.Where(x => x.mediaType.Equals(ecommerce.Data.MediaType.Image)))
+                                        {
+                                            <li>
+                                                <a href="#" class="elevatezoom-gallery @(Model.medias.First().id.Equals(media.id) ? "active" : "")" data-update="" data-image="@media.path" data-zoom-image="@media.path">
+                                                    <img src="@media.path" alt="@Model.name" />
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+                                <div id="img-1" class="text-center">
+                                    <p class="text-warning border-warning border"><span class="fa fa-warning p-1"></span>Warning: This product has no media file.</p>
+                                    <img src="/assets/img/ZeroData.svg" class="" />
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product_d_right">
+                            <h1 itemprop="name">@Model.name</h1>
+                            @*<div class="product_nav">
+                                    <ul>
+                                        <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>
+                                        <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>
+                                    </ul>
+                                </div>*@
+                            <div class=" product_ratting" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                <partial name="_Rating" model="@Model.rating" />
+                            </div>
+                            <div class="price_box">
+                                <span class="current_price">
+                                    <span itemprop="price" content="@Model.price">@Model.price</span>
+                                    <span itemprop="priceCurrency" content="USD">USD</span>
+                                </span>
+                                @if (!Model.oldPrice.Equals(0))
+                                {
+                                    <span class="old_price">@Model.oldPrice USD</span>
+                                }
+                            </div>
+                            <div class="product_desc" itemprop="description">
+                                <p>@Model.shortDescription</p>
+                            </div>
+                            <div class="product_variant quantity">
+                                <partial name="_AddToCart" model="addtocart" />
+                            </div>
+                            <div class=" product_d_action">
+                                <ul>
+                                    <li>
+                                        📦 @Model.qty @Model.packageType available.
+                                    </li>
+                                    @if (Model.freeShipping)
+                                    {
+                                        <li>
+                                            🚛 Free Shipping.
+                                        </li>
+                                    }
+                                    @if (Model.freeTax)
+                                    {
+                                        <li>
+                                            💲   Free Tax.
+                                        </li>
+                                    }
+                                    <li>
+                                        <!--In - out -- Stock-->
+                                        <i class="@iconAndColor" style=""></i>
+                                        <link itemprop="availability" href="http://schema.org/InStock" />@productStatus
+                                    </li>
+                                    <li>
+                                        @*<a asp-action="AddToWishlist" asp-controller="WishList" asp-route-id="@Model.id" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#wishlist_qty" data-ajax-loading="#spinner" title="Add to wishlist">
+                                                <i class="fa fa-heart"></i> Add to Wishlist  <span id="spinner" style="display:none;"><i class="fa fa-spinner fa-spin"></i></span>
+                                            </a>*@
+                                        <partial name="_AddToWishlist" model="Model.id" /> Add to Wishlist
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product_meta">
+                                <span>
+                                    Category:
+                                    <!--Neeed work does not work-->
+                                    <partial name="_CategoryLink" model="categoryData" />
+                                </span>
+                            </div>
+                            @if (!String.IsNullOrEmpty(Model.tags))
+                            {
+                                <div class="widget_list widget_tag">
+                                    <h4>Tags</h4>
+                                    <div class="tag_widget">
+                                        <ul>
+                                            @foreach (var item in Model.tags.Split(","))
+                                            {
+                                                <li><a>@item</a></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                            <div class="priduct_social">
+                                <div class="addthis_inline_share_toolbox"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--product details end-->
+        <!--product info start-->
+        <div class="product_d_info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product_d_inner">
+                            <div class="product_info_button">
+                                <ul class="nav" role="tablist">
+                                    <li>
+                                        <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Specification</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="info" role="tabpanel">
+                                    <div class="product_info_content">
+                                        <p>@Model.description</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="sheet" role="tabpanel">
+                                    <div class="product_d_table">
+                                        <div>
+                                            @if (Model.medias.Where(x => x.mediaType.Equals(ecommerce.Data.MediaType.File)).Count() > 0)
+                                            {
+                                                <h4>Product Description</h4>
+                                            }
+                                            <ol>
+                                                @foreach (var item in Model.medias.Where(x => x.mediaType.Equals(ecommerce.Data.MediaType.File)))
+                                                {
+                                                    <li>
+                                                        <a href="@item.path">@(String.IsNullOrEmpty(item.name) ? "Document" : item.name) <code class="text-danger">(Download)</code></a>
+                                                    </li>
+                                                }
+                                            </ol>
+                                        </div>
+                                        <div id="pdf-container"></div>
+                                        <h4>Product Details</h4>
+                                        <table>
+                                            <tbody>
+                                                @foreach (var productSpecification in Model.productSpecifications)
+                                                {
+                                                    <tr>
+                                                        <td class="first_child">@productSpecification.name</td>
+                                                        <td>@productSpecification.value</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    @*<div class="product_info_content">
+                                            <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
+                                        </div>*@
+                                </div>
+                                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                                    <div class="reviews_wrapper">
+                                        @*<h2>1 review for Donec eu furniture</h2>*@
+                                        <vc:product-reviews product-id="@Model.id"></vc:product-reviews>
+                                        <!--Add Review/ for customer who bought this product only.and review once.-->
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            //Send the productId and the user ID to check if the product is exsit in the Orderline and the customer revied the product or no.
+                                            <vc:check-customer-review user-id="@User.FindFirst(c => c.Type == "sub").Value" product-id="@Model.id" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--product info end-->
+    <!--product area start-->
+    <!--product area end-->
+    <vc:related-products category-id="@Model.categoryId"></vc:related-products>
+}
+
+@*@await Component.InvokeAsync("MostViewedProducts")*@
+
+@*<vc:most-viewed-products></vc:most-viewed-products>*@
+
+
+
