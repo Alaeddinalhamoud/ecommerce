@@ -13,7 +13,8 @@ Projects:
 - Auth using Identity server  4 (Published on github)
 
 
-![image](https://user-images.githubusercontent.com/20483242/144665570-b38ffe90-7d9f-42f0-b282-32eb5b402ef3.png)
+![image](https://user-images.githubusercontent.com/20483242/145685793-ec5242d4-4fc4-4688-9fb5-dc87d11d4e83.png)
+
 
 
 
